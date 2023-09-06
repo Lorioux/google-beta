@@ -10,9 +10,9 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-provider-google-beta/version"
+	"github.com/lorioux/google-beta/version"
 
-	services "github.com/hashicorp/terraform-provider-google-beta/google-beta/services"
+	services "github.com/lorioux/google-beta/google-beta/services"
 	// "github.com/hashicorp/terraform-provider-google-beta/google-beta/services/accesscontextmanager"
 	// "github.com/hashicorp/terraform-provider-google-beta/google-beta/services/activedirectory"
 	// "github.com/hashicorp/terraform-provider-google-beta/google-beta/services/alloydb"
@@ -131,7 +131,7 @@ import (
 	// "github.com/hashicorp/terraform-provider-google-beta/google-beta/services/dataflow"
 	// "github.com/hashicorp/terraform-provider-google-beta/google-beta/services/servicenetworking"
 	// "github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgiamresource"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 	// "github.com/hashicorp/terraform-provider-google-beta/google-beta/verify"
 
 	googleoauth "golang.org/x/oauth2/google"
@@ -1965,7 +1965,7 @@ func ProviderConfigure(ctx context.Context, d *schema.ResourceData, p *schema.Pr
 	config.BatchingConfig = batchCfg
 
 	// Generated products
-	config.services.AccessApprovalBasePath = d.Get("access_approval_custom_endpoint").(string)
+	config.AccessApprovalBasePath = d.Get("access_approval_custom_endpoint").(string)
 	config.AccessContextManagerBasePath = d.Get("access_context_manager_custom_endpoint").(string)
 	config.ActiveDirectoryBasePath = d.Get("active_directory_custom_endpoint").(string)
 	config.AlloydbBasePath = d.Get("alloydb_custom_endpoint").(string)

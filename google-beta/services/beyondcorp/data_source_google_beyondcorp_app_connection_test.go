@@ -7,7 +7,7 @@ import (
 
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
+	"github.com/lorioux/google-beta/google-beta/acctest"
 )
 
 func TestAccDataSourceGoogleBeyondcorpAppConnection_basic(t *testing.T) {

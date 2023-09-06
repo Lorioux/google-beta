@@ -11,8 +11,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/fwtransport"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/fwtransport"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 )
 
 // GetProject reads the "project" field from the given resource and falls

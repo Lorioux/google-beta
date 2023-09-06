@@ -11,11 +11,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/envvar"
-	tpgcompute "github.com/hashicorp/terraform-provider-google-beta/google-beta/services/compute"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/acctest"
+	"github.com/lorioux/google-beta/google-beta/envvar"
+	tpgcompute "github.com/lorioux/google-beta/google-beta/services/compute"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 
 	compute "google.golang.org/api/compute/v0.beta"
 

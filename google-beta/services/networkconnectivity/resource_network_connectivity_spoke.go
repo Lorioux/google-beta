@@ -29,9 +29,9 @@ import (
 	dcl "github.com/GoogleCloudPlatform/declarative-resource-client-library/dcl"
 	networkconnectivity "github.com/GoogleCloudPlatform/declarative-resource-client-library/services/google/networkconnectivity/beta"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgdclresource"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/tpgdclresource"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 func ResourceNetworkConnectivitySpoke() *schema.Resource {

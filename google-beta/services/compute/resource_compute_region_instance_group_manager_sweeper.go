@@ -6,7 +6,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/sweeper"
+	"github.com/lorioux/google-beta/google-beta/sweeper"
 )
 
 func init() {

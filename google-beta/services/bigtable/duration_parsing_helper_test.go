@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/bigtable"
+	"github.com/lorioux/google-beta/google-beta/services/bigtable"
 )
 
 var parseDurationTests = []struct {

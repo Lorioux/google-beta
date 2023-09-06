@@ -10,10 +10,10 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/envvar"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/provider"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/acctest"
+	"github.com/lorioux/google-beta/google-beta/envvar"
+	"github.com/lorioux/google-beta/google-beta/provider"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 	googleoauth "golang.org/x/oauth2/google"
 )
 

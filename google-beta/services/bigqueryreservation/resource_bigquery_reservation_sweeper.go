@@ -7,8 +7,8 @@ import (
 	"log"
 	"strings"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/sweeper"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/sweeper"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 // This will sweep BigqueryReservation Reservation and Assignment resources

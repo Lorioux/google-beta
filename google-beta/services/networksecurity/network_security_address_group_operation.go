@@ -5,7 +5,7 @@ package networksecurity
 import (
 	"time"
 
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 // NetworkSecurityAddressGroupOperationWaitTime is specific for address group resource because the only difference is that it does not need project param.

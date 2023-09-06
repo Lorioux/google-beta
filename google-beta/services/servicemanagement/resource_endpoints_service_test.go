@@ -6,14 +6,14 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/envvar"
+	"github.com/lorioux/google-beta/google-beta/acctest"
+	"github.com/lorioux/google-beta/google-beta/envvar"
 
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 func TestAccEndpointsService_basic(t *testing.T) {

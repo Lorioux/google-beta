@@ -5,7 +5,7 @@ package kms
 import (
 	"testing"
 
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 func TestKeyRingIdParsing(t *testing.T) {

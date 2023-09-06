@@ -6,8 +6,8 @@ import (
 	"context"
 	"log"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/sweeper"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/sweeper"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 )
 
 func init() {

@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/fwtransport"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/fwtransport"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 )
 
 type LocationDescriber interface {

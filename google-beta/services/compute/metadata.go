@@ -8,8 +8,8 @@ import (
 
 	compute "google.golang.org/api/compute/v0.beta"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 // Since the google compute API uses optimistic locking, there is a chance

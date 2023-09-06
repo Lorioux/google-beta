@@ -5,9 +5,9 @@ package bigtable
 import (
 	"fmt"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgiamresource"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/tpgiamresource"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 	"google.golang.org/api/bigtableadmin/v2"
 
 	"github.com/hashicorp/errwrap"

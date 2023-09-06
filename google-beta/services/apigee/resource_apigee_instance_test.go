@@ -5,8 +5,8 @@ package apigee_test
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/apigee"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/services/apigee"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 )
 
 func TestUnitApigeeInstance_projectListDiffSuppress(t *testing.T) {

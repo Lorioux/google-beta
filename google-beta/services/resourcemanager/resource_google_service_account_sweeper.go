@@ -6,9 +6,9 @@ import (
 	"context"
 	"log"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/sweeper"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/sweeper"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 // This will sweep Service Account resources

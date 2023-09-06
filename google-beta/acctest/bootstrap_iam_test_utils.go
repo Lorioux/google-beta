@@ -7,8 +7,8 @@ import (
 	"log"
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/envvar"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgiamresource"
+	"github.com/lorioux/google-beta/google-beta/envvar"
+	"github.com/lorioux/google-beta/google-beta/tpgiamresource"
 	cloudresourcemanager "google.golang.org/api/cloudresourcemanager/v1"
 )
 

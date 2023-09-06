@@ -8,7 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
+	"github.com/lorioux/google-beta/google-beta/acctest"
 )
 
 // Tests schema version migration by creating a certificate with an old version of the provider (4.59.0)

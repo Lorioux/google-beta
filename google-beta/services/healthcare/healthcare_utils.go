@@ -7,8 +7,8 @@ import (
 	"regexp"
 	"strings"
 
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/verify"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/verify"
 )
 
 type HealthcareDatasetId struct {

@@ -8,9 +8,9 @@ import (
 	"log"
 	neturl "net/url"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/envvar"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/sweeper"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/envvar"
+	"github.com/lorioux/google-beta/google-beta/sweeper"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 func init() {

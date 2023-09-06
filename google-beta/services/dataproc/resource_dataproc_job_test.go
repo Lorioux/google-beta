@@ -16,9 +16,9 @@ import (
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
-	tpgdataproc "github.com/hashicorp/terraform-provider-google-beta/google-beta/services/dataproc"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/acctest"
+	tpgdataproc "github.com/lorioux/google-beta/google-beta/services/dataproc"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 	"google.golang.org/api/dataproc/v1"
 	"google.golang.org/api/googleapi"
 )

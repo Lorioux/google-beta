@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/sweeper"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/sweeper"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 
 	"log"
 	"time"

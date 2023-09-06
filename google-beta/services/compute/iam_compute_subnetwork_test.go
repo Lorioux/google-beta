@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/envvar"
+	"github.com/lorioux/google-beta/google-beta/acctest"
+	"github.com/lorioux/google-beta/google-beta/envvar"
 )
 
 // Even though the resource has generated tests, keep this one around until we are able to generate

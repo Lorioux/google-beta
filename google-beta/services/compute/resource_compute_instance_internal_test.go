@@ -5,7 +5,7 @@ package compute
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 )
 
 func TestComputeInstance_networkIPCustomizedDiff(t *testing.T) {

@@ -9,8 +9,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
-	tpgcompute "github.com/hashicorp/terraform-provider-google-beta/google-beta/services/compute"
+	"github.com/lorioux/google-beta/google-beta/acctest"
+	tpgcompute "github.com/lorioux/google-beta/google-beta/services/compute"
 
 	compute "google.golang.org/api/compute/v0.beta"
 )

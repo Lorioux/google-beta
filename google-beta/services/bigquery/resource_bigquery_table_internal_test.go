@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 )
 
 func TestBigQueryTableSchemaDiffSuppress(t *testing.T) {

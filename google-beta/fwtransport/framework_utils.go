@@ -12,8 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/fwmodels"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/fwmodels"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 const uaEnvVar = "TF_APPEND_USER_AGENT"

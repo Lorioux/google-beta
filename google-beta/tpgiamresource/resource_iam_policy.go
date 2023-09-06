@@ -9,8 +9,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 
 	"google.golang.org/api/cloudresourcemanager/v1"
 )

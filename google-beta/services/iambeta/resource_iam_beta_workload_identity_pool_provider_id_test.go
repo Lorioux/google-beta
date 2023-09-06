@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/iambeta"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/verify"
+	"github.com/lorioux/google-beta/google-beta/services/iambeta"
+	"github.com/lorioux/google-beta/google-beta/verify"
 )
 
 func TestValidateIAMBetaWorkloadIdentityPoolProviderId(t *testing.T) {

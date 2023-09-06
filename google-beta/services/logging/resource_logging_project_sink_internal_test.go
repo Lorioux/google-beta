@@ -5,7 +5,7 @@ package logging
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 )
 
 func TestLoggingProjectSink_bigqueryOptionCustomizedDiff(t *testing.T) {

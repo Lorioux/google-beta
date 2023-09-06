@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 // Parse an import id extracting field values using the given list of regexes.

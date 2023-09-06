@@ -21,16 +21,17 @@ package cloudbuildv2_test
 import (
 	"context"
 	"fmt"
+	"strings"
+	"testing"
+
 	dcl "github.com/GoogleCloudPlatform/declarative-resource-client-library/dcl"
 	cloudbuildv2 "github.com/GoogleCloudPlatform/declarative-resource-client-library/services/google/cloudbuildv2/beta"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"strings"
-	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/envvar"
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	"github.com/lorioux/google-beta/google-beta/acctest"
+	"github.com/lorioux/google-beta/google-beta/envvar"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 func TestAccCloudbuildv2Connection_GheCompleteConnection(t *testing.T) {

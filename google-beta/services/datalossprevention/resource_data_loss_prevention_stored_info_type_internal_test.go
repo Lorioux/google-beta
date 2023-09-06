@@ -5,7 +5,7 @@ package datalossprevention
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 )
 
 func TestAccDataLossPreventionStoredInfoType_dlpStoredInfoTypeCustomDiffFuncForceNew(t *testing.T) {

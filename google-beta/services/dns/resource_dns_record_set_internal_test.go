@@ -5,7 +5,7 @@ package dns
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/verify"
+	"github.com/lorioux/google-beta/google-beta/verify"
 )
 
 func TestValidateRecordNameTrailingDot(t *testing.T) {

@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/firestore"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/services/firestore"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 )
 
 func TestUnitFirestoreIndex_firestoreIFieldsDiffSuppress(t *testing.T) {

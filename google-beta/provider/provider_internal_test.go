@@ -8,10 +8,10 @@
 // 	"os"
 // 	"testing"
 
-// 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
-// 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/provider"
-// 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
-// 	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+// 	"github.com/lorioux/google-beta/google-beta/acctest"
+// 	"github.com/lorioux/google-beta/google-beta/provider"
+// 	"github.com/lorioux/google-beta/google-beta/tpgresource"
+// 	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 // )
 
 // func TestProvider_ValidateCredentials(t *testing.T) {

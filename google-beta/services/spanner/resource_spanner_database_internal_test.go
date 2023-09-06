@@ -5,7 +5,7 @@ package spanner
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/tpgresource"
+	"github.com/lorioux/google-beta/google-beta/tpgresource"
 )
 
 // Unit Tests for ForceNew when the change in ddl

@@ -12,9 +12,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tfprotov5/tf5server"
 	"github.com/hashicorp/terraform-plugin-mux/tf5muxserver"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/fwprovider"
-	provider "github.com/hashicorp/terraform-provider-google-beta/google-beta"
-	ver "github.com/hashicorp/terraform-provider-google-beta/version"
+	ver "github.com/lorioux/google-beta/version"
+	provider "github.com/lorioux/google-beta/google-beta"
+	"github.com/lorioux/google-beta/google-beta/fwprovider"
 )
 
 var (

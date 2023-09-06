@@ -15,13 +15,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/fwmodels"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/fwtransport"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/dns"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/firebase"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/services/resourcemanager"
+	"github.com/lorioux/google-beta/google-beta/fwmodels"
+	"github.com/lorioux/google-beta/google-beta/fwtransport"
+	"github.com/lorioux/google-beta/google-beta/services/dns"
+	"github.com/lorioux/google-beta/google-beta/services/firebase"
+	"github.com/lorioux/google-beta/google-beta/services/resourcemanager"
 
-	transport_tpg "github.com/hashicorp/terraform-provider-google-beta/google-beta/transport"
+	transport_tpg "github.com/lorioux/google-beta/google-beta/transport"
 )
 
 // Ensure the implementation satisfies the expected interfaces

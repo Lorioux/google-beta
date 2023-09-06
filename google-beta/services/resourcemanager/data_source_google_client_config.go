@@ -10,9 +10,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/fwmodels"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/fwresource"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/fwtransport"
+	"github.com/lorioux/google-beta/google-beta/fwmodels"
+	"github.com/lorioux/google-beta/google-beta/fwresource"
+	"github.com/lorioux/google-beta/google-beta/fwtransport"
 )
 
 // Ensure the data source satisfies the expected interfaces.

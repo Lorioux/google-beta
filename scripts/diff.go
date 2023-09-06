@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	googleOld "github.com/hashicorp/terraform-provider-clean-google-beta/google-beta/provider"
-	google "github.com/hashicorp/terraform-provider-google-beta/google-beta/provider"
+	google "github.com/lorioux/google-beta/google-beta/provider"
 )
 
 var verbose bool

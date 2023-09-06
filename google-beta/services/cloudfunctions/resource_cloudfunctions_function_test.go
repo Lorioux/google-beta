@@ -9,9 +9,9 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/acctest"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/envvar"
-	tpgcloudfunctions "github.com/hashicorp/terraform-provider-google-beta/google-beta/services/cloudfunctions"
+	"github.com/lorioux/google-beta/google-beta/acctest"
+	"github.com/lorioux/google-beta/google-beta/envvar"
+	tpgcloudfunctions "github.com/lorioux/google-beta/google-beta/services/cloudfunctions"
 	"google.golang.org/api/cloudfunctions/v1"
 )
 

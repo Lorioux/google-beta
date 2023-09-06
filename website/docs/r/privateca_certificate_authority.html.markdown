@@ -34,7 +34,7 @@ To get more information about CertificateAuthority, see:
 It is recommended to not set this field (or set it to true) until you're ready to destroy.
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=privateca_certificate_authority_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=privateca_certificate_authority_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -92,7 +92,7 @@ resource "google_privateca_certificate_authority" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=privateca_certificate_authority_subordinate&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=privateca_certificate_authority_subordinate&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -389,7 +389,7 @@ The following arguments are supported:
 
 * `non_ca` -
   (Optional)
-  When true, the "CA" in Basic Constraints extension will be set to false. 
+  When true, the "CA" in Basic Constraints extension will be set to false.
   If both `is_ca` and `non_ca` are unset, the extension will be omitted from the CA certificate.
 
 * `max_issuer_path_length` -
@@ -630,7 +630,7 @@ The following arguments are supported:
   (Optional)
   The algorithm to use for creating a managed Cloud KMS key for a for a simplified
   experience. All managed keys will be have their ProtectionLevel as HSM.
-  Possible values are `SIGN_HASH_ALGORITHM_UNSPECIFIED`, `RSA_PSS_2048_SHA256`, `RSA_PSS_3072_SHA256`, `RSA_PSS_4096_SHA256`, `RSA_PKCS1_2048_SHA256`, `RSA_PKCS1_3072_SHA256`, `RSA_PKCS1_4096_SHA256`, `EC_P256_SHA256`, and `EC_P384_SHA384`.
+  Possible values are: `SIGN_HASH_ALGORITHM_UNSPECIFIED`, `RSA_PSS_2048_SHA256`, `RSA_PSS_3072_SHA256`, `RSA_PSS_4096_SHA256`, `RSA_PKCS1_2048_SHA256`, `RSA_PKCS1_3072_SHA256`, `RSA_PKCS1_4096_SHA256`, `EC_P256_SHA256`, `EC_P384_SHA384`.
 
 - - -
 
@@ -657,7 +657,7 @@ The following arguments are supported:
   ~> **Note:** For `SUBORDINATE` Certificate Authorities, they need to
   be activated before they can issue certificates.
   Default value is `SELF_SIGNED`.
-  Possible values are `SELF_SIGNED` and `SUBORDINATE`.
+  Possible values are: `SELF_SIGNED`, `SUBORDINATE`.
 
 * `lifetime` -
   (Optional)
@@ -705,7 +705,7 @@ in Terraform state, a `terraform destroy` or `terraform apply` that would delete
 
 * `pem_issuer_chain` -
   (Optional)
-  Contains the PEM certificate chain for the issuers of this CertificateAuthority, 
+  Contains the PEM certificate chain for the issuers of this CertificateAuthority,
   but not pem certificate for this CA itself.
   Structure is [documented below](#nested_pem_issuer_chain).
 

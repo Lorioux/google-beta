@@ -38,9 +38,40 @@ resource "google_firebase_android_app" "basic" {
   provider = google-beta
   project = "my-project-name"
   display_name = "Display Name Basic"
-  package_name = ""
+  package_name = "android.package.app"
   sha1_hashes = ["2145bdf698b8715039bd0e83f2069bed435ac21c"]
   sha256_hashes = ["2145bdf698b8715039bd0e83f2069bed435ac21ca1b2c3d4e5f6123456789abc"]
+}
+```
+## Example Usage - Firebase Android App Custom Api Key
+
+
+```hcl
+resource "google_firebase_android_app" "default" {
+  provider = google-beta
+  project = "my-project-name"
+  display_name = "Display Name"
+  package_name = "android.package.app"
+  sha1_hashes = ["2145bdf698b8715039bd0e83f2069bed435ac21c"]
+  sha256_hashes = ["2145bdf698b8715039bd0e83f2069bed435ac21ca1b2c3d4e5f6123456789abc"]
+  api_key_id = google_apikeys_key.android.uid
+}
+
+resource "google_apikeys_key" "android" {
+  provider = google-beta
+
+  name         = "api-key"
+  display_name = "Display Name"
+  project = "my-project-name"
+  
+  restrictions {
+    android_key_restrictions {
+      allowed_applications {
+        package_name     = "android.package.app"
+        sha1_fingerprint = "2145bdf698b8715039bd0e83f2069bed435ac21c"
+      }
+    }
+  }
 }
 ```
 
@@ -70,6 +101,12 @@ The following arguments are supported:
   (Optional)
   The SHA256 certificate hashes for the AndroidApp.
 
+* `api_key_id` -
+  (Optional)
+  The globally unique, Google-assigned identifier (UID) for the Firebase API key associated with the AndroidApp.
+  If apiKeyId is not set during creation, then Firebase automatically associates an apiKeyId with the AndroidApp.
+  This auto-associated key may be an existing valid key or, if no valid key exists, a new one will be provisioned.
+
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
 
@@ -82,7 +119,7 @@ serving traffic. Set to `DELETE` to delete the AndroidApp. Defaults to `DELETE`.
 
 In addition to the arguments listed above, the following computed attributes are exported:
 
-* `id` - an identifier for the resource with format `{{name}}`
+* `id` - an identifier for the resource with format `projects/{{project}}/androidApps/{{app_id}}`
 
 * `name` -
   The fully qualified resource name of the AndroidApp, for example:
@@ -112,10 +149,11 @@ This resource provides the following
 AndroidApp can be imported using any of these accepted formats:
 
 ```
-$ terraform import google_firebase_android_app.default projects/{{project}}/androidApps/{{appId}}
-$ terraform import google_firebase_android_app.default {{project}}/{{appId}}
-$ terraform import google_firebase_android_app.default androidApps/{{appId}}
-$ terraform import google_firebase_android_app.default {{appId}}
+$ terraform import google_firebase_android_app.default {{project}} projects/{{project}}/androidApps/{{app_id}}
+$ terraform import google_firebase_android_app.default projects/{{project}}/androidApps/{{app_id}}
+$ terraform import google_firebase_android_app.default {{project}}/{{project}}/{{app_id}}
+$ terraform import google_firebase_android_app.default androidApps/{{app_id}}
+$ terraform import google_firebase_android_app.default {{app_id}}
 ```
 
 ## User Project Overrides

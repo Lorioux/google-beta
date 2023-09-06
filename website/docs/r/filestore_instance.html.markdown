@@ -31,7 +31,7 @@ To get more information about Instance, see:
     * [Copying Data In/Out](https://cloud.google.com/filestore/docs/copying-data)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=filestore_instance_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=filestore_instance_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -40,12 +40,12 @@ To get more information about Instance, see:
 
 ```hcl
 resource "google_filestore_instance" "instance" {
-  name = "test-instance"
+  name     = "test-instance"
   location = "us-central1-b"
-  tier = "PREMIUM"
+  tier     = "BASIC_HDD"
 
   file_shares {
-    capacity_gb = 2660
+    capacity_gb = 1024
     name        = "share1"
   }
 
@@ -56,7 +56,7 @@ resource "google_filestore_instance" "instance" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=filestore_instance_full&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=filestore_instance_full&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -65,32 +65,32 @@ resource "google_filestore_instance" "instance" {
 
 ```hcl
 resource "google_filestore_instance" "instance" {
-  name = "test-instance"
+  name     = "test-instance"
   location = "us-central1-b"
-  tier = "BASIC_SSD"
+  tier     = "BASIC_SSD"
 
   file_shares {
-    capacity_gb = 2660
+    capacity_gb = 2560
     name        = "share1"
 
     nfs_export_options {
-      ip_ranges = ["10.0.0.0/24"]
+      ip_ranges   = ["10.0.0.0/24"]
       access_mode = "READ_WRITE"
       squash_mode = "NO_ROOT_SQUASH"
-   }
+    }
 
-   nfs_export_options {
-      ip_ranges = ["10.10.0.0/24"]
+    nfs_export_options {
+      ip_ranges   = ["10.10.0.0/24"]
       access_mode = "READ_ONLY"
       squash_mode = "ROOT_SQUASH"
-      anon_uid = 123
-      anon_gid = 456
-   }
+      anon_uid    = 123
+      anon_gid    = 456
+    }
   }
 
   networks {
-    network = "default"
-    modes   = ["MODE_IPV4"]
+    network      = "default"
+    modes        = ["MODE_IPV4"]
     connect_mode = "DIRECT_PEERING"
   }
 }
@@ -100,12 +100,12 @@ resource "google_filestore_instance" "instance" {
 
 ```hcl
 resource "google_filestore_instance" "instance" {
-  name = "test-instance"
+  name     = "test-instance"
   location = "us-central1"
-  tier = "ENTERPRISE"
+  tier     = "ENTERPRISE"
 
   file_shares {
-    capacity_gb = 2560
+    capacity_gb = 1024
     name        = "share1"
   }
 
@@ -113,6 +113,7 @@ resource "google_filestore_instance" "instance" {
     network = "default"
     modes   = ["MODE_IPV4"]
   }
+
   kms_key_name = google_kms_crypto_key.filestore_key.id
 }
 
@@ -190,14 +191,14 @@ The following arguments are supported:
   Either READ_ONLY, for allowing only read requests on the exported directory,
   or READ_WRITE, for allowing both read and write requests. The default is READ_WRITE.
   Default value is `READ_WRITE`.
-  Possible values are `READ_ONLY` and `READ_WRITE`.
+  Possible values are: `READ_ONLY`, `READ_WRITE`.
 
 * `squash_mode` -
   (Optional)
   Either NO_ROOT_SQUASH, for allowing root access on the exported directory, or ROOT_SQUASH,
   for not allowing root access. The default is NO_ROOT_SQUASH.
   Default value is `NO_ROOT_SQUASH`.
-  Possible values are `NO_ROOT_SQUASH` and `ROOT_SQUASH`.
+  Possible values are: `NO_ROOT_SQUASH`, `ROOT_SQUASH`.
 
 * `anon_uid` -
   (Optional)
@@ -222,7 +223,7 @@ The following arguments are supported:
   (Required)
   IP versions for which the instance has
   IP addresses assigned.
-  Each value may be one of `ADDRESS_MODE_UNSPECIFIED`, `MODE_IPV4`, and `MODE_IPV6`.
+  Each value may be one of: `ADDRESS_MODE_UNSPECIFIED`, `MODE_IPV4`, `MODE_IPV6`.
 
 * `reserved_ip_range` -
   (Optional)
@@ -239,7 +240,7 @@ The following arguments are supported:
   If not provided, the connect mode defaults to
   DIRECT_PEERING.
   Default value is `DIRECT_PEERING`.
-  Possible values are `DIRECT_PEERING` and `PRIVATE_SERVICE_ACCESS`.
+  Possible values are: `DIRECT_PEERING`, `PRIVATE_SERVICE_ACCESS`.
 
 - - -
 
@@ -259,6 +260,8 @@ The following arguments are supported:
 * `zone` -
   (Optional, Deprecated)
   The name of the Filestore zone of the instance.
+
+  ~> **Warning:** `zone` is deprecated and will be removed in a future major release. Use `location` instead.
 
 * `location` -
   (Optional)

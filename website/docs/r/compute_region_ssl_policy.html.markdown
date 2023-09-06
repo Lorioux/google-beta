@@ -22,12 +22,10 @@ description: |-
 Represents a Regional SSL policy. SSL policies give you the ability to control the
 features of SSL that your SSL proxy or HTTPS load balancer negotiates.
 
-~> **Warning:** This resource is in beta, and should be used with the terraform-provider-google-beta provider.
-See [Provider Versions](https://terraform.io/docs/providers/google/guides/provider_versions.html) for more details on beta resources.
 
 To get more information about RegionSslPolicy, see:
 
-* [API documentation](https://cloud.google.com/compute/docs/reference/rest/beta/regionSslPolicies)
+* [API documentation](https://cloud.google.com/compute/docs/reference/rest/v1/regionSslPolicies)
 * How-to Guides
     * [Using SSL Policies](https://cloud.google.com/compute/docs/load-balancing/ssl-policies)
 
@@ -68,14 +66,14 @@ The following arguments are supported:
   for information on what cipher suites each profile provides. If
   `CUSTOM` is used, the `custom_features` attribute **must be set**.
   Default value is `COMPATIBLE`.
-  Possible values are `COMPATIBLE`, `MODERN`, `RESTRICTED`, and `CUSTOM`.
+  Possible values are: `COMPATIBLE`, `MODERN`, `RESTRICTED`, `CUSTOM`.
 
 * `min_tls_version` -
   (Optional)
   The minimum version of SSL protocol that can be used by the clients
   to establish a connection with the load balancer.
   Default value is `TLS_1_0`.
-  Possible values are `TLS_1_0`, `TLS_1_1`, and `TLS_1_2`.
+  Possible values are: `TLS_1_0`, `TLS_1_1`, `TLS_1_2`.
 
 * `custom_features` -
   (Optional)

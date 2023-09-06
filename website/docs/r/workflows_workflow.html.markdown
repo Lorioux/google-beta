@@ -29,7 +29,7 @@ To get more information about Workflow, see:
     * [Managing Workflows](https://cloud.google.com/workflows/docs/creating-updating-workflow)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=workflow_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=workflow_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -48,31 +48,32 @@ resource "google_workflows_workflow" "example" {
   description   = "Magic"
   service_account = google_service_account.test_account.id
   source_contents = <<-EOF
-  # This is a sample workflow, feel free to replace it with your source code
+  # This is a sample workflow. You can replace it with your source code.
   #
   # This workflow does the following:
   # - reads current time and date information from an external API and stores
-  #   the response in CurrentDateTime variable
+  #   the response in currentTime variable
   # - retrieves a list of Wikipedia articles related to the day of the week
-  #   from CurrentDateTime
+  #   from currentTime
   # - returns the list of articles as an output of the workflow
-  # FYI, In terraform you need to escape the $$ or it will cause errors.
+  #
+  # Note: In Terraform you need to escape the $$ or it will cause errors.
 
   - getCurrentTime:
       call: http.get
       args:
-          url: https://us-central1-workflowsample.cloudfunctions.net/datetime
-      result: CurrentDateTime
+          url: https://timeapi.io/api/Time/current/zone?timeZone=Europe/Amsterdam
+      result: currentTime
   - readWikipedia:
       call: http.get
       args:
           url: https://en.wikipedia.org/w/api.php
           query:
               action: opensearch
-              search: $${CurrentDateTime.body.dayOfTheWeek}
-      result: WikiResult
+              search: $${currentTime.body.dayOfWeek}
+      result: wikiResult
   - returnOutput:
-      return: $${WikiResult.body[1]}
+      return: $${wikiResult.body[1]}
 EOF
 }
 ```
@@ -102,11 +103,20 @@ The following arguments are supported:
   (Optional)
   Name of the service account associated with the latest workflow version. This service
   account represents the identity of the workflow and determines what permissions the workflow has.
-  Format: projects/{project}/serviceAccounts/{account}.
+  Format: projects/{project}/serviceAccounts/{account} or {account}.
+  Using - as a wildcard for the {project} or not providing one at all will infer the project from the account.
+  The {account} value can be the email address or the unique_id of the service account.
+  If not provided, workflow will use the project's default service account.
+  Modifying this field for an existing workflow results in a new workflow revision.
 
 * `source_contents` -
   (Optional)
   Workflow code to be executed. The size limit is 32KB.
+
+* `crypto_key_name` -
+  (Optional)
+  The KMS key used to encrypt workflow and execution data.
+  Format: projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}
 
 * `region` -
   (Optional)

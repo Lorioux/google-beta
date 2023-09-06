@@ -30,7 +30,7 @@ To get more information about FhirStore, see:
     * [Creating a FHIR store](https://cloud.google.com/healthcare/docs/how-tos/fhir)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=healthcare_fhir_store_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=healthcare_fhir_store_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -42,11 +42,13 @@ resource "google_healthcare_fhir_store" "default" {
   name    = "example-fhir-store"
   dataset = google_healthcare_dataset.dataset.id
   version = "R4"
+  complex_data_type_reference_parsing = "DISABLED"
 
-  enable_update_create          = false
-  disable_referential_integrity = false
-  disable_resource_versioning   = false
-  enable_history_import         = false
+  enable_update_create           = false
+  disable_referential_integrity  = false
+  disable_resource_versioning    = false
+  enable_history_import          = false
+  default_search_handling_strict = false
 
   notification_config {
     pubsub_topic = google_pubsub_topic.topic.id
@@ -67,7 +69,7 @@ resource "google_healthcare_dataset" "dataset" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=healthcare_fhir_store_streaming_config&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=healthcare_fhir_store_streaming_config&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -95,6 +97,10 @@ resource "google_healthcare_fhir_store" "default" {
       dataset_uri = "bq://${google_bigquery_dataset.bq_dataset.project}.${google_bigquery_dataset.bq_dataset.dataset_id}"
       schema_config {
         recursive_structure_depth = 3
+        last_updated_partition_config {
+          type = "HOUR"
+          expiration_ms = 1000000
+        }
       }
     }
   }
@@ -118,7 +124,7 @@ resource "google_bigquery_dataset" "bq_dataset" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=healthcare_fhir_store_notification_config&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=healthcare_fhir_store_notification_config&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -155,7 +161,7 @@ resource "google_healthcare_dataset" "dataset" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=healthcare_fhir_store_notification_configs&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=healthcare_fhir_store_notification_configs&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -179,8 +185,9 @@ resource "google_healthcare_fhir_store" "default" {
   }
 
   notification_configs {
-    pubsub_topic       = "${google_pubsub_topic.topic.id}"
-    send_full_resource = true
+    pubsub_topic                     = "${google_pubsub_topic.topic.id}"
+    send_full_resource               = true
+    send_previous_resource_on_delete = true
   }
 }
 
@@ -219,7 +226,12 @@ The following arguments are supported:
   (Optional)
   The FHIR specification version.
   Default value is `STU3`.
-  Possible values are `DSTU2`, `STU3`, and `R4`.
+  Possible values are: `DSTU2`, `STU3`, `R4`.
+
+* `complex_data_type_reference_parsing` -
+  (Optional)
+  Enable parsing of references within complex FHIR data types such as Extensions. If this value is set to ENABLED, then features like referential integrity and Bundle reference rewriting apply to all references. If this flag has not been specified the behavior of the FHIR store will not change, references in complex data types will not be parsed. New stores will have this value set to ENABLED by default after a notification period. Warning: turning on this flag causes processing existing resources to fail if they contain references to non-existent resources.
+  Possible values are: `COMPLEX_DATA_TYPE_REFERENCE_PARSING_UNSPECIFIED`, `DISABLED`, `ENABLED`.
 
 * `enable_update_create` -
   (Optional)
@@ -283,6 +295,12 @@ The following arguments are supported:
   the order of dozens of seconds) is expected before the results show up in the streaming destination.
   Structure is [documented below](#nested_stream_configs).
 
+* `default_search_handling_strict` -
+  (Optional)
+  If true, overrides the default search behavior for this FHIR store to handling=strict which returns an error for unrecognized search parameters.
+  If false, uses the FHIR specification default handling=lenient which ignores unrecognized search parameters.
+  The handling can always be changed from the default on an individual API call by setting the HTTP header Prefer: handling=strict or Prefer: handling=lenient.
+
 * `notification_configs` -
   (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
   A list of notifcation configs that configure the notification for every resource mutation in this FHIR store.
@@ -340,7 +358,7 @@ The following arguments are supported:
    * ANALYTICS_V2: Analytics V2, similar to schema defined by the FHIR community, with added support for extensions with one or more occurrences and contained resources in stringified JSON.
    * LOSSLESS: A data-driven schema generated from the fields present in the FHIR data being exported, with no additional simplification.
   Default value is `ANALYTICS`.
-  Possible values are `ANALYTICS`, `ANALYTICS_V2`, and `LOSSLESS`.
+  Possible values are: `ANALYTICS`, `ANALYTICS_V2`, `LOSSLESS`.
 
 * `recursive_structure_depth` -
   (Required)
@@ -348,6 +366,23 @@ The following arguments are supported:
   resource is a recursive structure; when the depth is 2, the CodeSystem table will have a column called
   concept.concept but not concept.concept.concept. If not specified or set to 0, the server will use the default
   value 2. The maximum depth allowed is 5.
+
+* `last_updated_partition_config` -
+  (Optional)
+  The configuration for exported BigQuery tables to be partitioned by FHIR resource's last updated time column.
+  Structure is [documented below](#nested_last_updated_partition_config).
+
+
+<a name="nested_last_updated_partition_config"></a>The `last_updated_partition_config` block supports:
+
+* `type` -
+  (Required)
+  Type of partitioning.
+  Possible values are: `PARTITION_TYPE_UNSPECIFIED`, `HOUR`, `DAY`, `MONTH`, `YEAR`.
+
+* `expiration_ms` -
+  (Optional)
+  Number of milliseconds for which to keep the storage for a partition.
 
 <a name="nested_notification_configs"></a>The `notification_configs` block supports:
 
@@ -363,10 +398,18 @@ The following arguments are supported:
 * `send_full_resource` -
   (Optional)
   Whether to send full FHIR resource to this Pub/Sub topic for Create and Update operation.
-  Note that setting this to true does not guarantee that all resources will be sent in the format of 
+  Note that setting this to true does not guarantee that all resources will be sent in the format of
   full FHIR resource. When a resource change is too large or during heavy traffic, only the resource name will be
-  sent. Clients should always check the "payloadType" label from a Pub/Sub message to determine whether 
+  sent. Clients should always check the "payloadType" label from a Pub/Sub message to determine whether
   it needs to fetch the full resource as a separate operation.
+
+* `send_previous_resource_on_delete` -
+  (Optional)
+  Whether to send full FHIR resource to this Pub/Sub topic for deleting FHIR resource. Note that setting this to
+  true does not guarantee that all previous resources will be sent in the format of full FHIR resource. When a
+  resource change is too large or during heavy traffic, only the resource name will be sent. Clients should always
+  check the "payloadType" label from a Pub/Sub message to determine whether it needs to fetch the full previous
+  resource as a separate operation.
 
 ## Attributes Reference
 

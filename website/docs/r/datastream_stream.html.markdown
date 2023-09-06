@@ -29,7 +29,7 @@ To get more information about Stream, see:
     * [Official Documentation](https://cloud.google.com/datastream/docs/create-a-stream)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=datastream_stream_full&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=datastream_stream_full&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -414,17 +414,17 @@ resource "google_datastream_stream" "stream5" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=datastream_stream_postgresql_bigquery_dataset_id&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=datastream_stream_postgresql_bigquery_dataset_id&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
-## Example Usage - Datastream Stream Postgresql Bigquery Dataset
+## Example Usage - Datastream Stream Postgresql Bigquery Dataset Id
 
 
 ```hcl
 
 resource "google_bigquery_dataset" "postgres" {
-  dataset_id    = "postgres%{random_suffix}"
+  dataset_id    = "postgres"
   friendly_name = "postgres"
   description   = "Database of postgres"
   location      = "us-central1"
@@ -433,7 +433,7 @@ resource "google_bigquery_dataset" "postgres" {
 resource "google_datastream_stream" "default" {
   display_name  = "postgres to bigQuery"
   location      = "us-central1"
-  stream_id     = "postgres-to-big-query%{random_suffix}"
+  stream_id     = "postgres-bigquery"
 
    source_config {
     source_connection_profile = google_datastream_connection_profile.source_connection_profile.id
@@ -458,12 +458,12 @@ resource "google_datastream_stream" "default" {
 resource "google_datastream_connection_profile" "destination_connection_profile2" {
     display_name          = "Connection profile"
     location              = "us-central1"
-    connection_profile_id = "tf-test-destination-profile%{random_suffix}"
+    connection_profile_id = "dest-profile"
     bigquery_profile {}
 }
 
 resource "google_sql_database_instance" "instance" {
-    name             = "tf-test-my-instance%{random_suffix}"
+    name             = "instance-name"
     database_version = "MYSQL_8_0"
     region           = "us-central1"
     settings {
@@ -511,7 +511,7 @@ resource "random_password" "pwd" {
 }
 
 resource "google_sql_user" "user" {
-    name     = "user%{random_suffix}"
+    name     = "my-user"
     instance = google_sql_database_instance.instance.name
     host     = "%"
     password = random_password.pwd.result
@@ -520,7 +520,7 @@ resource "google_sql_user" "user" {
 resource "google_datastream_connection_profile" "source_connection_profile" {
     display_name          = "Source connection profile"
     location              = "us-central1"
-    connection_profile_id = "tf-test-source-profile%{random_suffix}"
+    connection_profile_id = "source-profile"
 
     mysql_profile {
         hostname = google_sql_database_instance.instance.public_ip_address
@@ -530,7 +530,7 @@ resource "google_datastream_connection_profile" "source_connection_profile" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=datastream_stream_bigquery&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=datastream_stream_bigquery&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -719,6 +719,11 @@ The following arguments are supported:
 * `max_concurrent_cdc_tasks` -
   (Optional)
   Maximum number of concurrent CDC tasks. The number should be non negative.
+  If not set (or set to 0), the system's default value will be used.
+
+* `max_concurrent_backfill_tasks` -
+  (Optional)
+  Maximum number of concurrent backfill tasks. The number should be non negative.
   If not set (or set to 0), the system's default value will be used.
 
 
@@ -1230,12 +1235,12 @@ The following arguments are supported:
 * `schema_file_format` -
   (Optional)
   The schema file format along JSON data files.
-  Possible values are `NO_SCHEMA_FILE` and `AVRO_SCHEMA_FILE`.
+  Possible values are: `NO_SCHEMA_FILE`, `AVRO_SCHEMA_FILE`.
 
 * `compression` -
   (Optional)
   Compression of the loaded JSON file.
-  Possible values are `NO_COMPRESSION` and `GZIP`.
+  Possible values are: `NO_COMPRESSION`, `GZIP`.
 
 <a name="nested_bigquery_destination_config"></a>The `bigquery_destination_config` block supports:
 

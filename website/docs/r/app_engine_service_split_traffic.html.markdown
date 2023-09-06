@@ -38,7 +38,7 @@ resource "google_storage_bucket" "bucket" {
 resource "google_storage_bucket_object" "object" {
 	name   = "hello-world.zip"
 	bucket = google_storage_bucket.bucket.name
-	source = "./test-fixtures/appengine/hello-world.zip"
+	source = "./test-fixtures/hello-world.zip"
 }
 
 resource "google_app_engine_standard_app_version" "liveapp_v1" {
@@ -113,7 +113,7 @@ The following arguments are supported:
 * `shard_by` -
   (Optional)
   Mechanism used to determine which version a request is sent to. The traffic selection algorithm will be stable for either type until allocations are changed.
-  Possible values are `UNSPECIFIED`, `COOKIE`, `IP`, and `RANDOM`.
+  Possible values are: `UNSPECIFIED`, `COOKIE`, `IP`, `RANDOM`.
 
 * `allocations` -
   (Required)

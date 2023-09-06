@@ -33,8 +33,8 @@ To get more information about InstanceAttachment, see:
 
 ```hcl
 resource "google_project" "project" {
-  project_id      = "tf-test%{random_suffix}"
-  name            = "tf-test%{random_suffix}"
+  project_id      = "my-project"
+  name            = "my-project"
   org_id          = ""
   billing_account = ""
 }
@@ -87,14 +87,14 @@ resource "google_apigee_organization" "apigee_org" {
 }
 
 resource "google_apigee_instance" "apigee_ins" {
-  name     = "tf-test%{random_suffix}"
+  name     = "my-instance-name"
   location = "us-central1"
   org_id   = google_apigee_organization.apigee_org.id
 }
 
 resource "google_apigee_environment" "apigee_env" {
   org_id   = google_apigee_organization.apigee_org.id
-  name         = "tf-test%{random_suffix}"
+  name         = "my-environment-name"
   description  = "Apigee Environment"
   display_name = "environment-1"
 }
@@ -117,7 +117,7 @@ The following arguments are supported:
 * `instance_id` -
   (Required)
   The Apigee instance associated with the Apigee environment,
-  in the format `organisations/{{org_name}}/instances/{{instance_name}}`.
+  in the format `organizations/{{org_name}}/instances/{{instance_name}}`.
 
 
 - - -

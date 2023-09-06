@@ -90,7 +90,7 @@ The following arguments are supported:
   (Required)
   The type of the feature that enabled for fulfillment.
   * SMALLTALK: Fulfillment is enabled for SmallTalk.
-  Possible values are `SMALLTALK`.
+  Possible values are: `SMALLTALK`.
 
 <a name="nested_generic_web_service"></a>The `generic_web_service` block supports:
 
@@ -117,7 +117,7 @@ In addition to the arguments listed above, the following computed attributes are
 * `id` - an identifier for the resource with format `{{name}}`
 
 * `name` -
-  The unique identifier of the fulfillment. 
+  The unique identifier of the fulfillment.
   Format: projects/<Project ID>/agent/fulfillment - projects/<Project ID>/locations/<Location ID>/agent/fulfillment
 
 

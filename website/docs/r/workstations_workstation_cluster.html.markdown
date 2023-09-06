@@ -12,14 +12,14 @@
 #     .github/CONTRIBUTING.md.
 #
 # ----------------------------------------------------------------------------
-subcategory: "Workstations"
+subcategory: "Cloud Workstations"
 description: |-
-  A managed workstation cluster.
+  A grouping of workstation configurations and the associated workstations in that region.
 ---
 
 # google\_workstations\_workstation\_cluster
 
-A managed workstation cluster.
+A grouping of workstation configurations and the associated workstations in that region.
 
 ~> **Warning:** This resource is in beta, and should be used with the terraform-provider-google-beta provider.
 See [Provider Versions](https://terraform.io/docs/providers/google/guides/provider_versions.html) for more details on beta resources.
@@ -31,7 +31,7 @@ To get more information about WorkstationCluster, see:
     * [Workstations](https://cloud.google.com/workstations/docs/)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=workstation_cluster_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=workstation_cluster_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -74,7 +74,7 @@ resource "google_compute_subnetwork" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=workstation_cluster_private&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=workstation_cluster_private&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -128,17 +128,17 @@ The following arguments are supported:
 
 * `network` -
   (Required)
-  The relative resource name of the VPC network on which the instance can be accessed. 
+  The relative resource name of the VPC network on which the instance can be accessed.
   It is specified in the following form: "projects/{projectNumber}/global/networks/{network_id}".
 
 * `subnetwork` -
   (Required)
-  Name of the Compute Engine subnetwork in which instances associated with this cluster will be created. 
+  Name of the Compute Engine subnetwork in which instances associated with this cluster will be created.
   Must be part of the subnetwork specified for this cluster.
 
 * `workstation_cluster_id` -
   (Required)
-  The ID of the workstation cluster.
+  ID to use for the workstation cluster.
 
 
 - - -
@@ -177,15 +177,20 @@ The following arguments are supported:
 
 * `cluster_hostname` -
   (Output)
-  Hostname for the workstation cluster. 
-  This field will be populated only when private endpoint is enabled. 
+  Hostname for the workstation cluster.
+  This field will be populated only when private endpoint is enabled.
   To access workstations in the cluster, create a new DNS zone mapping this domain name to an internal IP address and a forwarding rule mapping that address to the service attachment.
 
 * `service_attachment_uri` -
   (Output)
-  Service attachment URI for the workstation cluster. 
-  The service attachemnt is created when private endpoint is enabled. 
+  Service attachment URI for the workstation cluster.
+  The service attachment is created when private endpoint is enabled.
   To access workstations in the cluster, configure access to the managed service using (Private Service Connect)[https://cloud.google.com/vpc/docs/configure-private-service-connect-services].
+
+* `allowed_projects` -
+  (Optional)
+  Additional project IDs that are allowed to attach to the workstation cluster's service attachment.
+  By default, the workstation cluster's project and the VPC host project (if different) are allowed.
 
 ## Attributes Reference
 
@@ -200,15 +205,15 @@ In addition to the arguments listed above, the following computed attributes are
   The system-generated UID of the resource.
 
 * `degraded` -
-  Whether this resource is in degraded mode, in which case it may require user action to restore full functionality. 
+  Whether this resource is in degraded mode, in which case it may require user action to restore full functionality.
   Details can be found in the conditions field.
 
 * `etag` -
-  Checksum computed by the server. 
+  Checksum computed by the server.
   May be sent on update and delete requests to ensure that the client has an up-to-date value before proceeding.
 
 * `create_time` -
-  Time the Instance was created in UTC.
+  Time when this resource was created.
 
 * `conditions` -
   Status conditions describing the current resource state.

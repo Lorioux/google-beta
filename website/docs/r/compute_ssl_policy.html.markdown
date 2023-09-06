@@ -30,7 +30,7 @@ To get more information about SslPolicy, see:
     * [Using SSL Policies](https://cloud.google.com/compute/docs/load-balancing/ssl-policies)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=ssl_policy_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=ssl_policy_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -90,14 +90,14 @@ The following arguments are supported:
   for information on what cipher suites each profile provides. If
   `CUSTOM` is used, the `custom_features` attribute **must be set**.
   Default value is `COMPATIBLE`.
-  Possible values are `COMPATIBLE`, `MODERN`, `RESTRICTED`, and `CUSTOM`.
+  Possible values are: `COMPATIBLE`, `MODERN`, `RESTRICTED`, `CUSTOM`.
 
 * `min_tls_version` -
   (Optional)
   The minimum version of SSL protocol that can be used by the clients
   to establish a connection with the load balancer.
   Default value is `TLS_1_0`.
-  Possible values are `TLS_1_0`, `TLS_1_1`, and `TLS_1_2`.
+  Possible values are: `TLS_1_0`, `TLS_1_1`, `TLS_1_2`.
 
 * `custom_features` -
   (Optional)

@@ -29,8 +29,9 @@ To get more information about Config, see:
 * How-to Guides
     * [Official Documentation](https://cloud.google.com/bigquery/docs/reference/datatransfer/rest/)
 
-~> **Warning:** All arguments including `sensitive_params.secret_access_key` will be stored in the raw
-state as plain-text. [Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
+~> **Warning:** All arguments including the following potentially sensitive
+values will be stored in the raw state as plain text: `sensitive_params.secret_access_key`.
+[Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
 
 ## Example Usage - Bigquerydatatransfer Config Scheduled Query
 
@@ -208,8 +209,9 @@ In addition to the arguments listed above, the following computed attributes are
 
 * `name` -
   The resource name of the transfer config. Transfer config names have the
-  form projects/{projectId}/locations/{location}/transferConfigs/{configId}.
-  Where configId is usually a uuid, but this is not required.
+  form projects/{projectId}/locations/{location}/transferConfigs/{configId}
+  or projects/{projectId}/transferConfigs/{configId},
+  where configId is usually a uuid, but this is not required.
   The name is ignored when creating a transfer config.
 
 

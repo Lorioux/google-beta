@@ -14,14 +14,14 @@
 # ----------------------------------------------------------------------------
 subcategory: "Network services"
 description: |-
-  Mesh represents a logical configuration grouping for workload to workload communication within a 
+  Mesh represents a logical configuration grouping for workload to workload communication within a
   service mesh.
 ---
 
 # google\_network\_services\_mesh
 
-Mesh represents a logical configuration grouping for workload to workload communication within a 
-service mesh. Routes that point to mesh dictate how requests are routed within this logical 
+Mesh represents a logical configuration grouping for workload to workload communication within a
+service mesh. Routes that point to mesh dictate how requests are routed within this logical
 mesh boundary.
 
 ~> **Warning:** This resource is in beta, and should be used with the terraform-provider-google-beta provider.
@@ -32,7 +32,7 @@ To get more information about Mesh, see:
 * [API documentation](https://cloud.google.com/traffic-director/docs/reference/network-services/rest/v1beta1/projects.locations.meshes)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=network_services_mesh_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=network_services_mesh_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -51,7 +51,7 @@ resource "google_network_services_mesh" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=network_services_mesh_no_port&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=network_services_mesh_no_port&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -92,10 +92,10 @@ The following arguments are supported:
 
 * `interception_port` -
   (Optional)
-  Optional. If set to a valid TCP port (1-65535), instructs the SIDECAR proxy to listen on the 
-  specified port of localhost (127.0.0.1) address. The SIDECAR proxy will expect all traffic to 
-  be redirected to this port regardless of its actual ip:port destination. If unset, a port 
-  '15001' is used as the interception port. This will is applicable only for sidecar proxy 
+  Optional. If set to a valid TCP port (1-65535), instructs the SIDECAR proxy to listen on the
+  specified port of localhost (127.0.0.1) address. The SIDECAR proxy will expect all traffic to
+  be redirected to this port regardless of its actual ip:port destination. If unset, a port
+  '15001' is used as the interception port. This will is applicable only for sidecar proxy
   deployments.
 
 * `project` - (Optional) The ID of the project in which the resource belongs.

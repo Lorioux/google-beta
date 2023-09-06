@@ -36,7 +36,7 @@ on databases in order to prevent accidental data loss. See [Terraform docs](http
 for more information on lifecycle parameters.
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=spanner_database_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=spanner_database_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -104,13 +104,23 @@ The following arguments are supported:
   (Optional)
   The dialect of the Cloud Spanner Database.
   If it is not provided, "GOOGLE_STANDARD_SQL" will be used.
-  Possible values are `GOOGLE_STANDARD_SQL` and `POSTGRESQL`.
+  Possible values are: `GOOGLE_STANDARD_SQL`, `POSTGRESQL`.
+
+* `enable_drop_protection` -
+  (Optional)
+  Whether drop protection is enabled for this database. Defaults to false.
+  Drop protection is different from
+  the "deletion_protection" attribute in the following ways:
+  (1) "deletion_protection" only protects the database from deletions in Terraform.
+  whereas setting “enableDropProtection” to true protects the database from deletions in all interfaces.
+  (2) Setting "enableDropProtection" to true also prevents the deletion of the parent instance containing the database.
+  "deletion_protection" attribute does not provide protection against the deletion of the parent instance.
 
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
 
-* `deletion_protection` - (Optional) Whether or not to allow Terraform to destroy the instance. Unless this field is set to false
-in Terraform state, a `terraform destroy` or `terraform apply` that would delete the instance will fail.
+* `deletion_protection` - (Optional) Whether or not to allow Terraform to destroy the database. Defaults to true. Unless this field is set to false
+in Terraform state, a `terraform destroy` or `terraform apply` that would delete the database will fail.
 
 
 <a name="nested_encryption_config"></a>The `encryption_config` block supports:

@@ -47,8 +47,8 @@ Your account must have the `serviceusage.services.use` permission on the
 ```hcl
 resource "google_access_context_manager_access_level" "access-level-service-account" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access-policy.name}"
-  name   = "accessPolicies/${google_access_context_manager_access_policy.access-policy.name}/accessLevels/tf_test_chromeos_no_lock%{random_suffix}"
-  title  = "tf_test_chromeos_no_lock%{random_suffix}"
+  name   = "accessPolicies/${google_access_context_manager_access_policy.access-policy.name}/accessLevels/chromeos_no_lock"
+  title  = "chromeos_no_lock"
   basic {
     conditions {
       device_policy {
@@ -71,7 +71,7 @@ resource "google_access_context_manager_access_level" "access-level-service-acco
 }
 
 resource "google_service_account" "created-later" {
-  account_id = "tf-test-%{random_suffix}"
+  account_id = "my-account-id"
 }
 
 resource "google_access_context_manager_access_level_condition" "access-level-conditions" {
@@ -174,13 +174,13 @@ The following arguments are supported:
   (Optional)
   A list of allowed encryptions statuses.
   An empty list allows all statuses.
-  Each value may be one of `ENCRYPTION_UNSPECIFIED`, `ENCRYPTION_UNSUPPORTED`, `UNENCRYPTED`, and `ENCRYPTED`.
+  Each value may be one of: `ENCRYPTION_UNSPECIFIED`, `ENCRYPTION_UNSUPPORTED`, `UNENCRYPTED`, `ENCRYPTED`.
 
 * `allowed_device_management_levels` -
   (Optional)
   A list of allowed device management levels.
   An empty list allows all management levels.
-  Each value may be one of `MANAGEMENT_UNSPECIFIED`, `NONE`, `BASIC`, and `COMPLETE`.
+  Each value may be one of: `MANAGEMENT_UNSPECIFIED`, `NONE`, `BASIC`, `COMPLETE`.
 
 * `os_constraints` -
   (Optional)
@@ -208,7 +208,7 @@ The following arguments are supported:
 * `os_type` -
   (Required)
   The operating system type of the device.
-  Possible values are `OS_UNSPECIFIED`, `DESKTOP_MAC`, `DESKTOP_WINDOWS`, `DESKTOP_LINUX`, `DESKTOP_CHROME_OS`, `ANDROID`, and `IOS`.
+  Possible values are: `OS_UNSPECIFIED`, `DESKTOP_MAC`, `DESKTOP_WINDOWS`, `DESKTOP_LINUX`, `DESKTOP_CHROME_OS`, `ANDROID`, `IOS`.
 
 ## Attributes Reference
 

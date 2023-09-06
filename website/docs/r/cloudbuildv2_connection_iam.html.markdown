@@ -24,20 +24,21 @@ Three different resources help you manage your IAM policy for Cloud Build v2 Con
 * `google_cloudbuildv2_connection_iam_binding`: Authoritative for a given role. Updates the IAM policy to grant a role to a list of members. Other roles within the IAM policy for the connection are preserved.
 * `google_cloudbuildv2_connection_iam_member`: Non-authoritative. Updates the IAM policy to grant a role to a new member. Other members for the role for the connection are preserved.
 
+A data source can be used to retrieve policy data in advent you do not need creation
+
+* `google_cloudbuildv2_connection_iam_policy`: Retrieves the IAM policy for the connection
+
 ~> **Note:** `google_cloudbuildv2_connection_iam_policy` **cannot** be used in conjunction with `google_cloudbuildv2_connection_iam_binding` and `google_cloudbuildv2_connection_iam_member` or they will fight over what your policy should be.
 
 ~> **Note:** `google_cloudbuildv2_connection_iam_binding` resources **can be** used in conjunction with `google_cloudbuildv2_connection_iam_member` resources **only if** they do not grant privilege to the same role.
 
 
-~> **Warning:** This resource is in beta, and should be used with the terraform-provider-google-beta provider.
-See [Provider Versions](https://terraform.io/docs/providers/google/guides/provider_versions.html) for more details on beta resources.
 
 
 ## google\_cloudbuildv2\_connection\_iam\_policy
 
 ```hcl
 data "google_iam_policy" "admin" {
-  provider = google-beta
   binding {
     role = "roles/cloudbuild.connectionViewer"
     members = [
@@ -47,7 +48,6 @@ data "google_iam_policy" "admin" {
 }
 
 resource "google_cloudbuildv2_connection_iam_policy" "policy" {
-  provider = google-beta
   project = google_cloudbuildv2_connection.my-connection.project
   location = google_cloudbuildv2_connection.my-connection.location
   name = google_cloudbuildv2_connection.my-connection.name
@@ -59,7 +59,6 @@ resource "google_cloudbuildv2_connection_iam_policy" "policy" {
 
 ```hcl
 resource "google_cloudbuildv2_connection_iam_binding" "binding" {
-  provider = google-beta
   project = google_cloudbuildv2_connection.my-connection.project
   location = google_cloudbuildv2_connection.my-connection.location
   name = google_cloudbuildv2_connection.my-connection.name
@@ -74,7 +73,6 @@ resource "google_cloudbuildv2_connection_iam_binding" "binding" {
 
 ```hcl
 resource "google_cloudbuildv2_connection_iam_member" "member" {
-  provider = google-beta
   project = google_cloudbuildv2_connection.my-connection.project
   location = google_cloudbuildv2_connection.my-connection.location
   name = google_cloudbuildv2_connection.my-connection.name
@@ -82,6 +80,7 @@ resource "google_cloudbuildv2_connection_iam_member" "member" {
   member = "user:jane@example.com"
 }
 ```
+
 
 ## Argument Reference
 

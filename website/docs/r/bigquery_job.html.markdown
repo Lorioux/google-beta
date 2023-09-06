@@ -30,7 +30,7 @@ To get more information about Job, see:
     * [BigQuery Jobs Intro](https://cloud.google.com/bigquery/docs/jobs-overview)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_job_query&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_job_query&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -77,7 +77,7 @@ resource "google_bigquery_job" "job" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_job_query_table_reference&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_job_query_table_reference&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -126,7 +126,7 @@ resource "google_bigquery_job" "job" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_job_load&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_job_load&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -182,7 +182,7 @@ locals {
 }
 
 resource "google_storage_bucket" "bucket" {
-  name     = "${local.project}-bq-geojson-sample"  # Every bucket name must be globally unique
+  name     = "${local.project}-bq-geojson"  # Every bucket name must be globally unique
   location = "US"
   uniform_bucket_level_access = true
 }
@@ -234,6 +234,70 @@ resource "google_bigquery_job" "job" {
   }
 
   depends_on = ["google_storage_bucket_object.object"]
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_job_load_parquet&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Bigquery Job Load Parquet
+
+
+```hcl
+resource "google_storage_bucket" "test" {
+  name                        = "job_load_bucket"
+  location                    = "US"
+  uniform_bucket_level_access = true
+}
+
+resource "google_storage_bucket_object" "test" {
+  name   =  "job_load_bucket_object"
+  source = "./test-fixtures/test.parquet.gzip"
+  bucket = google_storage_bucket.test.name
+}
+
+resource "google_bigquery_dataset" "test" {
+  dataset_id                  = "job_load_dataset"
+  friendly_name               = "test"
+  description                 = "This is a test description"
+  location                    = "US"
+}
+
+resource "google_bigquery_table" "test" {
+  deletion_protection = false
+  table_id            = "job_load_table"
+  dataset_id          = google_bigquery_dataset.test.dataset_id
+}
+
+resource "google_bigquery_job" "job" {
+  job_id = "job_load"
+
+  labels = {
+    "my_job" ="load"
+  }
+
+  load {
+    source_uris = [
+      "gs://${google_storage_bucket_object.test.bucket}/${google_storage_bucket_object.test.name}"
+    ]
+
+    destination_table {
+      project_id = google_bigquery_table.test.project
+      dataset_id = google_bigquery_table.test.dataset_id
+      table_id   = google_bigquery_table.test.table_id
+    }
+
+    schema_update_options = ["ALLOW_FIELD_RELAXATION", "ALLOW_FIELD_ADDITION"]
+    write_disposition     = "WRITE_APPEND"
+    source_format         = "PARQUET"
+    autodetect            = true
+
+    parquet_options {
+      enum_as_string        = true
+      enable_list_inference = true
+    }
+  }
 }
 ```
 ## Example Usage - Bigquery Job Copy
@@ -367,7 +431,7 @@ resource "google_bigquery_job" "job" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_job_extract&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_job_extract&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -470,7 +534,7 @@ The following arguments are supported:
   CREATE_NEVER: The table must already exist. If it does not, a 'notFound' error is returned in the job result.
   Creation, truncation and append actions occur as one atomic update upon job completion
   Default value is `CREATE_IF_NEEDED`.
-  Possible values are `CREATE_IF_NEEDED` and `CREATE_NEVER`.
+  Possible values are: `CREATE_IF_NEEDED`, `CREATE_NEVER`.
 
 * `write_disposition` -
   (Optional)
@@ -481,7 +545,7 @@ The following arguments are supported:
   Each action is atomic and only occurs if BigQuery is able to complete the job successfully.
   Creation, truncation and append actions occur as one atomic update upon job completion.
   Default value is `WRITE_EMPTY`.
-  Possible values are `WRITE_TRUNCATE`, `WRITE_APPEND`, and `WRITE_EMPTY`.
+  Possible values are: `WRITE_TRUNCATE`, `WRITE_APPEND`, `WRITE_EMPTY`.
 
 * `default_dataset` -
   (Optional)
@@ -492,7 +556,7 @@ The following arguments are supported:
   (Optional)
   Specifies a priority for the query.
   Default value is `INTERACTIVE`.
-  Possible values are `INTERACTIVE` and `BATCH`.
+  Possible values are: `INTERACTIVE`, `BATCH`.
 
 * `allow_large_results` -
   (Optional)
@@ -613,7 +677,7 @@ The following arguments are supported:
   (Optional)
   Determines which statement in the script represents the "key result",
   used to populate the schema and query results of the script job.
-  Possible values are `LAST` and `FIRST_SELECT`.
+  Possible values are: `LAST`, `FIRST_SELECT`.
 
 <a name="nested_load"></a>The `load` block supports:
 
@@ -638,7 +702,7 @@ The following arguments are supported:
   CREATE_NEVER: The table must already exist. If it does not, a 'notFound' error is returned in the job result.
   Creation, truncation and append actions occur as one atomic update upon job completion
   Default value is `CREATE_IF_NEEDED`.
-  Possible values are `CREATE_IF_NEEDED` and `CREATE_NEVER`.
+  Possible values are: `CREATE_IF_NEEDED`, `CREATE_NEVER`.
 
 * `write_disposition` -
   (Optional)
@@ -649,7 +713,7 @@ The following arguments are supported:
   Each action is atomic and only occurs if BigQuery is able to complete the job successfully.
   Creation, truncation and append actions occur as one atomic update upon job completion.
   Default value is `WRITE_EMPTY`.
-  Possible values are `WRITE_TRUNCATE`, `WRITE_APPEND`, and `WRITE_EMPTY`.
+  Possible values are: `WRITE_TRUNCATE`, `WRITE_APPEND`, `WRITE_EMPTY`.
 
 * `null_marker` -
   (Optional)
@@ -757,6 +821,11 @@ The following arguments are supported:
   Custom encryption configuration (e.g., Cloud KMS keys)
   Structure is [documented below](#nested_destination_encryption_configuration).
 
+* `parquet_options` -
+  (Optional)
+  Parquet Options for load and make external tables.
+  Structure is [documented below](#nested_parquet_options).
+
 
 <a name="nested_destination_table"></a>The `destination_table` block supports:
 
@@ -801,6 +870,16 @@ The following arguments are supported:
   (Output)
   Describes the Cloud KMS encryption key version used to protect destination BigQuery table.
 
+<a name="nested_parquet_options"></a>The `parquet_options` block supports:
+
+* `enum_as_string` -
+  (Optional)
+  If sourceFormat is set to PARQUET, indicates whether to infer Parquet ENUM logical type as STRING instead of BYTES by default.
+
+* `enable_list_inference` -
+  (Optional)
+  If sourceFormat is set to PARQUET, indicates whether to use schema inference specifically for Parquet LIST logical type.
+
 <a name="nested_copy"></a>The `copy` block supports:
 
 * `source_tables` -
@@ -820,7 +899,7 @@ The following arguments are supported:
   CREATE_NEVER: The table must already exist. If it does not, a 'notFound' error is returned in the job result.
   Creation, truncation and append actions occur as one atomic update upon job completion
   Default value is `CREATE_IF_NEEDED`.
-  Possible values are `CREATE_IF_NEEDED` and `CREATE_NEVER`.
+  Possible values are: `CREATE_IF_NEEDED`, `CREATE_NEVER`.
 
 * `write_disposition` -
   (Optional)
@@ -831,7 +910,7 @@ The following arguments are supported:
   Each action is atomic and only occurs if BigQuery is able to complete the job successfully.
   Creation, truncation and append actions occur as one atomic update upon job completion.
   Default value is `WRITE_EMPTY`.
-  Possible values are `WRITE_TRUNCATE`, `WRITE_APPEND`, and `WRITE_EMPTY`.
+  Possible values are: `WRITE_TRUNCATE`, `WRITE_APPEND`, `WRITE_EMPTY`.
 
 * `destination_encryption_configuration` -
   (Optional)

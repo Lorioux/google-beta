@@ -24,12 +24,10 @@ Selectors are DNS names, which may be wildcards or exact matches.
 Each DNS query subject to a Response Policy matches at most one ResponsePolicyRule,
 as identified by the dns_name field with the longest matching suffix.
 
-~> **Warning:** This resource is in beta, and should be used with the terraform-provider-google-beta provider.
-See [Provider Versions](https://terraform.io/docs/providers/google/guides/provider_versions.html) for more details on beta resources.
 
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_response_policy_rule_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_response_policy_rule_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -38,24 +36,18 @@ See [Provider Versions](https://terraform.io/docs/providers/google/guides/provid
 
 ```hcl
 resource "google_compute_network" "network-1" {
-  provider = google-beta
-
   name                    = "network-1"
   auto_create_subnetworks = false
 }
 
 resource "google_compute_network" "network-2" {
-  provider = google-beta
-  
   name                    = "network-2"
   auto_create_subnetworks = false
 }
 
 resource "google_dns_response_policy" "response-policy" {
-  provider = google-beta
-
   response_policy_name = "example-response-policy"
-  
+
   networks {
     network_url = google_compute_network.network-1.id
   }
@@ -65,8 +57,6 @@ resource "google_dns_response_policy" "response-policy" {
 }
 
 resource "google_dns_response_policy_rule" "example-response-policy-rule" {
-  provider = google-beta
-
   response_policy = google_dns_response_policy.response-policy.response_policy_name
   rule_name       = "example-rule"
   dns_name        = "dns.example.com."
@@ -78,7 +68,7 @@ resource "google_dns_response_policy_rule" "example-response-policy-rule" {
       ttl     = 300
       rrdatas = ["192.0.2.91"]
     }
-  }  
+  }
 
 }
 ```
@@ -111,7 +101,7 @@ The following arguments are supported:
   Structure is [documented below](#nested_local_data).
 
 * `behavior` -
-  (Optional)
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
   Answer this query with a behavior rather than DNS data. Acceptable values are 'behaviorUnspecified', and 'bypassResponsePolicy'
 
 * `project` - (Optional) The ID of the project in which the resource belongs.
@@ -135,7 +125,7 @@ The following arguments are supported:
 * `type` -
   (Required)
   One of valid DNS resource types.
-  Possible values are `A`, `AAAA`, `CAA`, `CNAME`, `DNSKEY`, `DS`, `HTTPS`, `IPSECVPNKEY`, `MX`, `NAPTR`, `NS`, `PTR`, `SOA`, `SPF`, `SRV`, `SSHFP`, `SVCB`, `TLSA`, and `TXT`.
+  Possible values are: `A`, `AAAA`, `CAA`, `CNAME`, `DNSKEY`, `DS`, `HTTPS`, `IPSECVPNKEY`, `MX`, `NAPTR`, `NS`, `PTR`, `SOA`, `SPF`, `SRV`, `SSHFP`, `SVCB`, `TLSA`, `TXT`.
 
 * `ttl` -
   (Optional)

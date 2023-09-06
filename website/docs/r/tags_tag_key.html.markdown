@@ -46,7 +46,7 @@ The following arguments are supported:
 
 * `parent` -
   (Required)
-  Input only. The resource name of the new TagKey's parent. Must be of the form organizations/{org_id}.
+  Input only. The resource name of the new TagKey's parent. Must be of the form organizations/{org_id} or projects/{project_id_or_number}.
 
 * `short_name` -
   (Required)
@@ -65,7 +65,7 @@ The following arguments are supported:
   (Optional)
   Optional. A purpose cannot be changed once set.
   A purpose denotes that this Tag is intended for use in policies of a specific policy engine, and will involve that policy engine in management operations involving this Tag.
-  Possible values are `GCE_FIREWALL`.
+  Possible values are: `GCE_FIREWALL`.
 
 * `purpose_data` -
   (Optional)

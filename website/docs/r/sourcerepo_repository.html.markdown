@@ -29,7 +29,7 @@ To get more information about Repository, see:
     * [Official Documentation](https://cloud.google.com/source-repositories/)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=sourcerepo_repository_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=sourcerepo_repository_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -42,7 +42,7 @@ resource "google_sourcerepo_repository" "my-repo" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=sourcerepo_repository_full&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=sourcerepo_repository_full&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -85,7 +85,7 @@ The following arguments are supported:
 
 * `pubsub_configs` -
   (Optional)
-  How this repository publishes a change in the repository through Cloud Pub/Sub. 
+  How this repository publishes a change in the repository through Cloud Pub/Sub.
   Keyed by the topic names.
   Structure is [documented below](#nested_pubsub_configs).
 
@@ -99,16 +99,16 @@ The following arguments are supported:
 
 * `message_format` -
   (Required)
-  The format of the Cloud Pub/Sub messages. 
+  The format of the Cloud Pub/Sub messages.
   - PROTOBUF: The message payload is a serialized protocol buffer of SourceRepoEvent.
   - JSON: The message payload is a JSON string of SourceRepoEvent.
-  Possible values are `PROTOBUF` and `JSON`.
+  Possible values are: `PROTOBUF`, `JSON`.
 
 * `service_account_email` -
   (Optional)
-  Email address of the service account used for publishing Cloud Pub/Sub messages. 
-  This service account needs to be in the same project as the PubsubConfig. When added, 
-  the caller needs to have iam.serviceAccounts.actAs permission on this service account. 
+  Email address of the service account used for publishing Cloud Pub/Sub messages.
+  This service account needs to be in the same project as the PubsubConfig. When added,
+  the caller needs to have iam.serviceAccounts.actAs permission on this service account.
   If unspecified, it defaults to the compute engine default service account.
 
 ## Attributes Reference

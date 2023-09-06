@@ -25,7 +25,7 @@ The Dataplex Asset resource
 ## Example Usage - basic_asset
 ```hcl
 resource "google_storage_bucket" "basic_bucket" {
-  name          = "dataplex-bucket-%{random_suffix}"
+  name          = "bucket"
   location      = "us-west1"
   uniform_bucket_level_access = true
   lifecycle {
@@ -75,7 +75,7 @@ resource "google_dataplex_asset" "primary" {
   }
  
   resource_spec {
-    name = "projects/my-project-name/buckets/dataplex-bucket-%{random_suffix}"
+    name = "projects/my-project-name/buckets/bucket"
     type = "STORAGE_BUCKET"
   }
  
@@ -147,6 +147,10 @@ The `resource_spec` block supports:
 * `name` -
   (Optional)
   Immutable. Relative name of the cloud resource that contains the data that is being managed within a lake. For example: `projects/{project_number}/buckets/{bucket_id}` `projects/{project_number}/datasets/{dataset_id}`
+    
+* `read_access_mode` -
+  (Optional)
+  Optional. Determines how read permissions are handled for each asset and their associated tables. Only available to storage buckets assets. Possible values: DIRECT, MANAGED
     
 * `type` -
   (Required)

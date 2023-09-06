@@ -28,8 +28,9 @@ To get more information about UptimeCheckConfig, see:
 * How-to Guides
     * [Official Documentation](https://cloud.google.com/monitoring/uptime-checks/)
 
-~> **Warning:** All arguments including `http_check.auth_info.password` will be stored in the raw
-state as plain-text. [Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
+~> **Warning:** All arguments including the following potentially sensitive
+values will be stored in the raw state as plain text: `http_check.auth_info.password`.
+[Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
 
 ## Example Usage - Uptime Check Config Http
 
@@ -147,7 +148,7 @@ resource "google_monitoring_uptime_check_config" "https" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=uptime_check_tcp&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=uptime_check_tcp&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -172,6 +173,55 @@ resource "google_monitoring_uptime_check_config" "tcp_group" {
 resource "google_monitoring_group" "check" {
   display_name = "uptime-check-group"
   filter       = "resource.metadata.name=has_substring(\"foo\")"
+}
+```
+## Example Usage - Uptime Check Config Synthetic Monitor
+
+
+```hcl
+resource "google_storage_bucket" "bucket" {
+  name     = "my-project-name-gcf-source"  # Every bucket name must be globally unique
+  location = "US"
+  uniform_bucket_level_access = true
+}
+ 
+resource "google_storage_bucket_object" "object" {
+  name   = "function-source.zip"
+  bucket = google_storage_bucket.bucket.name
+  source = "synthetic-fn-source.zip"  # Add path to the zipped function source code
+}
+ 
+resource "google_cloudfunctions2_function" "function" {
+  name = "synthetic_function"
+  location = "us-central1"
+ 
+  build_config {
+    runtime = "nodejs16"
+    entry_point = "SyntheticFunction"  # Set the entry point 
+    source {
+      storage_source {
+        bucket = google_storage_bucket.bucket.name
+        object = google_storage_bucket_object.object.name
+      }
+    }
+  }
+ 
+  service_config {
+    max_instance_count  = 1
+    available_memory    = "256M"
+    timeout_seconds     = 60
+  }
+}
+
+resource "google_monitoring_uptime_check_config" "synthetic_monitor" {
+  display_name = "synthetic_monitor"
+  timeout = "60s"
+
+  synthetic_monitor {
+    cloud_function_v2 {
+      name = google_cloudfunctions2_function.function.id
+    }
+  }
 }
 ```
 
@@ -208,7 +258,7 @@ The following arguments are supported:
 * `checker_type` -
   (Optional)
   The checker type to use for the check. If the monitored resource type is servicedirectory_service, checkerType must be set to VPC_CHECKERS.
-  Possible values are `STATIC_IP_CHECKERS` and `VPC_CHECKERS`.
+  Possible values are: `STATIC_IP_CHECKERS`, `VPC_CHECKERS`.
 
 * `http_check` -
   (Optional)
@@ -230,6 +280,11 @@ The following arguments are supported:
   The monitored resource (https://cloud.google.com/monitoring/api/resources) associated with the configuration. The following monitored resource types are supported for uptime checks:  uptime_url  gce_instance  gae_app  aws_ec2_instance aws_elb_load_balancer  k8s_service  servicedirectory_service
   Structure is [documented below](#nested_monitored_resource).
 
+* `synthetic_monitor` -
+  (Optional)
+  A Synthetic Monitor deployed to a Cloud Functions V2 instance.
+  Structure is [documented below](#nested_synthetic_monitor).
+
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
 
@@ -244,7 +299,7 @@ The following arguments are supported:
   (Optional)
   The type of content matcher that will be applied to the server output, compared to the content string when the check is run.
   Default value is `CONTAINS_STRING`.
-  Possible values are `CONTAINS_STRING`, `NOT_CONTAINS_STRING`, `MATCHES_REGEX`, `NOT_MATCHES_REGEX`, `MATCHES_JSON_PATH`, and `NOT_MATCHES_JSON_PATH`.
+  Possible values are: `CONTAINS_STRING`, `NOT_CONTAINS_STRING`, `MATCHES_REGEX`, `NOT_MATCHES_REGEX`, `MATCHES_JSON_PATH`, `NOT_MATCHES_JSON_PATH`.
 
 * `json_path_matcher` -
   (Optional)
@@ -262,7 +317,7 @@ The following arguments are supported:
   (Optional)
   Options to perform JSONPath content matching.
   Default value is `EXACT_MATCH`.
-  Possible values are `EXACT_MATCH` and `REGEX_MATCH`.
+  Possible values are: `EXACT_MATCH`, `REGEX_MATCH`.
 
 <a name="nested_http_check"></a>The `http_check` block supports:
 
@@ -270,12 +325,12 @@ The following arguments are supported:
   (Optional)
   The HTTP request method to use for the check. If set to METHOD_UNSPECIFIED then requestMethod defaults to GET.
   Default value is `GET`.
-  Possible values are `METHOD_UNSPECIFIED`, `GET`, and `POST`.
+  Possible values are: `METHOD_UNSPECIFIED`, `GET`, `POST`.
 
 * `content_type` -
   (Optional)
   The content type to use for the check.
-  Possible values are `TYPE_UNSPECIFIED` and `URL_ENCODED`.
+  Possible values are: `TYPE_UNSPECIFIED`, `URL_ENCODED`.
 
 * `auth_info` -
   (Optional)
@@ -336,7 +391,7 @@ The following arguments are supported:
 * `status_class` -
   (Optional)
   A class of status codes to accept.
-  Possible values are `STATUS_CLASS_1XX`, `STATUS_CLASS_2XX`, `STATUS_CLASS_3XX`, `STATUS_CLASS_4XX`, `STATUS_CLASS_5XX`, and `STATUS_CLASS_ANY`.
+  Possible values are: `STATUS_CLASS_1XX`, `STATUS_CLASS_2XX`, `STATUS_CLASS_3XX`, `STATUS_CLASS_4XX`, `STATUS_CLASS_5XX`, `STATUS_CLASS_ANY`.
 
 <a name="nested_tcp_check"></a>The `tcp_check` block supports:
 
@@ -349,7 +404,7 @@ The following arguments are supported:
 * `resource_type` -
   (Optional)
   The resource type of the group members.
-  Possible values are `RESOURCE_TYPE_UNSPECIFIED`, `INSTANCE`, and `AWS_ELB_LOAD_BALANCER`.
+  Possible values are: `RESOURCE_TYPE_UNSPECIFIED`, `INSTANCE`, `AWS_ELB_LOAD_BALANCER`.
 
 * `group_id` -
   (Optional)
@@ -364,6 +419,20 @@ The following arguments are supported:
 * `labels` -
   (Required)
   Values for all of the labels listed in the associated monitored resource descriptor. For example, Compute Engine VM instances use the labels "project_id", "instance_id", and "zone".
+
+<a name="nested_synthetic_monitor"></a>The `synthetic_monitor` block supports:
+
+* `cloud_function_v2` -
+  (Required)
+  Target a Synthetic Monitor GCFv2 Instance
+  Structure is [documented below](#nested_cloud_function_v2).
+
+
+<a name="nested_cloud_function_v2"></a>The `cloud_function_v2` block supports:
+
+* `name` -
+  (Required)
+  The fully qualified name of the cloud function resource.
 
 ## Attributes Reference
 

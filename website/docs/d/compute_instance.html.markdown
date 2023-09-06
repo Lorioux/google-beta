@@ -61,7 +61,7 @@ The following arguments are supported:
 
 * `metadata` - Metadata key/value pairs made available within the instance.
 
-* `min_cpu_platform` - The minimum CPU platform specified for the VM instance.
+* `min_cpu_platform` - The minimum CPU platform specified for the VM instance. Set to "AUTOMATIC" to remove a previously-set value.
 
 * `scheduling` - The scheduling strategy being used by the instance. Structure is [documented below](#nested_scheduling)
 
@@ -85,7 +85,9 @@ The following arguments are supported:
 
 * `shielded_instance_config` - The shielded vm config being used by the instance. Structure is [documented below](#nested_shielded_instance_config).
 
-* `enable_display` -- Whether the instance has virtual displays enabled.
+* `enable_display` - Whether the instance has virtual displays enabled.
+
+* `current_status` - The current status of the instance. This could be one of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. For more information about the status of the instance, see [Instance life cycle](https://cloud.google.com/compute/docs/instances/instance-life-cycle).`,
 
 * `network_interface.0.network_ip` - The internal ip address of the instance, either manually or dynamically assigned.
 

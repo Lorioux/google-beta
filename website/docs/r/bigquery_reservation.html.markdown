@@ -29,7 +29,7 @@ To get more information about Reservation, see:
     * [Introduction to Reservations](https://cloud.google.com/bigquery/docs/reservations-intro)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_reservation_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=bigquery_reservation_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -39,12 +39,16 @@ To get more information about Reservation, see:
 ```hcl
 resource "google_bigquery_reservation" "reservation" {
 	name           = "my-reservation"
-	location       = "asia-northeast1"
+	location       = "us-west2"
 	// Set to 0 for testing purposes
 	// In reality this would be larger than zero
 	slot_capacity     = 0
-	ignore_idle_slots = false
+	edition = "STANDARD"
+	ignore_idle_slots = true
 	concurrency       = 0
+	autoscale {
+   	  max_slots = 100
+    }
 }
 ```
 
@@ -81,6 +85,15 @@ The following arguments are supported:
   Applicable only for reservations located within one of the BigQuery multi-regions (US or EU).
   If set to true, this reservation is placed in the organization's secondary region which is designated for disaster recovery purposes. If false, this reservation is placed in the organization's default region.
 
+* `edition` -
+  (Optional)
+  The edition type. Valid values are STANDARD, ENTERPRISE, ENTERPRISE_PLUS
+
+* `autoscale` -
+  (Optional)
+  The configuration parameters for the auto scaling feature.
+  Structure is [documented below](#nested_autoscale).
+
 * `location` -
   (Optional)
   The geographic location where the transfer config should reside.
@@ -89,6 +102,16 @@ The following arguments are supported:
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
 
+
+<a name="nested_autoscale"></a>The `autoscale` block supports:
+
+* `current_slots` -
+  (Output)
+  The slot capacity added to this reservation when autoscale happens. Will be between [0, max_slots].
+
+* `max_slots` -
+  (Optional)
+  Number of slots to be scaled when needed.
 
 ## Attributes Reference
 

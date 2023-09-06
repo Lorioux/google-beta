@@ -29,7 +29,7 @@ To get more information about Repository, see:
     * [Official Documentation](https://cloud.google.com/artifact-registry/docs/overview)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=artifact_registry_repository_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=artifact_registry_repository_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -45,7 +45,27 @@ resource "google_artifact_registry_repository" "my-repo" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=artifact_registry_repository_cmek&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=artifact_registry_repository_docker&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Artifact Registry Repository Docker
+
+
+```hcl
+resource "google_artifact_registry_repository" "my-repo" {
+  location      = "us-central1"
+  repository_id = "my-repository"
+  description   = "example docker repository"
+  format        = "DOCKER"
+
+  docker_config {
+    immutable_tags = true
+  }
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=artifact_registry_repository_cmek&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -73,7 +93,7 @@ resource "google_kms_crypto_key_iam_member" "crypto_key" {
 data "google_project" "project" {}
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=artifact_registry_repository_virtual&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=artifact_registry_repository_virtual&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -82,7 +102,6 @@ data "google_project" "project" {}
 
 ```hcl
 resource "google_artifact_registry_repository" "my-repo-upstream" {
-  provider      = google-beta
   location      = "us-central1"
   repository_id = "my-repository-upstream"
   description   = "example docker repository (upstream source)"
@@ -91,7 +110,6 @@ resource "google_artifact_registry_repository" "my-repo-upstream" {
 
 resource "google_artifact_registry_repository" "my-repo" {
   depends_on    = []
-  provider      = google-beta
   location      = "us-central1"
   repository_id = "my-repository"
   description   = "example virtual docker repository"
@@ -107,7 +125,7 @@ resource "google_artifact_registry_repository" "my-repo" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=artifact_registry_repository_remote&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=artifact_registry_repository_remote&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -116,7 +134,6 @@ resource "google_artifact_registry_repository" "my-repo" {
 
 ```hcl
 resource "google_artifact_registry_repository" "my-repo" {
-  provider      = google-beta
   location      = "us-central1"
   repository_id = "my-repository"
   description   = "example remote docker repository"
@@ -126,6 +143,50 @@ resource "google_artifact_registry_repository" "my-repo" {
     description = "docker hub"
     docker_repository {
       public_repository = "DOCKER_HUB"
+    }
+  }
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=artifact_registry_repository_cleanup&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Artifact Registry Repository Cleanup
+
+
+```hcl
+resource "google_artifact_registry_repository" "my-repo" {
+  provider      = google-beta
+  location      = "us-central1"
+  repository_id = "my-repository"
+  description   = "example docker repository with cleanup policies"
+  format        = "DOCKER"
+  cleanup_policy_dry_run = false
+  cleanup_policies {
+    id     = "delete-prerelease"
+    action = "DELETE"
+    condition {
+      tag_state    = "TAGGED"
+      tag_prefixes = ["alpha", "v0"]
+      older_than   = "2592000s"
+    }
+  }
+  cleanup_policies {
+    id     = "keep-tagged-release"
+    action = "KEEP"
+    condition {
+      tag_state             = "TAGGED"
+      tag_prefixes          = ["release"]
+      package_name_prefixes = ["webapp", "mobile"]
+    }
+  }
+  cleanup_policies {
+    id     = "keep-minimum-versions"
+    action = "KEEP"
+    most_recent_versions {
+      package_name_prefixes = ["webapp", "mobile", "sandbox"]
+      keep_count            = 5
     }
   }
 }
@@ -175,6 +236,11 @@ The following arguments are supported:
   `projects/my-project/locations/my-region/keyRings/my-kr/cryptoKeys/my-key`.
   This value may not be changed after the Repository has been created.
 
+* `docker_config` -
+  (Optional)
+  Docker repository config contains repository level configuration for the repositories of docker type.
+  Structure is [documented below](#nested_docker_config).
+
 * `maven_config` -
   (Optional)
   MavenRepositoryConfig is maven related repository details.
@@ -183,24 +249,43 @@ The following arguments are supported:
   Structure is [documented below](#nested_maven_config).
 
 * `mode` -
-  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  (Optional)
   The mode configures the repository to serve artifacts from different sources.
   Default value is `STANDARD_REPOSITORY`.
-  Possible values are `STANDARD_REPOSITORY`, `VIRTUAL_REPOSITORY`, and `REMOTE_REPOSITORY`.
+  Possible values are: `STANDARD_REPOSITORY`, `VIRTUAL_REPOSITORY`, `REMOTE_REPOSITORY`.
 
 * `virtual_repository_config` -
-  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  (Optional)
   Configuration specific for a Virtual Repository.
   Structure is [documented below](#nested_virtual_repository_config).
 
-* `remote_repository_config` -
+* `cleanup_policies` -
   (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Cleanup policies for this repository. Cleanup policies indicate when
+  certain package versions can be automatically deleted.
+  Map keys are policy IDs supplied by users during policy creation. They must
+  unique within a repository and be under 128 characters in length.
+  Structure is [documented below](#nested_cleanup_policies).
+
+* `remote_repository_config` -
+  (Optional)
   Configuration specific for a Remote Repository.
   Structure is [documented below](#nested_remote_repository_config).
+
+* `cleanup_policy_dry_run` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  If true, the cleanup pipeline is prevented from deleting versions in this
+  repository.
 
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
 
+
+<a name="nested_docker_config"></a>The `docker_config` block supports:
+
+* `immutable_tags` -
+  (Optional)
+  The repository which enabled this flag prevents all tags from being modified, moved or deleted. This does not prevent tags from being created.
 
 <a name="nested_maven_config"></a>The `maven_config` block supports:
 
@@ -213,7 +298,7 @@ The following arguments are supported:
   (Optional)
   Version policy defines the versions that the registry will accept.
   Default value is `VERSION_POLICY_UNSPECIFIED`.
-  Possible values are `VERSION_POLICY_UNSPECIFIED`, `RELEASE`, and `SNAPSHOT`.
+  Possible values are: `VERSION_POLICY_UNSPECIFIED`, `RELEASE`, `SNAPSHOT`.
 
 <a name="nested_virtual_repository_config"></a>The `virtual_repository_config` block supports:
 
@@ -238,6 +323,65 @@ The following arguments are supported:
 * `priority` -
   (Optional)
   Entries with a greater priority value take precedence in the pull order.
+
+<a name="nested_cleanup_policies"></a>The `cleanup_policies` block supports:
+
+* `id` - (Required) The identifier for this object. Format specified above.
+
+* `action` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Policy action.
+  Possible values are: `DELETE`, `KEEP`.
+
+* `condition` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Policy condition for matching versions.
+  Structure is [documented below](#nested_condition).
+
+* `most_recent_versions` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Policy condition for retaining a minimum number of versions. May only be
+  specified with a Keep action.
+  Structure is [documented below](#nested_most_recent_versions).
+
+
+<a name="nested_condition"></a>The `condition` block supports:
+
+* `tag_state` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Match versions by tag status.
+  Default value is `ANY`.
+  Possible values are: `TAGGED`, `UNTAGGED`, `ANY`.
+
+* `tag_prefixes` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Match versions by tag prefix. Applied on any prefix match.
+
+* `version_name_prefixes` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Match versions by version name prefix. Applied on any prefix match.
+
+* `package_name_prefixes` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Match versions by package prefix. Applied on any prefix match.
+
+* `older_than` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Match versions older than a duration.
+
+* `newer_than` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Match versions newer than a duration.
+
+<a name="nested_most_recent_versions"></a>The `most_recent_versions` block supports:
+
+* `package_name_prefixes` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Match versions by package prefix. Applied on any prefix match.
+
+* `keep_count` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Minimum number of versions to keep.
 
 <a name="nested_remote_repository_config"></a>The `remote_repository_config` block supports:
 
@@ -272,7 +416,7 @@ The following arguments are supported:
   (Optional)
   Address of the remote repository.
   Default value is `DOCKER_HUB`.
-  Possible values are `DOCKER_HUB`.
+  Possible values are: `DOCKER_HUB`.
 
 <a name="nested_maven_repository"></a>The `maven_repository` block supports:
 
@@ -280,7 +424,7 @@ The following arguments are supported:
   (Optional)
   Address of the remote repository.
   Default value is `MAVEN_CENTRAL`.
-  Possible values are `MAVEN_CENTRAL`.
+  Possible values are: `MAVEN_CENTRAL`.
 
 <a name="nested_npm_repository"></a>The `npm_repository` block supports:
 
@@ -288,7 +432,7 @@ The following arguments are supported:
   (Optional)
   Address of the remote repository.
   Default value is `NPMJS`.
-  Possible values are `NPMJS`.
+  Possible values are: `NPMJS`.
 
 <a name="nested_python_repository"></a>The `python_repository` block supports:
 
@@ -296,7 +440,7 @@ The following arguments are supported:
   (Optional)
   Address of the remote repository.
   Default value is `PYPI`.
-  Possible values are `PYPI`.
+  Possible values are: `PYPI`.
 
 ## Attributes Reference
 

@@ -31,7 +31,7 @@ To get more information about TargetHttpsProxy, see:
     * [Official Documentation](https://cloud.google.com/compute/docs/load-balancing/http/target-proxies)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=target_https_proxy_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=target_https_proxy_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -89,6 +89,67 @@ resource "google_compute_http_health_check" "default" {
   timeout_sec        = 1
 }
 ```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=target_https_proxy_http_keep_alive_timeout&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Target Https Proxy Http Keep Alive Timeout
+
+
+```hcl
+resource "google_compute_target_https_proxy" "default" {
+  name                        = "test-http-keep-alive-timeout-proxy"
+  http_keep_alive_timeout_sec = 610
+  url_map                     = google_compute_url_map.default.id
+  ssl_certificates            = [google_compute_ssl_certificate.default.id]
+}
+
+resource "google_compute_ssl_certificate" "default" {
+  name        = "my-certificate"
+  private_key = file("path/to/private.key")
+  certificate = file("path/to/certificate.crt")
+}
+
+resource "google_compute_url_map" "default" {
+  name        = "url-map"
+  description = "a description"
+
+  default_service = google_compute_backend_service.default.id
+
+  host_rule {
+    hosts        = ["mysite.com"]
+    path_matcher = "allpaths"
+  }
+
+  path_matcher {
+    name            = "allpaths"
+    default_service = google_compute_backend_service.default.id
+
+    path_rule {
+      paths   = ["/*"]
+      service = google_compute_backend_service.default.id
+    }
+  }
+}
+
+resource "google_compute_backend_service" "default" {
+  name                  = "backend-service"
+  port_name             = "http"
+  protocol              = "HTTP"
+  timeout_sec           = 10
+  load_balancing_scheme = "EXTERNAL_MANAGED"
+
+  health_checks = [google_compute_http_health_check.default.id]
+}
+
+resource "google_compute_http_health_check" "default" {
+  name               = "http-health-check"
+  request_path       = "/"
+  check_interval_sec = 1
+  timeout_sec        = 1
+}
+```
 
 ## Argument Reference
 
@@ -123,20 +184,18 @@ The following arguments are supported:
   Specifies the QUIC override policy for this resource. This determines
   whether the load balancer will attempt to negotiate QUIC with clients
   or not. Can specify one of NONE, ENABLE, or DISABLE. If NONE is
-  specified, uses the QUIC policy with no user overrides, which is
-  equivalent to DISABLE.
+  specified, Google manages whether QUIC is used.
   Default value is `NONE`.
-  Possible values are `NONE`, `ENABLE`, and `DISABLE`.
+  Possible values are: `NONE`, `ENABLE`, `DISABLE`.
 
 * `ssl_certificates` -
   (Optional)
-  A list of SslCertificate resources that are used to authenticate
-  connections between users and the load balancer. At least one SSL
-  certificate must be specified.
+  A list of SslCertificate resource URLs or Certificate Manager certificate URLs that are used to authenticate
+  connections between users and the load balancer. At least one resource must be specified.
 
 * `certificate_map` -
   (Optional)
-  A reference to the CertificateMap resource uri that identifies a certificate map 
+  A reference to the CertificateMap resource uri that identifies a certificate map
   associated with the given target proxy. This field can only be set for global target proxies.
   Accepted format is `//certificatemanager.googleapis.com/projects/{project}/locations/{location}/certificateMaps/{resourceName}`.
 
@@ -150,6 +209,15 @@ The following arguments are supported:
   (Optional)
   This field only applies when the forwarding rule that references
   this target proxy has a loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+
+* `http_keep_alive_timeout_sec` -
+  (Optional)
+  Specifies how long to keep a connection open, after completing a response,
+  while there is no matching traffic (in seconds). If an HTTP keepalive is
+  not specified, a default value (610 seconds) will be used. For Global
+  external HTTP(S) load balancer, the minimum allowed value is 5 seconds and
+  the maximum allowed value is 1200 seconds. For Global external HTTP(S)
+  load balancer (classic), this option is not available publicly.
 
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.

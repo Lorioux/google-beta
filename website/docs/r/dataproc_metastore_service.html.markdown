@@ -29,7 +29,7 @@ To get more information about Service, see:
     * [Official Documentation](https://cloud.google.com/dataproc-metastore/docs/overview)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dataproc_metastore_service_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dataproc_metastore_service_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -116,6 +116,58 @@ resource "google_dataproc_metastore_service" "default" {
   }
 }
 ```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dataproc_metastore_service_dpms2&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Dataproc Metastore Service Dpms2
+
+
+```hcl
+resource "google_dataproc_metastore_service" "dpms2" {
+  service_id = "dpms2"
+  location   = "us-central1"
+
+  # DPMS 2 requires SPANNER database type, and does not require
+  # a maintenance window.
+  database_type = "SPANNER"
+
+  hive_metastore_config {
+    version           = "3.1.2"
+  }
+
+  scaling_config {
+    instance_size = "EXTRA_SMALL"
+  }
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dataproc_metastore_service_dpms2_scaling_factor&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Dataproc Metastore Service Dpms2 Scaling Factor
+
+
+```hcl
+resource "google_dataproc_metastore_service" "dpms2_scaling_factor" {
+  service_id = "dpms2sf"
+  location   = "us-central1"
+
+  # DPMS 2 requires SPANNER database type, and does not require
+  # a maintenance window.
+  database_type = "SPANNER"
+
+  hive_metastore_config {
+    version           = "3.1.2"
+  }
+
+  scaling_config {
+    scaling_factor = "2"
+  }
+}
+```
 
 ## Argument Reference
 
@@ -148,7 +200,12 @@ The following arguments are supported:
 * `tier` -
   (Optional)
   The tier of the service.
-  Possible values are `DEVELOPER` and `ENTERPRISE`.
+  Possible values are: `DEVELOPER`, `ENTERPRISE`.
+
+* `scaling_config` -
+  (Optional)
+  Represents the scaling configuration of a metastore service.
+  Structure is [documented below](#nested_scaling_config).
 
 * `maintenance_window` -
   (Optional)
@@ -177,13 +234,13 @@ The following arguments are supported:
   (Optional)
   The database type that the Metastore service stores its data.
   Default value is `MYSQL`.
-  Possible values are `MYSQL` and `SPANNER`.
+  Possible values are: `MYSQL`, `SPANNER`.
 
 * `release_channel` -
   (Optional)
   The release channel of the service. If unspecified, defaults to `STABLE`.
   Default value is `STABLE`.
-  Possible values are `CANARY` and `STABLE`.
+  Possible values are: `CANARY`, `STABLE`.
 
 * `metadata_integration` -
   (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
@@ -204,6 +261,17 @@ The following arguments are supported:
     If it is not provided, the provider project is used.
 
 
+<a name="nested_scaling_config"></a>The `scaling_config` block supports:
+
+* `instance_size` -
+  (Optional)
+  Metastore instance sizes.
+  Possible values are: `EXTRA_SMALL`, `SMALL`, `MEDIUM`, `LARGE`, `EXTRA_LARGE`.
+
+* `scaling_factor` -
+  (Optional)
+  Scaling factor, in increments of 0.1 for values less than 1.0, and increments of 1.0 for values greater than 1.0.
+
 <a name="nested_maintenance_window"></a>The `maintenance_window` block supports:
 
 * `hour_of_day` -
@@ -213,7 +281,7 @@ The following arguments are supported:
 * `day_of_week` -
   (Required)
   The day of week, when the window starts.
-  Possible values are `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, and `SUNDAY`.
+  Possible values are: `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
 
 <a name="nested_encryption_config"></a>The `encryption_config` block supports:
 
@@ -228,7 +296,7 @@ The following arguments are supported:
   (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
   The protocol to use for the metastore service endpoint. If unspecified, defaults to `THRIFT`.
   Default value is `THRIFT`.
-  Possible values are `THRIFT` and `GRPC`.
+  Possible values are: `THRIFT`, `GRPC`.
 
 * `version` -
   (Required)
@@ -331,7 +399,7 @@ The following arguments are supported:
   (Optional)
   The output format of the Dataproc Metastore service's logs.
   Default value is `JSON`.
-  Possible values are `LEGACY` and `JSON`.
+  Possible values are: `LEGACY`, `JSON`.
 
 ## Attributes Reference
 

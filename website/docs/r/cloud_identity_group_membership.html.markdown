@@ -29,9 +29,9 @@ To get more information about GroupMembership, see:
     * [Official Documentation](https://cloud.google.com/identity/docs/how-to/memberships-google-groups)
 
 ~> **Warning:** If you are using User ADCs (Application Default Credentials) with this resource,
-you must specify a `billing_project` and set `user_project_override` to true 
-in the provider configuration. Otherwise the Cloud Identity API will return a 403 error. 
-Your account must have the `serviceusage.services.use` permission on the 
+you must specify a `billing_project` and set `user_project_override` to true
+in the provider configuration. Otherwise the Cloud Identity API will return a 403 error.
+Your account must have the `serviceusage.services.use` permission on the
 `billing_project` you defined.
 
 ## Example Usage - Cloud Identity Group Membership
@@ -134,7 +134,7 @@ The following arguments are supported:
 * `name` -
   (Required)
   The name of the MembershipRole. Must be one of OWNER, MANAGER, MEMBER.
-  Possible values are `OWNER`, `MANAGER`, and `MEMBER`.
+  Possible values are: `OWNER`, `MANAGER`, `MEMBER`.
 
 - - -
 

@@ -29,7 +29,7 @@ To get more information about Routine, see:
     * [Routines Intro](https://cloud.google.com/bigquery/docs/reference/rest/v2/routines)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=big_query_routine_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=big_query_routine_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -50,7 +50,7 @@ resource "google_bigquery_routine" "sproc" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=big_query_routine_json&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=big_query_routine_json&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -64,7 +64,7 @@ resource "google_bigquery_dataset" "test" {
 
 resource "google_bigquery_routine" "sproc" {
   dataset_id = google_bigquery_dataset.test.dataset_id
-  routine_id     = "tf_test_routine_id%{random_suffix}"
+  routine_id     = "routine_id"
   routine_type = "SCALAR_FUNCTION"
   language = "JAVASCRIPT"
   definition_body = "CREATE FUNCTION multiplyInputs return x*y;"
@@ -81,7 +81,7 @@ resource "google_bigquery_routine" "sproc" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=big_query_routine_tvf&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=big_query_routine_tvf&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -95,7 +95,7 @@ resource "google_bigquery_dataset" "test" {
 
 resource "google_bigquery_routine" "sproc" {
   dataset_id      = google_bigquery_dataset.test.dataset_id
-  routine_id      = "tf_test_routine_id%{random_suffix}"
+  routine_id      = "routine_id"
   routine_type    = "TABLE_VALUED_FUNCTION"
   language        = "SQL"
   definition_body = <<-EOS
@@ -137,12 +137,12 @@ The following arguments are supported:
 * `routine_type` -
   (Optional)
   The type of routine.
-  Possible values are `SCALAR_FUNCTION`, `PROCEDURE`, and `TABLE_VALUED_FUNCTION`.
+  Possible values are: `SCALAR_FUNCTION`, `PROCEDURE`, `TABLE_VALUED_FUNCTION`.
 
 * `language` -
   (Optional)
   The language of the routine.
-  Possible values are `SQL` and `JAVASCRIPT`.
+  Possible values are: `SQL`, `JAVASCRIPT`.
 
 * `arguments` -
   (Optional)
@@ -180,7 +180,7 @@ The following arguments are supported:
 * `determinism_level` -
   (Optional)
   The determinism level of the JavaScript UDF if defined.
-  Possible values are `DETERMINISM_LEVEL_UNSPECIFIED`, `DETERMINISTIC`, and `NOT_DETERMINISTIC`.
+  Possible values are: `DETERMINISM_LEVEL_UNSPECIFIED`, `DETERMINISTIC`, `NOT_DETERMINISTIC`.
 
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
@@ -196,12 +196,12 @@ The following arguments are supported:
   (Optional)
   Defaults to FIXED_TYPE.
   Default value is `FIXED_TYPE`.
-  Possible values are `FIXED_TYPE` and `ANY_TYPE`.
+  Possible values are: `FIXED_TYPE`, `ANY_TYPE`.
 
 * `mode` -
   (Optional)
   Specifies whether the argument is input or output. Can be set for procedures only.
-  Possible values are `IN`, `OUT`, and `INOUT`.
+  Possible values are: `IN`, `OUT`, `INOUT`.
 
 * `data_type` -
   (Optional)

@@ -35,7 +35,8 @@ resource "google_clouddeploy_target" "primary" {
     my_second_annotation = "example-annotation-2"
   }
 
-  description = "multi-target description"
+  deploy_parameters = {}
+  description       = "multi-target description"
 
   execution_configs {
     usages            = ["RENDER", "DEPLOY"]
@@ -71,7 +72,8 @@ resource "google_clouddeploy_target" "primary" {
     my_second_annotation = "example-annotation-2"
   }
 
-  description = "basic description"
+  deploy_parameters = {}
+  description       = "basic description"
 
   execution_configs {
     usages            = ["RENDER", "DEPLOY"]
@@ -105,6 +107,10 @@ resource "google_clouddeploy_target" "primary" {
     my_first_annotation = "example-annotation-1"
 
     my_second_annotation = "example-annotation-2"
+  }
+
+  deploy_parameters = {
+    deployParameterKey = "deployParameterValue"
   }
 
   description = "basic description"
@@ -150,6 +156,10 @@ The following arguments are supported:
   (Optional)
   Information specifying an Anthos Cluster.
   
+* `deploy_parameters` -
+  (Optional)
+  Optional. The deploy parameters to use for this target.
+  
 * `description` -
   (Optional)
   Optional. Description of the `Target`. Max length is 255 characters.
@@ -168,7 +178,7 @@ The following arguments are supported:
   
 * `multi_target` -
   (Optional)
-  (Beta only) Information specifying a multiTarget.
+  Information specifying a multiTarget.
   
 * `project` -
   (Optional)
@@ -180,7 +190,7 @@ The following arguments are supported:
   
 * `run` -
   (Optional)
-  (Beta only) Information specifying a Cloud Run deployment target.
+  Information specifying a Cloud Run deployment target.
   
 
 

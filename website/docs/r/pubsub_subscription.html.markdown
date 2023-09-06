@@ -30,11 +30,11 @@ To get more information about Subscription, see:
 * How-to Guides
     * [Managing Subscriptions](https://cloud.google.com/pubsub/docs/admin#managing_subscriptions)
 
-~> **Note:** You can retrieve the email of the Google Managed Pub/Sub Service Account used for forwarding 
+~> **Note:** You can retrieve the email of the Google Managed Pub/Sub Service Account used for forwarding
 by using the `google_project_service_identity` resource.
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=pubsub_subscription_push&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=pubsub_subscription_push&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -66,7 +66,7 @@ resource "google_pubsub_subscription" "example" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=pubsub_subscription_pull&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=pubsub_subscription_pull&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -118,7 +118,7 @@ resource "google_pubsub_subscription" "example" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=pubsub_subscription_dead_letter&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=pubsub_subscription_dead_letter&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -145,7 +145,7 @@ resource "google_pubsub_subscription" "example" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=pubsub_subscription_push_bq&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=pubsub_subscription_push_bq&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -204,6 +204,104 @@ resource "google_bigquery_table" "test" {
 EOF
 }
 ```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=pubsub_subscription_push_cloudstorage&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Pubsub Subscription Push Cloudstorage
+
+
+```hcl
+resource "google_storage_bucket" "example" {
+  name  = "example-bucket"
+  location = "US"
+  uniform_bucket_level_access = true
+}
+
+resource "google_pubsub_topic" "example" {
+  name = "example-topic"
+}
+
+resource "google_pubsub_subscription" "example" {
+  name  = "example-subscription"
+  topic = google_pubsub_topic.example.name
+
+  cloud_storage_config {
+    bucket = google_storage_bucket.example.name
+
+    filename_prefix = "pre-"
+    filename_suffix = "-%{random_suffix}"
+  
+    max_bytes = 1000
+    max_duration = "300s"
+  }
+  depends_on = [ 
+    google_storage_bucket.example,
+    google_storage_bucket_iam_member.admin,
+  ]
+}
+
+data "google_project" "project" {
+}
+
+resource "google_storage_bucket_iam_member" "admin" {
+  bucket = google_storage_bucket.example.name
+  role   = "roles/storage.admin"
+  member = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-pubsub.iam.gserviceaccount.com"
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=pubsub_subscription_push_cloudstorage_avro&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Pubsub Subscription Push Cloudstorage Avro
+
+
+```hcl
+resource "google_storage_bucket" "example" {
+  name  = "example-bucket"
+  location = "US"
+  uniform_bucket_level_access = true
+}
+
+resource "google_pubsub_topic" "example" {
+  name = "example-topic"
+}
+
+resource "google_pubsub_subscription" "example" {
+  name  = "example-subscription"
+  topic = google_pubsub_topic.example.name
+
+  cloud_storage_config {
+    bucket = google_storage_bucket.example.name
+
+    filename_prefix = "pre-"
+    filename_suffix = "-%{random_suffix}"
+  
+    max_bytes = 1000
+    max_duration = "300s"
+  
+    avro_config {
+      write_metadata = true
+    }
+  }
+  depends_on = [ 
+    google_storage_bucket.example,
+    google_storage_bucket_iam_member.admin,
+  ]
+}
+
+data "google_project" "project" {
+}
+
+resource "google_storage_bucket_iam_member" "admin" {
+  bucket = google_storage_bucket.example.name
+  role   = "roles/storage.admin"
+  member = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-pubsub.iam.gserviceaccount.com"
+}
+```
 
 ## Argument Reference
 
@@ -229,9 +327,16 @@ The following arguments are supported:
 * `bigquery_config` -
   (Optional)
   If delivery to BigQuery is used with this subscription, this field is used to configure it.
-  Either pushConfig or bigQueryConfig can be set, but not both.
-  If both are empty, then the subscriber will pull and ack messages using API methods.
+  Either pushConfig, bigQueryConfig or cloudStorageConfig can be set, but not combined.
+  If all three are empty, then the subscriber will pull and ack messages using API methods.
   Structure is [documented below](#nested_bigquery_config).
+
+* `cloud_storage_config` -
+  (Optional)
+  If delivery to Cloud Storage is used with this subscription, this field is used to configure it.
+  Either pushConfig, bigQueryConfig or cloudStorageConfig can be set, but not combined.
+  If all three are empty, then the subscriber will pull and ack messages using API methods.
+  Structure is [documented below](#nested_cloud_storage_config).
 
 * `push_config` -
   (Optional)
@@ -289,9 +394,9 @@ The following arguments are supported:
 
 * `filter` -
   (Optional)
-  The subscription only delivers the messages that match the filter. 
+  The subscription only delivers the messages that match the filter.
   Pub/Sub automatically acknowledges the messages that don't match the filter. You can filter messages
-  by their attributes. The maximum length of a filter is 256 bytes. After creating the subscription, 
+  by their attributes. The maximum length of a filter is 256 bytes. After creating the subscription,
   you can't modify the filter.
 
 * `dead_letter_policy` -
@@ -308,7 +413,7 @@ The following arguments are supported:
 * `retry_policy` -
   (Optional)
   A policy that specifies how Pub/Sub retries message delivery for this subscription.
-  If not set, the default retry policy is applied. This generally implies that messages will be retried as soon as possible for healthy subscribers. 
+  If not set, the default retry policy is applied. This generally implies that messages will be retried as soon as possible for healthy subscribers.
   RetryPolicy will be triggered on NACKs or acknowledgement deadline exceeded events for a given message
   Structure is [documented below](#nested_retry_policy).
 
@@ -351,6 +456,47 @@ The following arguments are supported:
   When true and useTopicSchema is true, any fields that are a part of the topic schema that are not part of the BigQuery table schema are dropped when writing to BigQuery.
   Otherwise, the schemas must be kept in sync and any messages with extra fields are not written and remain in the subscription's backlog.
 
+<a name="nested_cloud_storage_config"></a>The `cloud_storage_config` block supports:
+
+* `bucket` -
+  (Required)
+  User-provided name for the Cloud Storage bucket. The bucket must be created by the user. The bucket name must be without any prefix like "gs://".
+
+* `filename_prefix` -
+  (Optional)
+  User-provided prefix for Cloud Storage filename.
+
+* `filename_suffix` -
+  (Optional)
+  User-provided suffix for Cloud Storage filename. Must not end in "/".
+
+* `max_duration` -
+  (Optional)
+  The maximum duration that can elapse before a new Cloud Storage file is created. Min 1 minute, max 10 minutes, default 5 minutes.
+  May not exceed the subscription's acknowledgement deadline.
+  A duration in seconds with up to nine fractional digits, ending with 's'. Example: "3.5s".
+
+* `max_bytes` -
+  (Optional)
+  The maximum bytes that can be written to a Cloud Storage file before a new file is created. Min 1 KB, max 10 GiB.
+  The maxBytes limit may be exceeded in cases where messages are larger than the limit.
+
+* `state` -
+  (Output)
+  An output-only field that indicates whether or not the subscription can receive messages.
+
+* `avro_config` -
+  (Optional)
+  If set, message data will be written to Cloud Storage in Avro format.
+  Structure is [documented below](#nested_avro_config).
+
+
+<a name="nested_avro_config"></a>The `avro_config` block supports:
+
+* `write_metadata` -
+  (Optional)
+  When true, write the subscription name, messageId, publishTime, attributes, and orderingKey as additional fields in the output.
+
 <a name="nested_push_config"></a>The `push_config` block supports:
 
 * `oidc_token` -
@@ -386,6 +532,12 @@ The following arguments are supported:
   - v1beta1: uses the push format defined in the v1beta1 Pub/Sub API.
   - v1 or v1beta2: uses the push format defined in the v1 Pub/Sub API.
 
+* `no_wrapper` -
+  (Optional)
+  When set, the payload to the push endpoint is not wrapped.Sets the
+  `data` field as the HTTP body for delivery.
+  Structure is [documented below](#nested_no_wrapper).
+
 
 <a name="nested_oidc_token"></a>The `oidc_token` block supports:
 
@@ -405,13 +557,21 @@ The following arguments are supported:
   token audience here: https://tools.ietf.org/html/rfc7519#section-4.1.3
   Note: if not specified, the Push endpoint URL will be used.
 
+<a name="nested_no_wrapper"></a>The `no_wrapper` block supports:
+
+* `write_metadata` -
+  (Required)
+  When true, writes the Pub/Sub message metadata to
+  `x-goog-pubsub-<KEY>:<VAL>` headers of the HTTP request. Writes the
+  Pub/Sub message attributes to `<KEY>:<VAL>` headers of the HTTP request.
+
 <a name="nested_expiration_policy"></a>The `expiration_policy` block supports:
 
 * `ttl` -
   (Required)
   Specifies the "time-to-live" duration for an associated resource. The
   resource expires if it is not active for a period of ttl.
-  If ttl is not set, the associated resource never expires.
+  If ttl is set to "", the associated resource never expires.
   A duration in seconds with up to nine fractional digits, terminated by 's'.
   Example - "3.5s".
 
@@ -422,7 +582,7 @@ The following arguments are supported:
   The name of the topic to which dead letter messages should be published.
   Format is `projects/{project}/topics/{topic}`.
   The Cloud Pub/Sub service account associated with the enclosing subscription's
-  parent project (i.e., 
+  parent project (i.e.,
   service-{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
   permission to Publish() to this topic.
   The operation will fail if the topic does not exist.
@@ -433,7 +593,7 @@ The following arguments are supported:
   (Optional)
   The maximum number of delivery attempts for any message. The value must be
   between 5 and 100.
-  The number of delivery attempts is defined as 1 + (the sum of number of 
+  The number of delivery attempts is defined as 1 + (the sum of number of
   NACKs and number of times the acknowledgement deadline has been exceeded for the message).
   A NACK is any call to ModifyAckDeadline with a 0 deadline. Note that
   client libraries may automatically extend ack_deadlines.
@@ -449,7 +609,7 @@ The following arguments are supported:
 
 * `maximum_backoff` -
   (Optional)
-  The maximum delay between consecutive deliveries of a given message. Value should be between 0 and 600 seconds. Defaults to 600 seconds. 
+  The maximum delay between consecutive deliveries of a given message. Value should be between 0 and 600 seconds. Defaults to 600 seconds.
   A duration in seconds with up to nine fractional digits, terminated by 's'. Example: "3.5s".
 
 ## Attributes Reference

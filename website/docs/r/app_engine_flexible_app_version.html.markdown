@@ -141,7 +141,7 @@ resource "google_storage_bucket" "bucket" {
 resource "google_storage_bucket_object" "object" {
   name   = "hello-world.zip"
   bucket = google_storage_bucket.bucket.name
-  source = "./test-fixtures/appengine/hello-world.zip"
+  source = "./test-fixtures/hello-world.zip"
 }
 ```
 
@@ -241,7 +241,7 @@ The following arguments are supported:
 * `inbound_services` -
   (Optional)
   A list of the types of messages that this application is able to receive.
-  Each value may be one of `INBOUND_SERVICE_MAIL`, `INBOUND_SERVICE_MAIL_BOUNCE`, `INBOUND_SERVICE_XMPP_ERROR`, `INBOUND_SERVICE_XMPP_MESSAGE`, `INBOUND_SERVICE_XMPP_SUBSCRIBE`, `INBOUND_SERVICE_XMPP_PRESENCE`, `INBOUND_SERVICE_CHANNEL_PRESENCE`, and `INBOUND_SERVICE_WARMUP`.
+  Each value may be one of: `INBOUND_SERVICE_MAIL`, `INBOUND_SERVICE_MAIL_BOUNCE`, `INBOUND_SERVICE_XMPP_ERROR`, `INBOUND_SERVICE_XMPP_MESSAGE`, `INBOUND_SERVICE_XMPP_SUBSCRIBE`, `INBOUND_SERVICE_XMPP_PRESENCE`, `INBOUND_SERVICE_CHANNEL_PRESENCE`, `INBOUND_SERVICE_WARMUP`.
 
 * `instance_class` -
   (Optional)
@@ -272,7 +272,7 @@ The following arguments are supported:
   (Optional)
   Current serving status of this version. Only the versions with a SERVING status create instances and can be billed.
   Default value is `SERVING`.
-  Possible values are `SERVING` and `STOPPED`.
+  Possible values are: `SERVING`, `STOPPED`.
 
 * `runtime_api_version` -
   (Optional)
@@ -348,7 +348,7 @@ The following arguments are supported:
 
 * `noop_on_destroy` - (Optional) If set to `true`, the application version will not be deleted.
 
-* `delete_service_on_destroy` - (Optional) If set to `true`, the service will be deleted if it is the last version.    
+* `delete_service_on_destroy` - (Optional) If set to `true`, the service will be deleted if it is the last version.
 
 
 <a name="nested_network"></a>The `network` block supports:
@@ -421,22 +421,22 @@ The following arguments are supported:
 * `security_level` -
   (Optional)
   Security (HTTPS) enforcement for this URL.
-  Possible values are `SECURE_DEFAULT`, `SECURE_NEVER`, `SECURE_OPTIONAL`, and `SECURE_ALWAYS`.
+  Possible values are: `SECURE_DEFAULT`, `SECURE_NEVER`, `SECURE_OPTIONAL`, `SECURE_ALWAYS`.
 
 * `login` -
   (Optional)
   Methods to restrict access to a URL based on login status.
-  Possible values are `LOGIN_OPTIONAL`, `LOGIN_ADMIN`, and `LOGIN_REQUIRED`.
+  Possible values are: `LOGIN_OPTIONAL`, `LOGIN_ADMIN`, `LOGIN_REQUIRED`.
 
 * `auth_fail_action` -
   (Optional)
   Actions to take when the user is not logged in.
-  Possible values are `AUTH_FAIL_ACTION_REDIRECT` and `AUTH_FAIL_ACTION_UNAUTHORIZED`.
+  Possible values are: `AUTH_FAIL_ACTION_REDIRECT`, `AUTH_FAIL_ACTION_UNAUTHORIZED`.
 
 * `redirect_http_response_code` -
   (Optional)
   30x code to use when performing redirects for the secure field.
-  Possible values are `REDIRECT_HTTP_RESPONSE_CODE_301`, `REDIRECT_HTTP_RESPONSE_CODE_302`, `REDIRECT_HTTP_RESPONSE_CODE_303`, and `REDIRECT_HTTP_RESPONSE_CODE_307`.
+  Possible values are: `REDIRECT_HTTP_RESPONSE_CODE_301`, `REDIRECT_HTTP_RESPONSE_CODE_302`, `REDIRECT_HTTP_RESPONSE_CODE_303`, `REDIRECT_HTTP_RESPONSE_CODE_307`.
 
 * `script` -
   (Optional)
@@ -500,13 +500,13 @@ The following arguments are supported:
   (Optional)
   Action to take when users access resources that require authentication.
   Default value is `AUTH_FAIL_ACTION_REDIRECT`.
-  Possible values are `AUTH_FAIL_ACTION_REDIRECT` and `AUTH_FAIL_ACTION_UNAUTHORIZED`.
+  Possible values are: `AUTH_FAIL_ACTION_REDIRECT`, `AUTH_FAIL_ACTION_UNAUTHORIZED`.
 
 * `login` -
   (Optional)
   Level of login required to access this resource.
   Default value is `LOGIN_OPTIONAL`.
-  Possible values are `LOGIN_OPTIONAL`, `LOGIN_ADMIN`, and `LOGIN_REQUIRED`.
+  Possible values are: `LOGIN_OPTIONAL`, `LOGIN_ADMIN`, `LOGIN_REQUIRED`.
 
 * `script` -
   (Required)
@@ -515,7 +515,7 @@ The following arguments are supported:
 * `security_level` -
   (Optional)
   Security (HTTPS) enforcement for this URL.
-  Possible values are `SECURE_DEFAULT`, `SECURE_NEVER`, `SECURE_OPTIONAL`, and `SECURE_ALWAYS`.
+  Possible values are: `SECURE_DEFAULT`, `SECURE_NEVER`, `SECURE_OPTIONAL`, `SECURE_ALWAYS`.
 
 * `url` -
   (Optional)
@@ -605,7 +605,7 @@ The following arguments are supported:
   (Optional)
   Endpoints rollout strategy. If FIXED, configId must be specified. If MANAGED, configId must be omitted.
   Default value is `FIXED`.
-  Possible values are `FIXED` and `MANAGED`.
+  Possible values are: `FIXED`, `MANAGED`.
 
 * `disable_trace_sampling` -
   (Optional)

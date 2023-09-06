@@ -43,11 +43,12 @@ To get more information about Disk, see:
 * How-to Guides
     * [Adding a persistent disk](https://cloud.google.com/compute/docs/disks/add-persistent-disk)
 
-~> **Warning:** All arguments including `disk_encryption_key.raw_key` and `disk_encryption_key.rsa_encrypted_key` will be stored in the raw
-state as plain-text. [Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
+~> **Warning:** All arguments including the following potentially sensitive
+values will be stored in the raw state as plain text: `disk_encryption_key.raw_key`, `disk_encryption_key.rsa_encrypted_key`.
+[Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=disk_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=disk_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -63,6 +64,69 @@ resource "google_compute_disk" "default" {
   labels = {
     environment = "dev"
   }
+  physical_block_size_bytes = 4096
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=disk_async&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Disk Async
+
+
+```hcl
+resource "google_compute_disk" "primary" {
+  name  = "async-test-disk"
+  type  = "pd-ssd"
+  zone  = "us-central1-a"
+
+  physical_block_size_bytes = 4096
+}
+
+resource "google_compute_disk" "secondary" {
+  name  = "async-secondary-test-disk"
+  type  = "pd-ssd"
+  zone  = "us-east1-c"
+
+  async_primary_disk {
+    disk = google_compute_disk.primary.id
+  }
+
+  physical_block_size_bytes = 4096
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=disk_features&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Disk Features
+
+
+```hcl
+resource "google_compute_disk" "default" {
+  name  = "test-disk-features"
+  type  = "pd-ssd"
+  zone  = "us-central1-a"
+  labels = {
+    environment = "dev"
+  }
+
+  guest_os_features {
+    type = "SECURE_BOOT"
+  }
+
+  guest_os_features {
+    type = "MULTI_IP_SUBNET"
+  }
+
+  guest_os_features {
+    type = "WINDOWS"
+  }
+
+  licenses = ["https://www.googleapis.com/compute/v1/projects/windows-cloud/global/licenses/windows-server-core"]
+
   physical_block_size_bytes = 4096
 }
 ```
@@ -118,8 +182,10 @@ The following arguments are supported:
   the supported values for the caller's project.
 
 * `interface` -
-  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html), Deprecated)
   Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI.
+
+  ~> **Warning:** `interface` is deprecated and will be removed in a future major release. This field is no longer used and can be safely removed from your configurations; disk interfaces are automatically determined on attachment.
 
 * `source_disk` -
   (Optional)
@@ -158,6 +224,11 @@ The following arguments are supported:
   [`google_compute_disk_resource_policy_attachment`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_disk_resource_policy_attachment)
   to allow for updating the resource policy attached to the disk.
 
+* `enable_confidential_compute` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Whether this disk is using confidential compute mode.
+  Note: Only supported on hyperdisk skus, disk_encryption_key is required when setting to true
+
 * `multi_writer` -
   (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
   Indicates whether or not the disk can be read/write attached to more than one instance.
@@ -165,6 +236,29 @@ The following arguments are supported:
 * `provisioned_iops` -
   (Optional)
   Indicates how many IOPS must be provisioned for the disk.
+  Note: Updating currently is only supported by hyperdisk skus without the need to delete and recreate the disk, hyperdisk
+  allows for an update of IOPS every 4 hours. To update your hyperdisk more frequently, you'll need to manually delete and recreate it
+
+* `provisioned_throughput` -
+  (Optional)
+  Indicates how much Throughput must be provisioned for the disk.
+  Note: Updating currently is only supported by hyperdisk skus without the need to delete and recreate the disk, hyperdisk
+  allows for an update of Throughput every 4 hours. To update your hyperdisk more frequently, you'll need to manually delete and recreate it
+
+* `async_primary_disk` -
+  (Optional)
+  A nested object resource
+  Structure is [documented below](#nested_async_primary_disk).
+
+* `guest_os_features` -
+  (Optional)
+  A list of features to enable on the guest operating system.
+  Applicable only for bootable disks.
+  Structure is [documented below](#nested_guest_os_features).
+
+* `licenses` -
+  (Optional)
+  Any applicable license URI.
 
 * `zone` -
   (Optional)
@@ -211,6 +305,19 @@ The following arguments are supported:
     If it is not provided, the provider project is used.
 
 
+<a name="nested_async_primary_disk"></a>The `async_primary_disk` block supports:
+
+* `disk` -
+  (Required)
+  Primary disk for asynchronous disk replication.
+
+<a name="nested_guest_os_features"></a>The `guest_os_features` block supports:
+
+* `type` -
+  (Required)
+  The type of supported feature. Read [Enabling guest operating system features](https://cloud.google.com/compute/docs/images/create-delete-deprecate-private-images#guest-os-features) to see a list of available options.
+  Possible values are: `MULTI_IP_SUBNET`, `SECURE_BOOT`, `SEV_CAPABLE`, `UEFI_COMPATIBLE`, `VIRTIO_SCSI_MULTIQUEUE`, `WINDOWS`, `GVNIC`, `SEV_LIVE_MIGRATABLE`, `SEV_SNP_CAPABLE`, `SUSPEND_RESUME_COMPATIBLE`, `TDX_CAPABLE`.
+
 <a name="nested_source_image_encryption_key"></a>The `source_image_encryption_key` block supports:
 
 * `raw_key` -
@@ -246,8 +353,8 @@ The following arguments are supported:
 
 * `rsa_encrypted_key` -
   (Optional)
-  Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit 
-  customer-supplied encryption key to either encrypt or decrypt 
+  Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit
+  customer-supplied encryption key to either encrypt or decrypt
   this resource. You can provide either the rawKey or the rsaEncryptedKey.
   **Note**: This property is sensitive and will not be displayed in the plan.
 

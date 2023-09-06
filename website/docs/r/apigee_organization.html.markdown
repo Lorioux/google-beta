@@ -59,6 +59,19 @@ resource "google_apigee_organization" "org" {
   depends_on         = [google_service_networking_connection.apigee_vpc_connection]
 }
 ```
+## Example Usage - Apigee Organization Cloud Basic Disable Vpc Peering
+
+
+```hcl
+data "google_client_config" "current" {}
+
+resource "google_apigee_organization" "org" {
+  description         = "Terraform-provisioned basic Apigee Org without VPC Peering."
+  analytics_region    = "us-central1"
+  project_id          = data.google_client_config.current.project
+  disable_vpc_peering = true
+}
+```
 ## Example Usage - Apigee Organization Cloud Full
 
 
@@ -126,6 +139,54 @@ resource "google_apigee_organization" "org" {
   ]
 }
 ```
+## Example Usage - Apigee Organization Cloud Full Disable Vpc Peering
+
+
+```hcl
+data "google_client_config" "current" {}
+
+resource "google_kms_key_ring" "apigee_keyring" {
+  name     = "apigee-keyring"
+  location = "us-central1"
+}
+
+resource "google_kms_crypto_key" "apigee_key" {
+  name            = "apigee-key"
+  key_ring        = google_kms_key_ring.apigee_keyring.id
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "google_project_service_identity" "apigee_sa" {
+  provider = google-beta
+  project  = google_project.project.project_id
+  service  = google_project_service.apigee.service
+}
+
+resource "google_kms_crypto_key_iam_binding" "apigee_sa_keyuser" {
+  crypto_key_id = google_kms_crypto_key.apigee_key.id
+  role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+  members = [
+    "serviceAccount:${google_project_service_identity.apigee_sa.email}",
+  ]
+}
+
+resource "google_apigee_organization" "org" {
+  analytics_region                     = "us-central1"
+  display_name                         = "apigee-org"
+  description                          = "Terraform-provisioned Apigee Org without VPC Peering."
+  project_id                           = data.google_client_config.current.project
+  disable_vpc_peering                  = true
+  runtime_database_encryption_key_name = google_kms_crypto_key.apigee_key.id
+
+  depends_on = [
+    google_kms_crypto_key_iam_binding.apigee_sa_keyuser,
+  ]
+}
+```
 
 ## Argument Reference
 
@@ -158,11 +219,19 @@ The following arguments are supported:
   See [Getting started with the Service Networking API](https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started).
   Valid only when `RuntimeType` is set to CLOUD. The value can be updated only when there are no runtime instances. For example: "default".
 
+* `disable_vpc_peering` -
+  (Optional)
+  Flag that specifies whether the VPC Peering through Private Google Access should be
+  disabled between the consumer network and Apigee. Required if an `authorizedNetwork`
+  on the consumer project is not provided, in which case the flag should be set to `true`.
+  Valid only when `RuntimeType` is set to CLOUD. The value must be set before the creation
+  of any Apigee runtime instance and can be updated only when there are no runtime instances.
+
 * `runtime_type` -
   (Optional)
   Runtime type of the Apigee organization based on the Apigee subscription purchased.
   Default value is `CLOUD`.
-  Possible values are `CLOUD` and `HYBRID`.
+  Possible values are: `CLOUD`, `HYBRID`.
 
 * `billing_type` -
   (Optional)
@@ -187,7 +256,7 @@ The following arguments are supported:
   operation completes. During this period, the Organization may be restored to its last known state.
   After this period, the Organization will no longer be able to be restored.
   Default value is `DELETION_RETENTION_UNSPECIFIED`.
-  Possible values are `DELETION_RETENTION_UNSPECIFIED` and `MINIMUM`.
+  Possible values are: `DELETION_RETENTION_UNSPECIFIED`, `MINIMUM`.
 
 
 <a name="nested_properties"></a>The `properties` block supports:
@@ -225,15 +294,18 @@ In addition to the arguments listed above, the following computed attributes are
   Output only. Base64-encoded public certificate for the root CA of the Apigee organization.
   Valid only when `RuntimeType` is CLOUD. A base64-encoded string.
 
+* `apigee_project_id` -
+  Output only. Project ID of the Apigee Tenant Project.
+
 
 ## Timeouts
 
 This resource provides the following
 [Timeouts](https://developer.hashicorp.com/terraform/plugin/sdkv2/resources/retries-and-customizable-timeouts) configuration options:
 
-- `create` - Default is 20 minutes.
-- `update` - Default is 20 minutes.
-- `delete` - Default is 20 minutes.
+- `create` - Default is 45 minutes.
+- `update` - Default is 45 minutes.
+- `delete` - Default is 45 minutes.
 
 ## Import
 

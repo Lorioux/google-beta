@@ -220,7 +220,7 @@ resource "google_compute_firewall" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=external_tcp_proxy_lb_mig_backend&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=external_tcp_proxy_lb_mig_backend&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -373,7 +373,7 @@ resource "google_compute_firewall" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=external_http_lb_mig_backend_custom_header&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=external_http_lb_mig_backend_custom_header&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -538,7 +538,7 @@ resource "google_compute_firewall" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=global_forwarding_rule_http&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=global_forwarding_rule_http&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -596,7 +596,7 @@ resource "google_compute_http_health_check" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=global_forwarding_rule_internal&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=global_forwarding_rule_internal&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -713,7 +713,7 @@ resource "google_compute_health_check" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=global_forwarding_rule_external_managed&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=global_forwarding_rule_external_managed&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -764,7 +764,7 @@ resource "google_compute_backend_service" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=global_forwarding_rule_hybrid&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=global_forwarding_rule_hybrid&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -903,6 +903,199 @@ resource "google_compute_global_forwarding_rule" "default" {
   port_range = "80"
 }
 ```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=global_internal_http_lb_with_mig_backend&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Global Internal Http Lb With Mig Backend
+
+
+```hcl
+# Global Internal HTTP load balancer with a managed instance group backend
+
+# VPC network
+resource "google_compute_network" "gilb_network" {
+  name                    = "l7-gilb-network"
+  provider                = google-beta
+  auto_create_subnetworks = false
+}
+
+# proxy-only subnet
+resource "google_compute_subnetwork" "proxy_subnet" {
+  name          = "l7-gilb-proxy-subnet"
+  provider      = google-beta
+  ip_cidr_range = "10.0.0.0/24"
+  region        = "europe-west1"
+  purpose       = "GLOBAL_MANAGED_PROXY"
+  role          = "ACTIVE"
+  network       = google_compute_network.gilb_network.id
+}
+
+# backend subnet
+resource "google_compute_subnetwork" "gilb_subnet" {
+  name          = "l7-gilb-subnet"
+  provider      = google-beta
+  ip_cidr_range = "10.0.1.0/24"
+  region        = "europe-west1"
+  network       = google_compute_network.gilb_network.id
+}
+
+# forwarding rule
+resource "google_compute_global_forwarding_rule" "google_compute_forwarding_rule" {
+  name                  = "l7-gilb-forwarding-rule"
+  provider              = google-beta
+  depends_on            = [google_compute_subnetwork.proxy_subnet]
+  ip_protocol           = "TCP"
+  load_balancing_scheme = "INTERNAL_MANAGED"
+  port_range            = "80"
+  target                = google_compute_target_http_proxy.default.id
+  network               = google_compute_network.gilb_network.id
+  subnetwork            = google_compute_subnetwork.gilb_subnet.id
+}
+
+# HTTP target proxy
+resource "google_compute_target_http_proxy" "default" {
+  name     = "l7-gilb-target-http-proxy"
+  provider = google-beta
+  url_map  = google_compute_url_map.default.id
+}
+
+# URL map
+resource "google_compute_url_map" "default" {
+  name            = "l7-gilb-url-map"
+  provider        = google-beta
+  default_service = google_compute_backend_service.default.id
+}
+
+# backend service
+resource "google_compute_backend_service" "default" {
+  name                  = "l7-gilb-backend-subnet"
+  provider              = google-beta
+  protocol              = "HTTP"
+  load_balancing_scheme = "INTERNAL_MANAGED"
+  timeout_sec           = 10
+  health_checks         = [google_compute_health_check.default.id]
+  backend {
+    group           = google_compute_instance_group_manager.mig.instance_group
+    balancing_mode  = "UTILIZATION"
+    capacity_scaler = 1.0
+  }
+}
+
+# instance template
+resource "google_compute_instance_template" "instance_template" {
+  name         = "l7-gilb-mig-template"
+  provider     = google-beta
+  machine_type = "e2-small"
+  tags         = ["http-server"]
+
+  network_interface {
+    network    = google_compute_network.gilb_network.id
+    subnetwork = google_compute_subnetwork.gilb_subnet.id
+    access_config {
+      # add external ip to fetch packages
+    }
+  }
+  disk {
+    source_image = "debian-cloud/debian-10"
+    auto_delete  = true
+    boot         = true
+  }
+
+  # install nginx and serve a simple web page
+  metadata = {
+    startup-script = <<-EOF1
+      #! /bin/bash
+      set -euo pipefail
+
+      export DEBIAN_FRONTEND=noninteractive
+      apt-get update
+      apt-get install -y nginx-light jq
+
+      NAME=$(curl -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/hostname")
+      IP=$(curl -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip")
+      METADATA=$(curl -f -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/attributes/?recursive=True" | jq 'del(.["startup-script"])')
+
+      cat <<EOF > /var/www/html/index.html
+      <pre>
+      Name: $NAME
+      IP: $IP
+      Metadata: $METADATA
+      </pre>
+      EOF
+    EOF1
+  }
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# health check
+resource "google_compute_health_check" "default" {
+  name     = "l7-gilb-hc"
+  provider = google-beta
+  http_health_check {
+    port_specification = "USE_SERVING_PORT"
+  }
+}
+
+# MIG
+resource "google_compute_instance_group_manager" "mig" {
+  name     = "l7-gilb-mig1"
+  provider = google-beta
+  zone = "europe-west1-b"
+  version {
+    instance_template = google_compute_instance_template.instance_template.id
+    name              = "primary"
+  }
+  base_instance_name = "vm"
+  target_size        = 2
+}
+
+# allow all access from IAP and health check ranges
+resource "google_compute_firewall" "fw-iap" {
+  name          = "l7-gilb-fw-allow-iap-hc"
+  provider      = google-beta
+  direction     = "INGRESS"
+  network       = google_compute_network.gilb_network.id
+  source_ranges = ["130.211.0.0/22", "35.191.0.0/16", "35.235.240.0/20"]
+  allow {
+    protocol = "tcp"
+  }
+}
+
+# allow http from proxy subnet to backends
+resource "google_compute_firewall" "fw-gilb-to-backends" {
+  name          = "l7-gilb-fw-allow-gilb-to-backends"
+  provider      = google-beta
+  direction     = "INGRESS"
+  network       = google_compute_network.gilb_network.id
+  source_ranges = ["10.0.0.0/24"]
+  target_tags   = ["http-server"]
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "443", "8080"]
+  }
+}
+
+# test instance
+resource "google_compute_instance" "vm-test" {
+  name         = "l7-gilb-test-vm"
+  provider     = google-beta
+  zone         = "europe-west1-b"
+  machine_type = "e2-small"
+  network_interface {
+    network    = google_compute_network.gilb_network.id
+    subnetwork = google_compute_subnetwork.gilb_subnet.id
+  }
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-10"
+    }
+  }
+}
+```
 ## Example Usage - Private Service Connect Google Apis
 
 
@@ -944,6 +1137,48 @@ resource "google_compute_global_forwarding_rule" "default" {
   load_balancing_scheme = ""
 }
 ```
+## Example Usage - Private Service Connect Google Apis No Automate Dns
+
+
+```hcl
+resource "google_compute_network" "network" {
+  provider      = google-beta
+  project       = "my-project-name"
+  name          = "my-network"
+  auto_create_subnetworks = false
+}
+
+resource "google_compute_subnetwork" "vpc_subnetwork" {
+  provider                 = google-beta
+  project                  = google_compute_network.network.project
+  name                     = "my-subnetwork"
+  ip_cidr_range            = "10.2.0.0/16"
+  region                   = "us-central1"
+  network                  = google_compute_network.network.id
+  private_ip_google_access = true
+}
+
+resource "google_compute_global_address" "default" {
+  provider      = google-beta
+  project       = google_compute_network.network.project
+  name          = "global-psconnect-ip"
+  address_type  = "INTERNAL"
+  purpose       = "PRIVATE_SERVICE_CONNECT"
+  network       = google_compute_network.network.id
+  address       = "100.100.100.106"
+}
+
+resource "google_compute_global_forwarding_rule" "default" {
+  provider      = google-beta
+  project       = google_compute_network.network.project
+  name          = "globalrule"
+  target        = "all-apis"
+  network       = google_compute_network.network.id
+  ip_address    = google_compute_global_address.default.id
+  load_balancing_scheme = ""
+  no_automate_dns_zone  = false
+}
+```
 
 ## Argument Reference
 
@@ -952,22 +1187,31 @@ The following arguments are supported:
 
 * `name` -
   (Required)
-  Name of the resource; provided by the client when the resource is
-  created. The name must be 1-63 characters long, and comply with
-  RFC1035. Specifically, the name must be 1-63 characters long and match
-  the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the
-  first character must be a lowercase letter, and all following
-  characters must be a dash, lowercase letter, or digit, except the last
-  character, which cannot be a dash.
+  Name of the resource; provided by the client when the resource is created.
+  The name must be 1-63 characters long, and comply with
+  [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
+  Specifically, the name must be 1-63 characters long and match the regular
+  expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first
+  character must be a lowercase letter, and all following characters must
+  be a dash, lowercase letter, or digit, except the last character, which
+  cannot be a dash.
+  For Private Service Connect forwarding rules that forward traffic to Google
+  APIs, the forwarding rule name must be a 1-20 characters string with
+  lowercase letters and numbers and must start with a letter.
 
 * `target` -
   (Required)
-  The URL of the target resource to receive the matched traffic.
+  The URL of the target resource to receive the matched traffic.  For
+  regional forwarding rules, this target must be in the same region as the
+  forwarding rule. For global forwarding rules, this target must be a global
+  load balancing resource.
   The forwarded traffic must be of a type appropriate to the target object.
-  For INTERNAL_SELF_MANAGED load balancing, only HTTP and HTTPS targets
-  are valid.
-  ([Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html) only) For global address with a purpose of PRIVATE_SERVICE_CONNECT and
-  addressType of INTERNAL, only "all-apis" and "vpc-sc" are valid.
+  *  For load balancers, see the "Target" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
+  *  For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle:
+    *  `vpc-sc` - [ APIs that support VPC Service Controls](https://cloud.google.com/vpc-service-controls/docs/supported-products).
+    *  `all-apis` - [All supported Google APIs](https://cloud.google.com/vpc/docs/private-service-connect#supported-apis).
+
+  For Private Service Connect forwarding rules that forward traffic to managed services, the target must be a service attachment.
 
 
 - - -
@@ -980,49 +1224,68 @@ The following arguments are supported:
 
 * `ip_address` -
   (Optional)
-  The IP address that this forwarding rule serves. When a client sends
-  traffic to this IP address, the forwarding rule directs the traffic to
-  the target that you specify in the forwarding rule. The
-  loadBalancingScheme and the forwarding rule's target determine the
-  type of IP address that you can use. For detailed information, refer
-  to [IP address specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
-  An address can be specified either by a literal IP address or a
-  reference to an existing Address resource. If you don't specify a
-  reserved IP address, an ephemeral IP address is assigned.
-  The value must be set to 0.0.0.0 when the target is a targetGrpcProxy
-  that has validateForProxyless field set to true.
-  For Private Service Connect forwarding rules that forward traffic to
-  Google APIs, IP address must be provided.
+  IP address for which this forwarding rule accepts traffic. When a client
+  sends traffic to this IP address, the forwarding rule directs the traffic
+  to the referenced `target`.
+  While creating a forwarding rule, specifying an `IPAddress` is
+  required under the following circumstances:
+  * When the `target` is set to `targetGrpcProxy` and
+  `validateForProxyless` is set to `true`, the
+  `IPAddress` should be set to `0.0.0.0`.
+  * When the `target` is a Private Service Connect Google APIs
+  bundle, you must specify an `IPAddress`.
+
+  Otherwise, you can optionally specify an IP address that references an
+  existing static (reserved) IP address resource. When omitted, Google Cloud
+  assigns an ephemeral IP address.
+  Use one of the following formats to specify an IP address while creating a
+  forwarding rule:
+  * IP address number, as in `100.1.2.3`
+  * IPv6 address range, as in `2600:1234::/96`
+  * Full resource URL, as in
+  `https://www.googleapis.com/compute/v1/projects/project_id/regions/region/addresses/address-name`
+  * Partial URL or by name, as in:
+    * `projects/project_id/regions/region/addresses/address-name`
+    * `regions/region/addresses/address-name`
+    * `global/addresses/address-name`
+    * `address-name`
+
+  The forwarding rule's `target`,
+  and in most cases, also the `loadBalancingScheme`, determine the
+  type of IP address that you can use. For detailed information, see
+  [IP address
+  specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
+  When reading an `IPAddress`, the API always returns the IP
+  address number.
 
 * `ip_protocol` -
   (Optional)
-  The IP protocol to which this rule applies. When the load balancing scheme is
-  INTERNAL_SELF_MANAGED, only TCP is valid. This field must not be set if the
-  global address is configured as a purpose of PRIVATE_SERVICE_CONNECT
-  and addressType of INTERNAL
-  Possible values are `TCP`, `UDP`, `ESP`, `AH`, `SCTP`, and `ICMP`.
+  The IP protocol to which this rule applies.
+  For protocol forwarding, valid
+  options are `TCP`, `UDP`, `ESP`,
+  `AH`, `SCTP`, `ICMP` and
+  `L3_DEFAULT`.
+  The valid IP protocols are different for different load balancing products
+  as described in [Load balancing
+  features](https://cloud.google.com/load-balancing/docs/features#protocols_from_the_load_balancer_to_the_backends).
+  Possible values are: `TCP`, `UDP`, `ESP`, `AH`, `SCTP`, `ICMP`.
 
 * `ip_version` -
   (Optional)
   The IP Version that will be used by this global forwarding rule.
-  Possible values are `IPV4` and `IPV6`.
+  Possible values are: `IPV4`, `IPV6`.
 
 * `labels` -
-  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  (Optional)
   Labels to apply to this forwarding rule.  A list of key->value pairs.
 
 * `load_balancing_scheme` -
   (Optional)
-  This signifies what the GlobalForwardingRule will be used for.
-  The value of INTERNAL_SELF_MANAGED means that this will be used for
-  Internal Global HTTP(S) LB. The value of EXTERNAL means that this
-  will be used for External Global Load Balancing (HTTP(S) LB,
-  External TCP/UDP LB, SSL Proxy). The value of EXTERNAL_MANAGED means
-  that this will be used for Global external HTTP(S) load balancers.
-  ([Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html) only) Note: This field must be set "" if the global address is
-  configured as a purpose of PRIVATE_SERVICE_CONNECT and addressType of INTERNAL.
+  Specifies the forwarding rule type.
+  For more information about forwarding rules, refer to
+  [Forwarding rule concepts](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts).
   Default value is `EXTERNAL`.
-  Possible values are `EXTERNAL`, `EXTERNAL_MANAGED`, and `INTERNAL_SELF_MANAGED`.
+  Possible values are: `EXTERNAL`, `EXTERNAL_MANAGED`, `INTERNAL_MANAGED`, `INTERNAL_SELF_MANAGED`.
 
 * `metadata_filters` -
   (Optional)
@@ -1043,24 +1306,27 @@ The following arguments are supported:
   Structure is [documented below](#nested_metadata_filters).
 
 * `network` -
-  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  (Optional)
   This field is not used for external load balancing.
-  For INTERNAL_SELF_MANAGED load balancing, this field
-  identifies the network that the load balanced IP should belong to
-  for this global forwarding rule. If this field is not specified,
-  the default network will be used.
+  For Internal TCP/UDP Load Balancing, this field identifies the network that
+  the load balanced IP should belong to for this Forwarding Rule.
+  If the subnetwork is specified, the network of the subnetwork will be used.
+  If neither subnetwork nor this field is specified, the default network will
+  be used.
+  For Private Service Connect forwarding rules that forward traffic to Google
+  APIs, a network must be provided.
 
 * `port_range` -
   (Optional)
-  This field is used along with the target field for TargetHttpProxy,
-  TargetHttpsProxy, TargetSslProxy, TargetTcpProxy, TargetVpnGateway,
-  TargetPool, TargetInstance.
-  Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets
-  addressed to ports in the specified range will be forwarded to target.
-  Forwarding rules with the same [IPAddress, IPProtocol] pair must have
-  disjoint port ranges.
-  Some types of forwarding target have constraints on the acceptable
-  ports:
+  This field can only be used:
+  * If `IPProtocol` is one of TCP, UDP, or SCTP.
+  * By backend service-based network load balancers, target pool-based
+  network load balancers, internal proxy load balancers, external proxy load
+  balancers, Traffic Director, external protocol forwarding, and Classic VPN.
+  Some products have restrictions on what ports can be used. See
+  [port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#port_specifications)
+  for details.
+
   * TargetHttpProxy: 80, 8080
   * TargetHttpsProxy: 443
   * TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995,
@@ -1068,6 +1334,27 @@ The following arguments are supported:
   * TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995,
                     1883, 5222
   * TargetVpnGateway: 500, 4500
+
+* `subnetwork` -
+  (Optional)
+  This field identifies the subnetwork that the load balanced IP should
+  belong to for this Forwarding Rule, used in internal load balancing and
+  network load balancing with IPv6.
+  If the network specified is in auto subnet mode, this field is optional.
+  However, a subnetwork must be specified if the network is in custom subnet
+  mode or when creating external forwarding rule with IPv6.
+
+* `source_ip_ranges` -
+  (Optional)
+  If not empty, this Forwarding Rule will only forward the traffic when the source IP address matches one of the IP addresses or CIDR ranges set here. Note that a Forwarding Rule can only have up to 64 source IP ranges, and this field can only be used with a regional Forwarding Rule whose scheme is EXTERNAL. Each sourceIpRange entry should be either an IP address (for example, 1.2.3.4) or a CIDR range (for example, 1.2.3.0/24).
+
+* `allow_psc_global_access` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  This is used in PSC consumer ForwardingRule to control whether the PSC endpoint can be accessed from another region.
+
+* `no_automate_dns_zone` -
+  (Optional)
+  This is used in PSC consumer ForwardingRule to control whether it should try to auto-generate a DNS zone or not. Non-PSC forwarding rules do not use this field.
 
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
@@ -1083,7 +1370,7 @@ The following arguments are supported:
   label in the provided metadata.
   MATCH_ALL - All filterLabels must have matching labels in the
   provided metadata.
-  Possible values are `MATCH_ANY` and `MATCH_ALL`.
+  Possible values are: `MATCH_ANY`, `MATCH_ALL`.
 
 * `filter_labels` -
   (Required)
@@ -1111,10 +1398,18 @@ In addition to the arguments listed above, the following computed attributes are
 
 * `id` - an identifier for the resource with format `projects/{{project}}/global/forwardingRules/{{name}}`
 
+* `psc_connection_id` -
+  The PSC connection id of the PSC Forwarding Rule.
+
+* `psc_connection_status` -
+  The PSC connection status of the PSC Forwarding Rule. Possible values: `STATUS_UNSPECIFIED`, `PENDING`, `ACCEPTED`, `REJECTED`, `CLOSED`
+
 * `label_fingerprint` -
-  ([Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
   The fingerprint used for optimistic locking of this resource.  Used
   internally during updates.
+
+* `base_forwarding_rule` -
+  [Output Only] The URL for the corresponding base Forwarding Rule. By base Forwarding Rule, we mean the Forwarding Rule that has the same IP address, protocol, and port settings with the current Forwarding Rule, but without sourceIPRanges specified. Always empty if the current Forwarding Rule does not have sourceIPRanges specified.
 * `self_link` - The URI of the created resource.
 
 

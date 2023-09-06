@@ -27,7 +27,7 @@ To get more information about Secret, see:
 * [API documentation](https://cloud.google.com/secret-manager/docs/reference/rest/v1/projects.secrets)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=secret_config_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=secret_config_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -51,6 +51,35 @@ resource "google_secret_manager_secret" "secret-basic" {
         location = "us-east1"
       }
     }
+  }
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=secret_with_annotations&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Secret With Annotations
+
+
+```hcl
+resource "google_secret_manager_secret" "secret-with-annotations" {
+  secret_id = "secret"
+
+  labels = {
+    label = "my-label"
+  }
+
+  annotations = {
+    key1 = "someval"
+    key2 = "someval2"
+    key3 = "someval3"
+    key4 = "someval4"
+    key5 = "someval5"
+  }
+
+  replication {
+    automatic = true
   }
 }
 ```
@@ -79,7 +108,7 @@ The following arguments are supported:
 
 * `user_managed` -
   (Optional)
-  The Secret will automatically be replicated without any restrictions.
+  The Secret will be replicated to the regions specified by the user.
   Structure is [documented below](#nested_user_managed).
 
 
@@ -120,6 +149,29 @@ The following arguments are supported:
   Label values must be between 0 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes,
   and must conform to the following PCRE regular expression: [\p{Ll}\p{Lo}\p{N}_-]{0,63}
   No more than 64 labels can be assigned to a given resource.
+  An object containing a list of "key": value pairs. Example:
+  { "name": "wrench", "mass": "1.3kg", "count": "3" }.
+
+* `annotations` -
+  (Optional)
+  Custom metadata about the secret.
+  Annotations are distinct from various forms of labels. Annotations exist to allow
+  client tools to store their own state information without requiring a database.
+  Annotation keys must be between 1 and 63 characters long, have a UTF-8 encoding of
+  maximum 128 bytes, begin and end with an alphanumeric character ([a-z0-9A-Z]), and
+  may have dashes (-), underscores (_), dots (.), and alphanumerics in between these
+  symbols.
+  The total size of annotation keys and values must be less than 16KiB.
+  An object containing a list of "key": value pairs. Example:
+  { "name": "wrench", "mass": "1.3kg", "count": "3" }.
+
+* `version_aliases` -
+  (Optional)
+  Mapping from version alias to version name.
+  A version alias is a string with a maximum length of 63 characters and can contain
+  uppercase and lowercase letters, numerals, and the hyphen (-) and underscore ('_')
+  characters. An alias string must start with a letter and cannot be the string
+  'latest' or 'NEW'. No more than 50 aliases can be assigned to a given secret.
   An object containing a list of "key": value pairs. Example:
   { "name": "wrench", "mass": "1.3kg", "count": "3" }.
 

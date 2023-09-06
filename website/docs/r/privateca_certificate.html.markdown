@@ -22,18 +22,18 @@ description: |-
 A Certificate corresponds to a signed X.509 certificate issued by a Certificate.
 
 
-~> **Note:** The Certificate Authority that is referenced by this resource **must** be 
+~> **Note:** The Certificate Authority that is referenced by this resource **must** be
 `tier = "ENTERPRISE"`
 
 
 
-## Example Usage - Privateca Certificate Config
+## Example Usage - Privateca Certificate Generated Key
 
 
 ```hcl
 resource "google_privateca_ca_pool" "default" {
   location = "us-central1"
-  name = "my-pool"
+  name = "default"
   tier = "ENTERPRISE"
 }
 
@@ -76,12 +76,16 @@ resource "google_privateca_certificate_authority" "default" {
   ignore_active_certificates_on_deletion = true
 }
 
+resource "tls_private_key" "cert_key" {
+  algorithm = "RSA"
+}
+
 resource "google_privateca_certificate" "default" {
   location = "us-central1"
   pool = google_privateca_ca_pool.default.name
   certificate_authority = google_privateca_certificate_authority.default.certificate_authority_id
   lifetime = "86000s"
-  name = "my-certificate"
+  name = "cert-1"
   config {
     subject_config  {
       subject {
@@ -105,8 +109,8 @@ resource "google_privateca_certificate" "default" {
       }
       key_usage {
         base_key_usage {
-          crl_sign = false
-          decipher_only = false
+          cert_sign = true
+          crl_sign = true
         }
         extended_key_usage {
           server_auth = false
@@ -126,7 +130,7 @@ resource "google_privateca_certificate" "default" {
     }
     public_key {
       format = "PEM"
-      key = filebase64("test-fixtures/rsa_public.pem")
+      key = base64encode(tls_private_key.cert_key.public_key_pem)
     }
   }
 }
@@ -571,7 +575,7 @@ The following arguments are supported:
 
 * `non_ca` -
   (Optional)
-  When true, the "CA" in Basic Constraints extension will be set to false. 
+  When true, the "CA" in Basic Constraints extension will be set to false.
   If both `is_ca` and `non_ca` are unset, the extension will be omitted from the CA certificate.
 
 * `max_issuer_path_length` -
@@ -809,7 +813,7 @@ The following arguments are supported:
 * `format` -
   (Required)
   The format of the public key. Currently, only PEM format is supported.
-  Possible values are `KEY_TYPE_UNSPECIFIED` and `PEM`.
+  Possible values are: `KEY_TYPE_UNSPECIFIED`, `PEM`.
 
 ## Attributes Reference
 
@@ -821,7 +825,7 @@ In addition to the arguments listed above, the following computed attributes are
   The resource name of the issuing CertificateAuthority in the format `projects/*/locations/*/caPools/*/certificateAuthorities/*`.
 
 * `revocation_details` -
-  Output only. Details regarding the revocation of this Certificate. This Certificate is 
+  Output only. Details regarding the revocation of this Certificate. This Certificate is
   considered revoked if and only if this field is present.
   Structure is [documented below](#nested_revocation_details).
 
@@ -838,6 +842,8 @@ In addition to the arguments listed above, the following computed attributes are
 * `pem_certificates` -
   (Deprecated)
   Required. Expected to be in leaf-to-root order according to RFC 5246.
+
+  ~> **Warning:** `pem_certificates` is deprecated and will be removed in a future major release. Use `pem_certificate_chain` instead.
 
 * `create_time` -
   The time that this resource was created on the server.
@@ -874,6 +880,8 @@ In addition to the arguments listed above, the following computed attributes are
   (Output, Deprecated)
   Describes some of the technical fields in a certificate.
   Structure is [documented below](#nested_config_values).
+
+  ~> **Warning:** `config_values` is deprecated and will be removed in a future release. Use `x509_description` instead.
 
 * `public_key` -
   (Output)

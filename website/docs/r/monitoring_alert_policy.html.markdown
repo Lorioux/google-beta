@@ -83,6 +83,34 @@ resource "google_monitoring_alert_policy" "alert_policy" {
   }
 }
 ```
+## Example Usage - Monitoring Alert Policy Forecast Options
+
+
+```hcl
+resource "google_monitoring_alert_policy" "alert_policy" {
+  display_name = "My Alert Policy"
+  combiner     = "OR"
+  conditions {
+    display_name = "test condition"
+    condition_threshold {
+      filter     = "metric.type=\"compute.googleapis.com/instance/disk/write_bytes_count\" AND resource.type=\"gce_instance\""
+      duration   = "60s"
+      forecast_options {
+        forecast_horizon = "3600s"
+      }
+      comparison = "COMPARISON_GT"
+      aggregations {
+        alignment_period   = "60s"
+        per_series_aligner = "ALIGN_RATE"
+      }
+    }
+  }
+
+  user_labels = {
+    foo = "bar"
+  }
+}
+```
 
 ## Argument Reference
 
@@ -100,7 +128,7 @@ The following arguments are supported:
   (Required)
   How to combine the results of multiple conditions to
   determine if an incident should be opened.
-  Possible values are `AND`, `OR`, and `AND_WITH_MATCHING_RESOURCE`.
+  Possible values are: `AND`, `OR`, `AND_WITH_MATCHING_RESOURCE`.
 
 * `conditions` -
   (Required)
@@ -152,6 +180,15 @@ The following arguments are supported:
   A condition that checks for log messages matching given constraints.
   If set, no other conditions can be present.
   Structure is [documented below](#nested_condition_matched_log).
+
+* `condition_prometheus_query_language` -
+  (Optional)
+  A Monitoring Query Language query that outputs a boolean stream
+  A condition type that allows alert policies to be defined using
+  Prometheus Query Language (PromQL).
+  The PrometheusQueryLanguageCondition message contains information
+  from a Prometheus alerting rule and its associated rule group.
+  Structure is [documented below](#nested_condition_prometheus_query_language).
 
 
 <a name="nested_condition_absent"></a>The `condition_absent` block supports:
@@ -224,7 +261,7 @@ The following arguments are supported:
   and alignmentPeriod must be
   specified; otherwise, an error is
   returned.
-  Possible values are `ALIGN_NONE`, `ALIGN_DELTA`, `ALIGN_RATE`, `ALIGN_INTERPOLATE`, `ALIGN_NEXT_OLDER`, `ALIGN_MIN`, `ALIGN_MAX`, `ALIGN_MEAN`, `ALIGN_COUNT`, `ALIGN_SUM`, `ALIGN_STDDEV`, `ALIGN_COUNT_TRUE`, `ALIGN_COUNT_FALSE`, `ALIGN_FRACTION_TRUE`, `ALIGN_PERCENTILE_99`, `ALIGN_PERCENTILE_95`, `ALIGN_PERCENTILE_50`, `ALIGN_PERCENTILE_05`, and `ALIGN_PERCENT_CHANGE`.
+  Possible values are: `ALIGN_NONE`, `ALIGN_DELTA`, `ALIGN_RATE`, `ALIGN_INTERPOLATE`, `ALIGN_NEXT_OLDER`, `ALIGN_MIN`, `ALIGN_MAX`, `ALIGN_MEAN`, `ALIGN_COUNT`, `ALIGN_SUM`, `ALIGN_STDDEV`, `ALIGN_COUNT_TRUE`, `ALIGN_COUNT_FALSE`, `ALIGN_FRACTION_TRUE`, `ALIGN_PERCENTILE_99`, `ALIGN_PERCENTILE_95`, `ALIGN_PERCENTILE_50`, `ALIGN_PERCENTILE_05`, `ALIGN_PERCENT_CHANGE`.
 
 * `group_by_fields` -
   (Optional)
@@ -290,7 +327,7 @@ The following arguments are supported:
   and alignmentPeriod must be
   specified; otherwise, an error is
   returned.
-  Possible values are `REDUCE_NONE`, `REDUCE_MEAN`, `REDUCE_MIN`, `REDUCE_MAX`, `REDUCE_SUM`, `REDUCE_STDDEV`, `REDUCE_COUNT`, `REDUCE_COUNT_TRUE`, `REDUCE_COUNT_FALSE`, `REDUCE_FRACTION_TRUE`, `REDUCE_PERCENTILE_99`, `REDUCE_PERCENTILE_95`, `REDUCE_PERCENTILE_50`, and `REDUCE_PERCENTILE_05`.
+  Possible values are: `REDUCE_NONE`, `REDUCE_MEAN`, `REDUCE_MIN`, `REDUCE_MAX`, `REDUCE_SUM`, `REDUCE_STDDEV`, `REDUCE_COUNT`, `REDUCE_COUNT_TRUE`, `REDUCE_COUNT_FALSE`, `REDUCE_FRACTION_TRUE`, `REDUCE_PERCENTILE_99`, `REDUCE_PERCENTILE_95`, `REDUCE_PERCENTILE_50`, `REDUCE_PERCENTILE_05`.
 
 <a name="nested_trigger"></a>The `trigger` block supports:
 
@@ -347,7 +384,7 @@ The following arguments are supported:
   A condition control that determines how
   metric-threshold conditions are evaluated when
   data stops arriving.
-  Possible values are `EVALUATION_MISSING_DATA_INACTIVE`, `EVALUATION_MISSING_DATA_ACTIVE`, and `EVALUATION_MISSING_DATA_NO_OP`.
+  Possible values are: `EVALUATION_MISSING_DATA_INACTIVE`, `EVALUATION_MISSING_DATA_ACTIVE`, `EVALUATION_MISSING_DATA_NO_OP`.
 
 
 <a name="nested_trigger"></a>The `trigger` block supports:
@@ -427,6 +464,16 @@ The following arguments are supported:
   that unhealthy states are detected and
   alerted on quickly.
 
+* `forecast_options` -
+  (Optional)
+  When this field is present, the `MetricThreshold`
+  condition forecasts whether the time series is
+  predicted to violate the threshold within the
+  `forecastHorizon`. When this field is not set, the
+  `MetricThreshold` tests the current value of the
+  timeseries against the threshold.
+  Structure is [documented below](#nested_forecast_options).
+
 * `comparison` -
   (Required)
   The comparison to apply between the time
@@ -437,7 +484,7 @@ The following arguments are supported:
   the left-hand side and the threshold on the
   right-hand side. Only COMPARISON_LT and
   COMPARISON_GT are supported currently.
-  Possible values are `COMPARISON_GT`, `COMPARISON_GE`, `COMPARISON_LT`, `COMPARISON_LE`, `COMPARISON_EQ`, and `COMPARISON_NE`.
+  Possible values are: `COMPARISON_GT`, `COMPARISON_GE`, `COMPARISON_LT`, `COMPARISON_LE`, `COMPARISON_EQ`, `COMPARISON_NE`.
 
 * `trigger` -
   (Optional)
@@ -488,7 +535,7 @@ The following arguments are supported:
   A condition control that determines how
   metric-threshold conditions are evaluated when
   data stops arriving.
-  Possible values are `EVALUATION_MISSING_DATA_INACTIVE`, `EVALUATION_MISSING_DATA_ACTIVE`, and `EVALUATION_MISSING_DATA_NO_OP`.
+  Possible values are: `EVALUATION_MISSING_DATA_INACTIVE`, `EVALUATION_MISSING_DATA_ACTIVE`, `EVALUATION_MISSING_DATA_NO_OP`.
 
 
 <a name="nested_denominator_aggregations"></a>The `denominator_aggregations` block supports:
@@ -512,7 +559,7 @@ The following arguments are supported:
   and alignmentPeriod must be
   specified; otherwise, an error is
   returned.
-  Possible values are `ALIGN_NONE`, `ALIGN_DELTA`, `ALIGN_RATE`, `ALIGN_INTERPOLATE`, `ALIGN_NEXT_OLDER`, `ALIGN_MIN`, `ALIGN_MAX`, `ALIGN_MEAN`, `ALIGN_COUNT`, `ALIGN_SUM`, `ALIGN_STDDEV`, `ALIGN_COUNT_TRUE`, `ALIGN_COUNT_FALSE`, `ALIGN_FRACTION_TRUE`, `ALIGN_PERCENTILE_99`, `ALIGN_PERCENTILE_95`, `ALIGN_PERCENTILE_50`, `ALIGN_PERCENTILE_05`, and `ALIGN_PERCENT_CHANGE`.
+  Possible values are: `ALIGN_NONE`, `ALIGN_DELTA`, `ALIGN_RATE`, `ALIGN_INTERPOLATE`, `ALIGN_NEXT_OLDER`, `ALIGN_MIN`, `ALIGN_MAX`, `ALIGN_MEAN`, `ALIGN_COUNT`, `ALIGN_SUM`, `ALIGN_STDDEV`, `ALIGN_COUNT_TRUE`, `ALIGN_COUNT_FALSE`, `ALIGN_FRACTION_TRUE`, `ALIGN_PERCENTILE_99`, `ALIGN_PERCENTILE_95`, `ALIGN_PERCENTILE_50`, `ALIGN_PERCENTILE_05`, `ALIGN_PERCENT_CHANGE`.
 
 * `group_by_fields` -
   (Optional)
@@ -578,7 +625,18 @@ The following arguments are supported:
   and alignmentPeriod must be
   specified; otherwise, an error is
   returned.
-  Possible values are `REDUCE_NONE`, `REDUCE_MEAN`, `REDUCE_MIN`, `REDUCE_MAX`, `REDUCE_SUM`, `REDUCE_STDDEV`, `REDUCE_COUNT`, `REDUCE_COUNT_TRUE`, `REDUCE_COUNT_FALSE`, `REDUCE_FRACTION_TRUE`, `REDUCE_PERCENTILE_99`, `REDUCE_PERCENTILE_95`, `REDUCE_PERCENTILE_50`, and `REDUCE_PERCENTILE_05`.
+  Possible values are: `REDUCE_NONE`, `REDUCE_MEAN`, `REDUCE_MIN`, `REDUCE_MAX`, `REDUCE_SUM`, `REDUCE_STDDEV`, `REDUCE_COUNT`, `REDUCE_COUNT_TRUE`, `REDUCE_COUNT_FALSE`, `REDUCE_FRACTION_TRUE`, `REDUCE_PERCENTILE_99`, `REDUCE_PERCENTILE_95`, `REDUCE_PERCENTILE_50`, `REDUCE_PERCENTILE_05`.
+
+<a name="nested_forecast_options"></a>The `forecast_options` block supports:
+
+* `forecast_horizon` -
+  (Required)
+  The length of time into the future to forecast
+  whether a timeseries will violate the threshold.
+  If the predicted value is found to violate the
+  threshold, and the violation is observed in all
+  forecasts made for the Configured `duration`,
+  then the timeseries is considered to be failing.
 
 <a name="nested_trigger"></a>The `trigger` block supports:
 
@@ -615,7 +673,7 @@ The following arguments are supported:
   and alignmentPeriod must be
   specified; otherwise, an error is
   returned.
-  Possible values are `ALIGN_NONE`, `ALIGN_DELTA`, `ALIGN_RATE`, `ALIGN_INTERPOLATE`, `ALIGN_NEXT_OLDER`, `ALIGN_MIN`, `ALIGN_MAX`, `ALIGN_MEAN`, `ALIGN_COUNT`, `ALIGN_SUM`, `ALIGN_STDDEV`, `ALIGN_COUNT_TRUE`, `ALIGN_COUNT_FALSE`, `ALIGN_FRACTION_TRUE`, `ALIGN_PERCENTILE_99`, `ALIGN_PERCENTILE_95`, `ALIGN_PERCENTILE_50`, `ALIGN_PERCENTILE_05`, and `ALIGN_PERCENT_CHANGE`.
+  Possible values are: `ALIGN_NONE`, `ALIGN_DELTA`, `ALIGN_RATE`, `ALIGN_INTERPOLATE`, `ALIGN_NEXT_OLDER`, `ALIGN_MIN`, `ALIGN_MAX`, `ALIGN_MEAN`, `ALIGN_COUNT`, `ALIGN_SUM`, `ALIGN_STDDEV`, `ALIGN_COUNT_TRUE`, `ALIGN_COUNT_FALSE`, `ALIGN_FRACTION_TRUE`, `ALIGN_PERCENTILE_99`, `ALIGN_PERCENTILE_95`, `ALIGN_PERCENTILE_50`, `ALIGN_PERCENTILE_05`, `ALIGN_PERCENT_CHANGE`.
 
 * `group_by_fields` -
   (Optional)
@@ -681,7 +739,7 @@ The following arguments are supported:
   and alignmentPeriod must be
   specified; otherwise, an error is
   returned.
-  Possible values are `REDUCE_NONE`, `REDUCE_MEAN`, `REDUCE_MIN`, `REDUCE_MAX`, `REDUCE_SUM`, `REDUCE_STDDEV`, `REDUCE_COUNT`, `REDUCE_COUNT_TRUE`, `REDUCE_COUNT_FALSE`, `REDUCE_FRACTION_TRUE`, `REDUCE_PERCENTILE_99`, `REDUCE_PERCENTILE_95`, `REDUCE_PERCENTILE_50`, and `REDUCE_PERCENTILE_05`.
+  Possible values are: `REDUCE_NONE`, `REDUCE_MEAN`, `REDUCE_MIN`, `REDUCE_MAX`, `REDUCE_SUM`, `REDUCE_STDDEV`, `REDUCE_COUNT`, `REDUCE_COUNT_TRUE`, `REDUCE_COUNT_FALSE`, `REDUCE_FRACTION_TRUE`, `REDUCE_PERCENTILE_99`, `REDUCE_PERCENTILE_95`, `REDUCE_PERCENTILE_50`, `REDUCE_PERCENTILE_05`.
 
 <a name="nested_condition_matched_log"></a>The `condition_matched_log` block supports:
 
@@ -698,6 +756,62 @@ The following arguments are supported:
   a separate rule for the purposes of triggering notifications.
   Label keys and corresponding values can be used in notifications
   generated by this condition.
+
+<a name="nested_condition_prometheus_query_language"></a>The `condition_prometheus_query_language` block supports:
+
+* `query` -
+  (Required)
+  The PromQL expression to evaluate. Every evaluation cycle this
+  expression is evaluated at the current time, and all resultant time
+  series become pending/firing alerts. This field must not be empty.
+
+* `duration` -
+  (Optional)
+  Alerts are considered firing once their PromQL expression evaluated
+  to be "true" for this long. Alerts whose PromQL expression was not
+  evaluated to be "true" for long enough are considered pending. The
+  default value is zero. Must be zero or positive.
+
+* `evaluation_interval` -
+  (Optional)
+  How often this rule should be evaluated. Must be a positive multiple
+  of 30 seconds or missing. The default value is 30 seconds. If this
+  PrometheusQueryLanguageCondition was generated from a Prometheus
+  alerting rule, then this value should be taken from the enclosing
+  rule group.
+
+* `labels` -
+  (Optional)
+  Labels to add to or overwrite in the PromQL query result. Label names
+  must be valid.
+  Label values can be templatized by using variables. The only available
+  variable names are the names of the labels in the PromQL result, including
+  "__name__" and "value". "labels" may be empty. This field is intended to be
+  used for organizing and identifying the AlertPolicy
+
+* `rule_group` -
+  (Optional)
+  The rule group name of this alert in the corresponding Prometheus
+  configuration file.
+  Some external tools may require this field to be populated correctly
+  in order to refer to the original Prometheus configuration file.
+  The rule group name and the alert name are necessary to update the
+  relevant AlertPolicies in case the definition of the rule group changes
+  in the future.
+  This field is optional. If this field is not empty, then it must be a
+  valid Prometheus label name.
+
+* `alert_rule` -
+  (Optional)
+  The alerting rule name of this alert in the corresponding Prometheus
+  configuration file.
+  Some external tools may require this field to be populated correctly
+  in order to refer to the original Prometheus configuration file.
+  The rule group name and the alert name are necessary to update the
+  relevant AlertPolicies in case the definition of the rule group changes
+  in the future.
+  This field is optional. If this field is not empty, then it must be a
+  valid Prometheus label name.
 
 - - -
 
@@ -754,12 +868,31 @@ The following arguments are supported:
   (Optional)
   If an alert policy that was active has no data for this long, any open incidents will close.
 
+* `notification_channel_strategy` -
+  (Optional)
+  Control over how the notification channels in `notification_channels`
+  are notified when this alert fires, on a per-channel basis.
+  Structure is [documented below](#nested_notification_channel_strategy).
+
 
 <a name="nested_notification_rate_limit"></a>The `notification_rate_limit` block supports:
 
 * `period` -
   (Optional)
   Not more than one notification per period.
+
+<a name="nested_notification_channel_strategy"></a>The `notification_channel_strategy` block supports:
+
+* `notification_channel_names` -
+  (Optional)
+  The notification channels that these settings apply to. Each of these
+  correspond to the name field in one of the NotificationChannel objects
+  referenced in the notification_channels field of this AlertPolicy. The format is
+  `projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]`
+
+* `renotify_interval` -
+  (Optional)
+  The frequency at which to send reminder notifications for open incidents.
 
 <a name="nested_documentation"></a>The `documentation` block supports:
 

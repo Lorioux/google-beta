@@ -113,6 +113,196 @@ resource "google_container_aws_cluster" "primary" {
 
 
 ```
+## Example Usage - basic_enum_aws_cluster
+A basic example of a containeraws cluster with lowercase enums
+```hcl
+data "google_container_aws_versions" "versions" {
+  project = "my-project-name"
+  location = "us-west1"
+}
+
+resource "google_container_aws_cluster" "primary" {
+  authorization {
+    admin_users {
+      username = "my@service-account.com"
+    }
+  }
+
+  aws_region = "my-aws-region"
+
+  control_plane {
+    aws_services_authentication {
+      role_arn          = "arn:aws:iam::012345678910:role/my--1p-dev-oneplatform"
+      role_session_name = "my--1p-dev-session"
+    }
+
+    config_encryption {
+      kms_key_arn = "arn:aws:kms:my-aws-region:012345678910:key/12345678-1234-1234-1234-123456789111"
+    }
+
+    database_encryption {
+      kms_key_arn = "arn:aws:kms:my-aws-region:012345678910:key/12345678-1234-1234-1234-123456789111"
+    }
+
+    iam_instance_profile = "my--1p-dev-controlplane"
+    subnet_ids           = ["subnet-00000000000000000"]
+    version   = "${data.google_container_aws_versions.versions.valid_versions[0]}"
+    instance_type        = "t3.medium"
+
+    main_volume {
+      iops        = 3000
+      kms_key_arn = "arn:aws:kms:my-aws-region:012345678910:key/12345678-1234-1234-1234-123456789111"
+      size_gib    = 10
+      volume_type = "gp3"
+    }
+
+    proxy_config {
+      secret_arn     = "arn:aws:secretsmanager:us-west-2:126285863215:secret:proxy_config20210824150329476300000001-ABCDEF"
+      secret_version = "12345678-ABCD-EFGH-IJKL-987654321098"
+    }
+
+    root_volume {
+      iops        = 3000
+      kms_key_arn = "arn:aws:kms:my-aws-region:012345678910:key/12345678-1234-1234-1234-123456789111"
+      size_gib    = 10
+      volume_type = "gp3"
+    }
+
+    security_group_ids = ["sg-00000000000000000"]
+
+    ssh_config {
+      ec2_key_pair = "my--1p-dev-ssh"
+    }
+
+    tags = {
+      owner = "my@service-account.com"
+    }
+  }
+
+  fleet {
+    project = "my-project-number"
+  }
+
+  location = "us-west1"
+  name     = "name"
+
+  networking {
+    pod_address_cidr_blocks     = ["10.2.0.0/16"]
+    service_address_cidr_blocks = ["10.1.0.0/16"]
+    vpc_id                      = "vpc-00000000000000000"
+  }
+
+  annotations = {
+    label-one = "value-one"
+  }
+
+  description = "A sample aws cluster"
+  project     = "my-project-name"
+}
+
+
+```
+## Example Usage - beta_basic_enum_aws_cluster
+A basic example of a containeraws cluster with lowercase enums (beta)
+```hcl
+data "google_container_aws_versions" "versions" {
+  provider = google-beta
+  project = "my-project-name"
+  location = "us-west1"
+}
+
+resource "google_container_aws_cluster" "primary" {
+  provider = google-beta
+  authorization {
+    admin_users {
+      username = "my@service-account.com"
+    }
+  }
+
+  aws_region = "my-aws-region"
+
+  control_plane {
+    aws_services_authentication {
+      role_arn          = "arn:aws:iam::012345678910:role/my--1p-dev-oneplatform"
+      role_session_name = "my--1p-dev-session"
+    }
+
+    config_encryption {
+      kms_key_arn = "arn:aws:kms:my-aws-region:012345678910:key/12345678-1234-1234-1234-123456789111"
+    }
+
+    database_encryption {
+      kms_key_arn = "arn:aws:kms:my-aws-region:012345678910:key/12345678-1234-1234-1234-123456789111"
+    }
+
+    iam_instance_profile = "my--1p-dev-controlplane"
+    subnet_ids           = ["subnet-00000000000000000"]
+    version   = "${data.google_container_aws_versions.versions.valid_versions[0]}"
+    instance_type        = "t3.medium"
+
+    main_volume {
+      iops        = 3000
+      kms_key_arn = "arn:aws:kms:my-aws-region:012345678910:key/12345678-1234-1234-1234-123456789111"
+      size_gib    = 10
+      volume_type = "gp3"
+    }
+
+    proxy_config {
+      secret_arn     = "arn:aws:secretsmanager:us-west-2:126285863215:secret:proxy_config20210824150329476300000001-ABCDEF"
+      secret_version = "12345678-ABCD-EFGH-IJKL-987654321098"
+    }
+
+    root_volume {
+      iops        = 3000
+      kms_key_arn = "arn:aws:kms:my-aws-region:012345678910:key/12345678-1234-1234-1234-123456789111"
+      size_gib    = 10
+      volume_type = "gp3"
+    }
+
+    security_group_ids = ["sg-00000000000000000"]
+
+    ssh_config {
+      ec2_key_pair = "my--1p-dev-ssh"
+    }
+
+    tags = {
+      owner = "my@service-account.com"
+    }
+
+    instance_placement {
+      tenancy = "dedicated"
+    }
+  }
+
+  fleet {
+    project = "my-project-number"
+  }
+
+  location = "us-west1"
+  name     = "name"
+
+  networking {
+    pod_address_cidr_blocks     = ["10.2.0.0/16"]
+    service_address_cidr_blocks = ["10.1.0.0/16"]
+    vpc_id                      = "vpc-00000000000000000"
+  }
+
+  annotations = {
+    label-one = "value-one"
+  }
+
+  description = "A sample aws cluster"
+  project     = "my-project-name"
+
+  logging_config {
+    component_config {
+      enable_components = ["system_components", "workloads"]
+    }
+  }
+
+}
+
+```
 
 ## Argument Reference
 
@@ -251,6 +441,10 @@ The `fleet` block supports:
     
 The `networking` block supports:
     
+* `per_node_pool_sg_rules_disabled` -
+  (Optional)
+  Disable the per node pool subnet security group rules on the control plane security group. When set to true, you must also provide one or more security groups that ensure node pools are able to send requests to the control plane on TCP/443 and TCP/8132. Failure to do so may result in unavailable node pools.
+    
 * `pod_address_cidr_blocks` -
   (Required)
   All pods in the cluster are assigned an RFC1918 IPv4 address from these ranges. Only a single range is supported. This field cannot be changed after creation.
@@ -303,6 +497,10 @@ The `main_volume` block supports:
   (Optional)
   Optional. The size of the volume, in GiBs. When unspecified, a default value is provided. See the specific reference in the parent resource.
     
+* `throughput` -
+  (Optional)
+  Optional. The throughput to provision for the volume, in MiB/s. Only valid if the volume type is GP3.
+    
 * `volume_type` -
   (Optional)
   Optional. Type of the EBS volume. When unspecified, it defaults to GP2 volume. Possible values: VOLUME_TYPE_UNSPECIFIED, GP2, GP3
@@ -330,6 +528,10 @@ The `root_volume` block supports:
 * `size_gib` -
   (Optional)
   Optional. The size of the volume, in GiBs. When unspecified, a default value is provided. See the specific reference in the parent resource.
+    
+* `throughput` -
+  (Optional)
+  Optional. The throughput to provision for the volume, in MiB/s. Only valid if the volume type is GP3.
     
 * `volume_type` -
   (Optional)

@@ -30,7 +30,7 @@ To get more information about PatchDeployment, see:
     * [Official Documentation](https://cloud.google.com/compute/docs/os-patch-management)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_patch_deployment_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_patch_deployment_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -51,7 +51,7 @@ resource "google_os_config_patch_deployment" "patch" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_patch_deployment_daily&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_patch_deployment_daily&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -81,7 +81,7 @@ resource "google_os_config_patch_deployment" "patch" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_patch_deployment_daily_midnight&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_patch_deployment_daily_midnight&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -111,7 +111,7 @@ resource "google_os_config_patch_deployment" "patch" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_patch_deployment_instance&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_patch_deployment_instance&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -180,7 +180,7 @@ resource "google_os_config_patch_deployment" "patch" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_patch_deployment_full&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_patch_deployment_full&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -394,7 +394,7 @@ The following arguments are supported:
 * `reboot_config` -
   (Optional)
   Post-patch reboot settings.
-  Possible values are `DEFAULT`, `ALWAYS`, and `NEVER`.
+  Possible values are: `DEFAULT`, `ALWAYS`, `NEVER`.
 
 * `apt` -
   (Optional)
@@ -437,7 +437,7 @@ The following arguments are supported:
 * `type` -
   (Optional)
   By changing the type to DIST, the patching is performed using apt-get dist-upgrade instead.
-  Possible values are `DIST` and `UPGRADE`.
+  Possible values are: `DIST`, `UPGRADE`.
 
 * `excludes` -
   (Optional)
@@ -507,7 +507,7 @@ The following arguments are supported:
 * `classifications` -
   (Optional)
   Only apply updates of these windows update classifications. If empty, all updates are applied.
-  Each value may be one of `CRITICAL`, `SECURITY`, `DEFINITION`, `DRIVER`, `FEATURE_PACK`, `SERVICE_PACK`, `TOOL`, `UPDATE_ROLLUP`, and `UPDATE`.
+  Each value may be one of: `CRITICAL`, `SECURITY`, `DEFINITION`, `DRIVER`, `FEATURE_PACK`, `SERVICE_PACK`, `TOOL`, `UPDATE_ROLLUP`, `UPDATE`.
 
 * `excludes` -
   (Optional)
@@ -541,7 +541,7 @@ The following arguments are supported:
   (Optional)
   The script interpreter to use to run the script. If no interpreter is specified the script will
   be executed directly, which will likely only succeed for scripts with shebang lines.
-  Possible values are `SHELL` and `POWERSHELL`.
+  Possible values are: `SHELL`, `POWERSHELL`.
 
 * `local_path` -
   (Optional)
@@ -577,7 +577,7 @@ The following arguments are supported:
   (Optional)
   The script interpreter to use to run the script. If no interpreter is specified the script will
   be executed directly, which will likely only succeed for scripts with shebang lines.
-  Possible values are `SHELL` and `POWERSHELL`.
+  Possible values are: `SHELL`, `POWERSHELL`.
 
 * `local_path` -
   (Optional)
@@ -626,7 +626,7 @@ The following arguments are supported:
   (Optional)
   The script interpreter to use to run the script. If no interpreter is specified the script will
   be executed directly, which will likely only succeed for scripts with shebang lines.
-  Possible values are `SHELL` and `POWERSHELL`.
+  Possible values are: `SHELL`, `POWERSHELL`.
 
 * `local_path` -
   (Optional)
@@ -662,7 +662,7 @@ The following arguments are supported:
   (Optional)
   The script interpreter to use to run the script. If no interpreter is specified the script will
   be executed directly, which will likely only succeed for scripts with shebang lines.
-  Possible values are `SHELL` and `POWERSHELL`.
+  Possible values are: `SHELL`, `POWERSHELL`.
 
 * `local_path` -
   (Optional)
@@ -773,7 +773,7 @@ The following arguments are supported:
 * `day_of_week` -
   (Required)
   IANA Time Zone Database time zone, e.g. "America/New_York".
-  Possible values are `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, and `SUNDAY`.
+  Possible values are: `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
 
 <a name="nested_monthly"></a>The `monthly` block supports:
 
@@ -798,14 +798,14 @@ The following arguments are supported:
 * `day_of_week` -
   (Required)
   A day of the week.
-  Possible values are `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, and `SUNDAY`.
+  Possible values are: `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
 
 <a name="nested_rollout"></a>The `rollout` block supports:
 
 * `mode` -
   (Required)
   Mode of the patch rollout.
-  Possible values are `ZONE_BY_ZONE` and `CONCURRENT_ZONES`.
+  Possible values are: `ZONE_BY_ZONE`, `CONCURRENT_ZONES`.
 
 * `disruption_budget` -
   (Required)

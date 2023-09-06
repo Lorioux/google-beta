@@ -30,7 +30,6 @@ To get more information about function, see:
 
 
 ```hcl
-# [START functions_v2_basic]
 locals {
   project = "my-project-name" # Google Cloud Platform Project ID
 }
@@ -73,13 +72,11 @@ resource "google_cloudfunctions2_function" "function" {
 output "function_uri" { 
   value = google_cloudfunctions2_function.function.service_config[0].uri
 }
-# [END functions_v2_basic]
 ```
 ## Example Usage - Cloudfunctions2 Full
 
 
 ```hcl
-# [START functions_v2_full]
 locals {
   project = "my-project-name" # Google Cloud Platform Project ID
 }
@@ -146,14 +143,93 @@ resource "google_cloudfunctions2_function" "function" {
     retry_policy = "RETRY_POLICY_RETRY"
   }
 }
-# [END functions_v2_full]
+```
+## Example Usage - Cloudfunctions2 Scheduler Auth
+
+
+```hcl
+locals {
+  project = "my-project-name" # Google Cloud Platform Project ID
+}
+
+resource "google_service_account" "account" {
+  account_id   = "gcf-sa"
+  display_name = "Test Service Account"
+}
+
+resource "google_storage_bucket" "bucket" {
+  name                        = "${local.project}-gcf-source"  # Every bucket name must be globally unique
+  location                    = "US"
+  uniform_bucket_level_access = true
+}
+ 
+resource "google_storage_bucket_object" "object" {
+  name   = "function-source.zip"
+  bucket = google_storage_bucket.bucket.name
+  source = "function-source.zip"  # Add path to the zipped function source code
+}
+
+resource "google_cloudfunctions2_function" "function" {
+  name        = "gcf-function" # name should use kebab-case so generated Cloud Run service name will be the same
+  location    = "us-central1"
+  description = "a new function"
+ 
+  build_config {
+    runtime     = "nodejs16"
+    entry_point = "helloHttp"  # Set the entry point
+    source {
+      storage_source {
+        bucket = google_storage_bucket.bucket.name
+        object = google_storage_bucket_object.object.name
+      }
+    }
+  }
+ 
+  service_config {
+    min_instance_count    = 1
+    available_memory      = "256M"
+    timeout_seconds       = 60
+    service_account_email = google_service_account.account.email
+  }
+}
+
+resource "google_cloudfunctions2_function_iam_member" "invoker" {
+  project        = google_cloudfunctions2_function.function.project
+  location       = google_cloudfunctions2_function.function.location
+  cloud_function = google_cloudfunctions2_function.function.name
+  role           = "roles/cloudfunctions.invoker"
+  member         = "serviceAccount:${google_service_account.account.email}"
+}
+
+resource "google_cloud_run_service_iam_member" "cloud_run_invoker" {
+  project  = google_cloudfunctions2_function.function.project
+  location = google_cloudfunctions2_function.function.location
+  service  = google_cloudfunctions2_function.function.name
+  role     = "roles/run.invoker"
+  member   = "serviceAccount:${google_service_account.account.email}"
+}
+
+resource "google_cloud_scheduler_job" "invoke_cloud_function" {
+  name        = "invoke-gcf-function"
+  description = "Schedule the HTTPS trigger for cloud function"
+  schedule    = "0 0 * * *" # every day at midnight
+  project     = google_cloudfunctions2_function.function.project
+  region      = google_cloudfunctions2_function.function.location
+
+  http_target {
+    uri         = google_cloudfunctions2_function.function.service_config[0].uri
+    http_method = "POST"
+    oidc_token {
+      audience              = "${google_cloudfunctions2_function.function.service_config[0].uri}/"
+      service_account_email = google_service_account.account.email
+    }
+  }
+}
 ```
 ## Example Usage - Cloudfunctions2 Basic Gcs
 
 
 ```hcl
-# [START functions_v2_basic_gcs]
-
 resource "google_storage_bucket" "source-bucket" {
   name     = "gcf-source-bucket"
   location = "US"
@@ -257,13 +333,11 @@ resource "google_cloudfunctions2_function" "function" {
     }
   }
 }
-# [END functions_v2_basic_gcs]
 ```
 ## Example Usage - Cloudfunctions2 Basic Auditlogs
 
 
 ```hcl
-# [START functions_v2_basic_auditlogs]
 # This example follows the examples shown in this Google Cloud Community blog post
 # https://medium.com/google-cloud/applying-a-path-pattern-when-filtering-in-eventarc-f06b937b4c34
 # and the docs:
@@ -372,7 +446,6 @@ resource "google_cloudfunctions2_function" "function" {
     }
   }
 }
-# [END functions_v2_basic_auditlogs]
 ```
 ## Example Usage - Cloudfunctions2 Secret Env
 
@@ -567,6 +640,124 @@ resource "google_cloudfunctions2_function" "function" {
   }
 }
 ```
+## Example Usage - Cloudfunctions2 Cmek
+
+
+```hcl
+locals {
+  project = "my-project-name" # Google Cloud Platform Project ID
+}
+
+data "google_project" "project" {
+  provider = google-beta
+}
+
+resource "google_storage_bucket" "bucket" {
+  provider = google-beta
+
+  name     = "${local.project}-gcf-source"  # Every bucket name must be globally unique
+  location = "US"
+  uniform_bucket_level_access = true
+}
+ 
+resource "google_storage_bucket_object" "object" {
+  provider = google-beta
+
+  name   = "function-source.zip"
+  bucket = google_storage_bucket.bucket.name
+  source = "function-source.zip"  # Add path to the zipped function source code
+}
+
+resource "google_project_service_identity" "ea_sa" {
+  provider = google-beta
+
+  project = data.google_project.project.project_id
+  service = "eventarc.googleapis.com"
+}
+
+resource "google_artifact_registry_repository" "unencoded-ar-repo" {
+  provider = google-beta
+
+  repository_id = "ar-repo"
+  location = "us-central1"
+  format = "DOCKER"
+}
+
+resource "google_artifact_registry_repository_iam_binding" "binding" {
+  provider = google-beta
+
+  location = google_artifact_registry_repository.encoded-ar-repo.location
+  repository = google_artifact_registry_repository.encoded-ar-repo.name
+  role = "roles/artifactregistry.admin"
+  members = [
+    "serviceAccount:service-${data.google_project.project.number}@gcf-admin-robot.iam.gserviceaccount.com",
+  ]
+}
+
+resource "google_kms_crypto_key_iam_binding" "gcf_cmek_keyuser" {
+  provider = google-beta
+
+  crypto_key_id = "cmek-key"
+  role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+  members = [
+    "serviceAccount:service-${data.google_project.project.number}@gcf-admin-robot.iam.gserviceaccount.com",
+    "serviceAccount:service-${data.google_project.project.number}@gcp-sa-artifactregistry.iam.gserviceaccount.com",
+    "serviceAccount:service-${data.google_project.project.number}@gs-project-accounts.iam.gserviceaccount.com",
+    "serviceAccount:service-${data.google_project.project.number}@serverless-robot-prod.iam.gserviceaccount.com",
+    "serviceAccount:${google_project_service_identity.ea_sa.email}",
+  ]
+
+  depends_on = [
+    google_project_service_identity.ea_sa
+  ]
+}
+
+resource "google_artifact_registry_repository" "encoded-ar-repo" {
+  provider = google-beta
+
+  location = "us-central1"
+  repository_id = "cmek-repo"
+  format = "DOCKER"
+  kms_key_name = "cmek-key"
+  depends_on = [
+    google_kms_crypto_key_iam_binding.gcf_cmek_keyuser
+  ]
+}
+
+resource "google_cloudfunctions2_function" "function" {
+  provider = google-beta
+
+  name = "function-cmek"
+  location = "us-central1"
+  description = "CMEK function"
+  kms_key_name = "cmek-key"
+
+  build_config {
+    runtime = "nodejs16"
+    entry_point = "helloHttp"  # Set the entry point
+    docker_repository = google_artifact_registry_repository.encoded-ar-repo.id
+
+    source {
+      storage_source {
+        bucket = google_storage_bucket.bucket.name
+        object = google_storage_bucket_object.object.name
+      }
+    }
+  }
+
+  service_config {
+    max_instance_count  = 1
+    available_memory    = "256M"
+    timeout_seconds     = 60
+  }
+
+  depends_on = [
+    google_kms_crypto_key_iam_binding.gcf_cmek_keyuser
+  ]
+
+}
+```
 
 ## Argument Reference
 
@@ -606,6 +797,11 @@ The following arguments are supported:
 * `labels` -
   (Optional)
   A set of key/value label pairs associated with this Cloud Function.
+
+* `kms_key_name` -
+  (Optional)
+  Resource name of a KMS crypto key (managed by the user) used to encrypt/decrypt function resources.
+  It must match the pattern projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}.
 
 * `location` -
   (Optional)
@@ -678,14 +874,14 @@ The following arguments are supported:
 
 * `generation` -
   (Optional)
-  Google Cloud Storage generation for the object. If the generation 
+  Google Cloud Storage generation for the object. If the generation
   is omitted, the latest generation will be used.
 
 <a name="nested_repo_source"></a>The `repo_source` block supports:
 
 * `project_id` -
   (Optional)
-  ID of the project that owns the Cloud Source Repository. If omitted, the 
+  ID of the project that owns the Cloud Source Repository. If omitted, the
   project ID requesting the build is assumed.
 
 * `repo_name` -
@@ -710,7 +906,7 @@ The following arguments are supported:
 
 * `invert_regex` -
   (Optional)
-  Only trigger a build if the revision regex does 
+  Only trigger a build if the revision regex does
   NOT match the revision regex.
 
 <a name="nested_service_config"></a>The `service_config` block supports:
@@ -760,13 +956,13 @@ The following arguments are supported:
 * `vpc_connector_egress_settings` -
   (Optional)
   Available egress settings.
-  Possible values are `VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED`, `PRIVATE_RANGES_ONLY`, and `ALL_TRAFFIC`.
+  Possible values are: `VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED`, `PRIVATE_RANGES_ONLY`, `ALL_TRAFFIC`.
 
 * `ingress_settings` -
   (Optional)
   Available ingress settings. Defaults to "ALLOW_ALL" if unspecified.
   Default value is `ALLOW_ALL`.
-  Possible values are `ALLOW_ALL`, `ALLOW_INTERNAL_ONLY`, and `ALLOW_INTERNAL_AND_GCLB`.
+  Possible values are: `ALLOW_ALL`, `ALLOW_INTERNAL_ONLY`, `ALLOW_INTERNAL_AND_GCLB`.
 
 * `uri` -
   (Output)
@@ -878,7 +1074,7 @@ The following arguments are supported:
   (Optional)
   Describes the retry policy in case of function's execution failure.
   Retried execution is charged as any other execution.
-  Possible values are `RETRY_POLICY_UNSPECIFIED`, `RETRY_POLICY_DO_NOT_RETRY`, and `RETRY_POLICY_RETRY`.
+  Possible values are: `RETRY_POLICY_UNSPECIFIED`, `RETRY_POLICY_DO_NOT_RETRY`, `RETRY_POLICY_RETRY`.
 
 
 <a name="nested_event_filters"></a>The `event_filters` block supports:
@@ -910,6 +1106,9 @@ In addition to the arguments listed above, the following computed attributes are
 
 * `environment` -
   The environment the function is hosted on.
+
+* `url` -
+  Output only. The deployed url for the function.
 
 * `state` -
   Describes the current state of the function.

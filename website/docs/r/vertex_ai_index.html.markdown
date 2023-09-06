@@ -59,6 +59,7 @@ resource "google_vertex_ai_index" "index" {
     config {
       dimensions = 2
       approximate_neighbors_count = 150
+      shard_size = "SHARD_SIZE_SMALL"
       distance_measure_type = "DOT_PRODUCT_DISTANCE"
       algorithm_config {
         tree_ah_config {
@@ -103,6 +104,7 @@ resource "google_vertex_ai_index" "index" {
     contents_delta_uri = "gs://${google_storage_bucket.bucket.name}/contents"
     config {
       dimensions = 2
+      shard_size = "SHARD_SIZE_LARGE"
       distance_measure_type = "COSINE_DISTANCE"
       feature_norm_type = "UNIT_L2_NORM"
       algorithm_config {
@@ -189,6 +191,14 @@ The following arguments are supported:
   approximate search algorithm are reordered via a more expensive distance computation.
   Required if tree-AH algorithm is used.
 
+* `shard_size` -
+  (Optional)
+  Index data is split into equal parts to be processed. These are called "shards".
+  The shard size must be specified when creating an index. The value must be one of the followings:
+  * SHARD_SIZE_SMALL: Small (2GB)
+  * SHARD_SIZE_MEDIUM: Medium (20GB)
+  * SHARD_SIZE_LARGE: Large (50GB)
+
 * `distance_measure_type` -
   (Optional)
   The distance measure used in nearest neighbor search. The value must be one of the followings:
@@ -199,7 +209,7 @@ The following arguments are supported:
 
 * `feature_norm_type` -
   (Optional)
-  Type of normalization to be carried out on each vector. The value must be one of the followings: 
+  Type of normalization to be carried out on each vector. The value must be one of the followings:
   * UNIT_L2_NORM: Unit L2 normalization type
   * NONE: No normalization type is specified.
 
@@ -289,9 +299,9 @@ In addition to the arguments listed above, the following computed attributes are
 This resource provides the following
 [Timeouts](https://developer.hashicorp.com/terraform/plugin/sdkv2/resources/retries-and-customizable-timeouts) configuration options:
 
-- `create` - Default is 60 minutes.
-- `update` - Default is 60 minutes.
-- `delete` - Default is 60 minutes.
+- `create` - Default is 180 minutes.
+- `update` - Default is 180 minutes.
+- `delete` - Default is 180 minutes.
 
 ## Import
 

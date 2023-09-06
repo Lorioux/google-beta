@@ -29,7 +29,7 @@ To get more information about Backup, see:
     * [AlloyDB](https://cloud.google.com/alloydb/docs/)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=alloydb_backup_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=alloydb_backup_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -78,7 +78,7 @@ data "google_compute_network" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=alloydb_backup_full&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=alloydb_backup_full&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -144,6 +144,10 @@ The following arguments are supported:
   (Required)
   The ID of the alloydb backup.
 
+* `location` -
+  (Required)
+  The location where the alloydb backup should reside.
+
 
 - - -
 
@@ -156,13 +160,20 @@ The following arguments are supported:
   (Optional)
   User-provided description of the backup.
 
-* `location` -
+* `encryption_config` -
   (Optional)
-  The location where the alloydb backup should reside.
+  EncryptionConfig describes the encryption config of a cluster or a backup that is encrypted with a CMEK (customer-managed encryption key).
+  Structure is [documented below](#nested_encryption_config).
 
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
 
+
+<a name="nested_encryption_config"></a>The `encryption_config` block supports:
+
+* `kms_key_name` -
+  (Optional)
+  The fully-qualified resource name of the KMS key. Each Cloud KMS key is regionalized and has the following format: projects/[PROJECT]/locations/[REGION]/keyRings/[RING]/cryptoKeys/[KEY_NAME].
 
 ## Attributes Reference
 
@@ -191,6 +202,20 @@ In addition to the arguments listed above, the following computed attributes are
 * `etag` -
   A hash of the resource.
 
+* `encryption_info` -
+  EncryptionInfo describes the encryption information of a cluster or a backup.
+  Structure is [documented below](#nested_encryption_info).
+
+
+<a name="nested_encryption_info"></a>The `encryption_info` block contains:
+
+* `encryption_type` -
+  (Output)
+  Output only. Type of encryption.
+
+* `kms_key_versions` -
+  (Output)
+  Output only. Cloud KMS key versions that are being used to protect the database or the backup.
 
 ## Timeouts
 

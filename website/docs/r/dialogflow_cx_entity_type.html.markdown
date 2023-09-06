@@ -30,7 +30,7 @@ To get more information about EntityType, see:
     * [Official Documentation](https://cloud.google.com/dialogflow/cx/docs)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dialogflowcx_entity_type_full&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dialogflowcx_entity_type_full&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -85,7 +85,7 @@ The following arguments are supported:
   * KIND_MAP: Map entity types allow mapping of a group of synonyms to a canonical value.
   * KIND_LIST: List entity types contain a set of entries that do not map to canonical values. However, list entity types can contain references to other entity types (with or without aliases).
   * KIND_REGEXP: Regexp entity types allow to specify regular expressions in entries values.
-  Possible values are `KIND_MAP`, `KIND_LIST`, and `KIND_REGEXP`.
+  Possible values are: `KIND_MAP`, `KIND_LIST`, `KIND_REGEXP`.
 
 * `entities` -
   (Required)
@@ -114,7 +114,7 @@ The following arguments are supported:
   Represents kinds of entities.
   * AUTO_EXPANSION_MODE_UNSPECIFIED: Auto expansion disabled for the entity.
   * AUTO_EXPANSION_MODE_DEFAULT: Allows an agent to recognize values that have not been explicitly listed in the entity.
-  Possible values are `AUTO_EXPANSION_MODE_DEFAULT` and `AUTO_EXPANSION_MODE_UNSPECIFIED`.
+  Possible values are: `AUTO_EXPANSION_MODE_DEFAULT`, `AUTO_EXPANSION_MODE_UNSPECIFIED`.
 
 * `excluded_phrases` -
   (Optional)

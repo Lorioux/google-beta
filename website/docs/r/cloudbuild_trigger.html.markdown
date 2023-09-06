@@ -31,7 +31,7 @@ To get more information about Trigger, see:
 ~> **Note:** You can retrieve the email of the Cloud Build Service Account used in jobs by using the `google_project_service_identity` resource.
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_filename&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_filename&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -56,7 +56,7 @@ resource "google_cloudbuild_trigger" "filename-trigger" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_build&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_build&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -65,6 +65,7 @@ resource "google_cloudbuild_trigger" "filename-trigger" {
 
 ```hcl
 resource "google_cloudbuild_trigger" "build-trigger" {
+  name = "my-trigger"
   location = "global"
 
   trigger_template {
@@ -138,7 +139,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_service_account&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_service_account&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -163,7 +164,7 @@ resource "google_cloudbuild_trigger" "service-account-trigger" {
 }
 
 resource "google_service_account" "cloudbuild_service_account" {
-  account_id = "tf-test-my-service-account"
+  account_id = "cloud-sa"
 }
 
 resource "google_project_iam_member" "act_as" {
@@ -199,7 +200,7 @@ resource "google_cloudbuild_trigger" "include-build-logs-trigger" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_pubsub_config&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_pubsub_config&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -209,7 +210,7 @@ resource "google_cloudbuild_trigger" "include-build-logs-trigger" {
 ```hcl
 
 resource "google_pubsub_topic" "mytopic" {
-  name = "mytopic"
+  name = "my-topic"
 }
 
 resource "google_cloudbuild_trigger" "pubsub-config-trigger" {
@@ -242,7 +243,7 @@ resource "google_cloudbuild_trigger" "pubsub-config-trigger" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_webhook_config&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_webhook_config&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -252,7 +253,7 @@ resource "google_cloudbuild_trigger" "pubsub-config-trigger" {
 ```hcl
 
 resource "google_secret_manager_secret" "webhook_trigger_secret_key" {
-  secret_id = "webhook_trigger-secret-key-1"
+  secret_id = "webhook-trigger-secret-key"
 
   replication {
     user_managed {
@@ -310,7 +311,7 @@ resource "google_cloudbuild_trigger" "webhook-config-trigger" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_manual&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_manual&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -320,7 +321,7 @@ resource "google_cloudbuild_trigger" "webhook-config-trigger" {
 ```hcl
 
 resource "google_cloudbuild_trigger" "manual-trigger" {
-  name        = "manual-build"
+  name        = "manual-trigger"
 
   source_to_build {
     uri       = "https://hashicorp/terraform-provider-google-beta"
@@ -350,7 +351,7 @@ resource "google_cloudbuild_trigger" "manual-trigger" {
 
 ```hcl
 resource "google_cloudbuild_trigger" "manual-ghe-trigger" {
-  name        = "terraform-manual-ghe-trigger"
+  name        = ""
 
   source_to_build {
     uri       = "https://hashicorp/terraform-provider-google-beta"
@@ -369,7 +370,35 @@ git_file_source {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_repo&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_manual_bitbucket_server&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Cloudbuild Trigger Manual Bitbucket Server
+
+
+```hcl
+resource "google_cloudbuild_trigger" "manual-bitbucket-trigger" {
+  name        = "terraform-manual-bbs-trigger"
+
+  source_to_build {
+    uri       = "https://bbs.com/scm/stag/test-repo.git"
+    ref       = "refs/heads/main"
+    repo_type = "BITBUCKET_SERVER"
+    bitbucket_server_config = "projects/myProject/locations/global/bitbucketServerConfigs/configID"
+  }
+
+  git_file_source {
+    path      = "cloudbuild.yaml"
+    uri       = "https://bbs.com/scm/stag/test-repo.git"
+    revision  = "refs/heads/main"
+    repo_type = "BITBUCKET_SERVER"
+    bitbucket_server_config = "projects/myProject/locations/global/bitbucketServerConfigs/configID"
+  }
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_repo&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -378,7 +407,6 @@ git_file_source {
 
 ```hcl
 resource "google_cloudbuildv2_connection" "my-connection" {
-  provider = google-beta
   location = "us-central1"
   name = "my-connection"
 
@@ -391,14 +419,12 @@ resource "google_cloudbuildv2_connection" "my-connection" {
 }
 
 resource "google_cloudbuildv2_repository" "my-repository" {
-  provider = google-beta
   name = "my-repo"
   parent_connection = google_cloudbuildv2_connection.my-connection.id
   remote_uri = "https://github.com/myuser/my-repo.git"
 }
 
 resource "google_cloudbuild_trigger" "repo-trigger" {
-  provider = google-beta
   location = "us-central1"
 
   repository_event_config {
@@ -412,7 +438,7 @@ resource "google_cloudbuild_trigger" "repo-trigger" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_bitbucket_server_push&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_bitbucket_server_push&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -421,11 +447,11 @@ resource "google_cloudbuild_trigger" "repo-trigger" {
 
 ```hcl
 resource "google_cloudbuild_trigger" "bbs-push-trigger" {
-  name        = "terraform-bbs-push-trigger"
+  name        = "bbs-push-trigger"
   location    = "us-central1"
 
   bitbucket_server_trigger_config {
-    repo_slug = "terraform-provider-google"
+    repo_slug = "bbs-push-trigger"
     project_key = "STAG"
     bitbucket_server_config_resource = "projects/123456789/locations/us-central1/bitbucketServerConfigs/myBitbucketConfig"
     push {
@@ -438,7 +464,7 @@ resource "google_cloudbuild_trigger" "bbs-push-trigger" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_bitbucket_server_pull_request&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_bitbucket_server_pull_request&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -447,7 +473,7 @@ resource "google_cloudbuild_trigger" "bbs-push-trigger" {
 
 ```hcl
 resource "google_cloudbuild_trigger" "bbs-pull-request-trigger" {
-  name        = "terraform-bbs-pull-request-trigger"
+  name        = "ghe-trigger"
   location    = "us-central1"
 
   bitbucket_server_trigger_config {
@@ -469,7 +495,7 @@ resource "google_cloudbuild_trigger" "bbs-pull-request-trigger" {
 
 ```hcl
 resource "google_cloudbuild_trigger" "ghe-trigger" {
-  name        = "terraform-ghe-trigger"
+  name        = "ghe-trigger"
   location    = "us-central1"
 
   github {
@@ -482,6 +508,211 @@ resource "google_cloudbuild_trigger" "ghe-trigger" {
   }
 
   filename = "cloudbuild.yaml"
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_allow_failure&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Cloudbuild Trigger Allow Failure
+
+
+```hcl
+resource "google_cloudbuild_trigger" "allow-failure-trigger" {
+  name = "my-trigger"
+  location = "global"
+
+  trigger_template {
+    branch_name = "main"
+    repo_name   = "my-repo"
+  }
+
+  build {
+    step {
+      name = "ubuntu"
+      args = ["-c", "exit 1"]
+      allow_failure = true
+    }
+
+    source {
+      storage_source {
+        bucket = "mybucket"
+        object = "source_code.tar.gz"
+      }
+    }
+    tags = ["build", "newFeature"]
+    substitutions = {
+      _FOO = "bar"
+      _BAZ = "qux"
+    }
+    queue_ttl = "20s"
+    logs_bucket = "gs://mybucket/logs"
+    secret {
+      kms_key_name = "projects/myProject/locations/global/keyRings/keyring-name/cryptoKeys/key-name"
+      secret_env = {
+        PASSWORD = "ZW5jcnlwdGVkLXBhc3N3b3JkCg=="
+      }
+    }
+    available_secrets {
+      secret_manager {
+        env          = "MY_SECRET"
+        version_name = "projects/myProject/secrets/mySecret/versions/latest"
+      }
+    }
+    artifacts {
+      images = ["gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"]
+      objects {
+        location = "gs://bucket/path/to/somewhere/"
+        paths = ["path"]
+      }
+    }
+    options {
+      source_provenance_hash = ["MD5"]
+      requested_verify_option = "VERIFIED"
+      machine_type = "N1_HIGHCPU_8"
+      disk_size_gb = 100
+      substitution_option = "ALLOW_LOOSE"
+      dynamic_substitutions = true
+      log_streaming_option = "STREAM_OFF"
+      worker_pool = "pool"
+      logging = "LEGACY"
+      env = ["ekey = evalue"]
+      secret_env = ["secretenv = svalue"]
+      volumes {
+        name = "v1"
+        path = "v1"
+      }
+    }
+  }
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_allow_exit_codes&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Cloudbuild Trigger Allow Exit Codes
+
+
+```hcl
+resource "google_cloudbuild_trigger" "allow-exit-codes-trigger" {
+  name = "my-trigger"
+  location = "global"
+
+  trigger_template {
+    branch_name = "main"
+    repo_name   = "my-repo"
+  }
+
+  build {
+    step {
+      name = "ubuntu"
+      args = ["-c", "exit 1"]
+      allow_exit_codes = [1,3]
+    }
+
+    source {
+      storage_source {
+        bucket = "mybucket"
+        object = "source_code.tar.gz"
+      }
+    }
+    tags = ["build", "newFeature"]
+    substitutions = {
+      _FOO = "bar"
+      _BAZ = "qux"
+    }
+    queue_ttl = "20s"
+    logs_bucket = "gs://mybucket/logs"
+    secret {
+      kms_key_name = "projects/myProject/locations/global/keyRings/keyring-name/cryptoKeys/key-name"
+      secret_env = {
+        PASSWORD = "ZW5jcnlwdGVkLXBhc3N3b3JkCg=="
+      }
+    }
+    available_secrets {
+      secret_manager {
+        env          = "MY_SECRET"
+        version_name = "projects/myProject/secrets/mySecret/versions/latest"
+      }
+    }
+    artifacts {
+      images = ["gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"]
+      objects {
+        location = "gs://bucket/path/to/somewhere/"
+        paths = ["path"]
+      }
+    }
+    options {
+      source_provenance_hash = ["MD5"]
+      requested_verify_option = "VERIFIED"
+      machine_type = "N1_HIGHCPU_8"
+      disk_size_gb = 100
+      substitution_option = "ALLOW_LOOSE"
+      dynamic_substitutions = true
+      log_streaming_option = "STREAM_OFF"
+      worker_pool = "pool"
+      logging = "LEGACY"
+      env = ["ekey = evalue"]
+      secret_env = ["secretenv = svalue"]
+      volumes {
+        name = "v1"
+        path = "v1"
+      }
+    }
+  }
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_trigger_pubsub_with_repo&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Cloudbuild Trigger Pubsub With Repo
+
+
+```hcl
+resource "google_cloudbuildv2_connection" "my-connection" {
+  location = "us-central1"
+  name = "my-connection"
+
+  github_config {
+    app_installation_id = 123123
+    authorizer_credential {
+      oauth_token_secret_version = "projects/my-project/secrets/github-pat-secret/versions/latest"
+    }
+  }
+}
+
+resource "google_cloudbuildv2_repository" "my-repository" {
+  name = "my-repo"
+  parent_connection = google_cloudbuildv2_connection.my-connection.id
+  remote_uri = "https://github.com/myuser/my-repo.git"
+}
+
+resource "google_pubsub_topic" "mytopic" {
+  name = "my-topic"
+}
+
+resource "google_cloudbuild_trigger" "pubsub-with-repo-trigger" {
+  name = "pubsub-with-repo-trigger"
+  location = "us-central1"
+
+  pubsub_config {
+    topic = google_pubsub_topic.mytopic.id
+  }
+  source_to_build {
+    repository = google_cloudbuildv2_repository.my-repository.id
+    ref = "refs/heads/main"
+    repo_type = "GITHUB"
+  }
+  git_file_source {
+    path = "cloudbuild.yaml"
+    repository = google_cloudbuildv2_repository.my-repository.id
+    revision = "refs/heads/main"
+    repo_type = "GITHUB"
+  }
 }
 ```
 
@@ -527,11 +758,11 @@ The following arguments are supported:
   Build logs will be sent back to GitHub as part of the checkrun
   result.  Values can be INCLUDE_BUILD_LOGS_UNSPECIFIED or
   INCLUDE_BUILD_LOGS_WITH_STATUS
-  Possible values are `INCLUDE_BUILD_LOGS_UNSPECIFIED` and `INCLUDE_BUILD_LOGS_WITH_STATUS`.
+  Possible values are: `INCLUDE_BUILD_LOGS_UNSPECIFIED`, `INCLUDE_BUILD_LOGS_WITH_STATUS`.
 
 * `filename` -
   (Optional)
-  Path, from the source root, to a file whose contents is used for the template. 
+  Path, from the source root, to a file whose contents is used for the template.
   Either a filename or build template must be provided. Set this only when using trigger_template or github.
   When using Pub/Sub, Webhook or Manual set the file name using git_file_source instead.
 
@@ -545,15 +776,15 @@ The following arguments are supported:
   Structure is [documented below](#nested_git_file_source).
 
 * `repository_event_config` -
-  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  (Optional)
   The configuration of a trigger that creates a build whenever an event from Repo API is received.
   Structure is [documented below](#nested_repository_event_config).
 
 * `source_to_build` -
   (Optional)
-  The repo and ref of the repository from which to build. 
-  This field is used only for those triggers that do not respond to SCM events. 
-  Triggers that respond to such events build source at whatever commit caused the event. 
+  The repo and ref of the repository from which to build.
+  This field is used only for those triggers that do not respond to SCM events.
+  Triggers that respond to such events build source at whatever commit caused the event.
   This field is currently only used by Webhook, Pub/Sub, Manual, and Cron triggers.
   One of `trigger_template`, `github`, `pubsub_config` `webhook_config` or `source_to_build` must be provided.
   Structure is [documented below](#nested_source_to_build).
@@ -602,22 +833,22 @@ The following arguments are supported:
 
 * `pubsub_config` -
   (Optional)
-  PubsubConfig describes the configuration of a trigger that creates 
+  PubsubConfig describes the configuration of a trigger that creates
   a build whenever a Pub/Sub message is published.
   One of `trigger_template`, `github`, `pubsub_config` `webhook_config` or `source_to_build` must be provided.
   Structure is [documented below](#nested_pubsub_config).
 
 * `webhook_config` -
   (Optional)
-  WebhookConfig describes the configuration of a trigger that creates 
+  WebhookConfig describes the configuration of a trigger that creates
   a build whenever a webhook is sent to a trigger's webhook URL.
   One of `trigger_template`, `github`, `pubsub_config` `webhook_config` or `source_to_build` must be provided.
   Structure is [documented below](#nested_webhook_config).
 
 * `approval_config` -
   (Optional)
-  Configuration for manual approval to start a build invocation of this BuildTrigger. 
-  Builds created by this trigger will require approval before they execute. 
+  Configuration for manual approval to start a build invocation of this BuildTrigger.
+  Builds created by this trigger will require approval before they execute.
   Any user with a Cloud Build Approver role for the project can approve a build.
   Structure is [documented below](#nested_approval_config).
 
@@ -643,25 +874,35 @@ The following arguments are supported:
 
 * `uri` -
   (Optional)
-  The URI of the repo (optional). If unspecified, the repo from which the trigger 
+  The URI of the repo (optional). If unspecified, the repo from which the trigger
   invocation originated is assumed to be the repo from which to read the specified path.
+
+* `repository` -
+  (Optional)
+  The fully qualified resource name of the Repo API repository. The fully qualified resource name of the Repo API repository.
+  If unspecified, the repo from which the trigger invocation originated is assumed to be the repo from which to read the specified path.
 
 * `repo_type` -
   (Required)
-  The type of the repo, since it may not be explicit from the repo field (e.g from a URL). 
+  The type of the repo, since it may not be explicit from the repo field (e.g from a URL).
   Values can be UNKNOWN, CLOUD_SOURCE_REPOSITORIES, GITHUB, BITBUCKET_SERVER
-  Possible values are `UNKNOWN`, `CLOUD_SOURCE_REPOSITORIES`, `GITHUB`, and `BITBUCKET_SERVER`.
+  Possible values are: `UNKNOWN`, `CLOUD_SOURCE_REPOSITORIES`, `GITHUB`, `BITBUCKET_SERVER`.
 
 * `revision` -
   (Optional)
-  The branch, tag, arbitrary ref, or SHA version of the repo to use when resolving the 
-  filename (optional). This field respects the same syntax/resolution as described here: https://git-scm.com/docs/gitrevisions 
+  The branch, tag, arbitrary ref, or SHA version of the repo to use when resolving the
+  filename (optional). This field respects the same syntax/resolution as described here: https://git-scm.com/docs/gitrevisions
   If unspecified, the revision from which the trigger invocation originated is assumed to be the revision from which to read the specified path.
 
 * `github_enterprise_config` -
   (Optional)
   The full resource name of the github enterprise config.
   Format: projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}. projects/{project}/githubEnterpriseConfigs/{id}.
+
+* `bitbucket_server_config` -
+  (Optional)
+  The full resource name of the bitbucket server config.
+  Format: projects/{project}/locations/{location}/bitbucketServerConfigs/{id}.
 
 <a name="nested_repository_event_config"></a>The `repository_event_config` block supports:
 
@@ -695,7 +936,7 @@ The following arguments are supported:
 * `comment_control` -
   (Optional)
   Configure builds to run whether a repository owner or collaborator need to comment `/gcbrun`.
-  Possible values are `COMMENTS_DISABLED`, `COMMENTS_ENABLED`, and `COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY`.
+  Possible values are: `COMMENTS_DISABLED`, `COMMENTS_ENABLED`, `COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY`.
 
 <a name="nested_push"></a>The `push` block supports:
 
@@ -718,8 +959,13 @@ The following arguments are supported:
 <a name="nested_source_to_build"></a>The `source_to_build` block supports:
 
 * `uri` -
-  (Required)
-  The URI of the repo (required).
+  (Optional)
+  The URI of the repo.
+
+* `repository` -
+  (Optional)
+  The qualified resource name of the Repo API repository.
+  Either uri or repository can be specified and is required.
 
 * `ref` -
   (Required)
@@ -729,12 +975,17 @@ The following arguments are supported:
   (Required)
   The type of the repo, since it may not be explicit from the repo field (e.g from a URL).
   Values can be UNKNOWN, CLOUD_SOURCE_REPOSITORIES, GITHUB, BITBUCKET_SERVER
-  Possible values are `UNKNOWN`, `CLOUD_SOURCE_REPOSITORIES`, `GITHUB`, and `BITBUCKET_SERVER`.
+  Possible values are: `UNKNOWN`, `CLOUD_SOURCE_REPOSITORIES`, `GITHUB`, `BITBUCKET_SERVER`.
 
 * `github_enterprise_config` -
   (Optional)
   The full resource name of the github enterprise config.
   Format: projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}. projects/{project}/githubEnterpriseConfigs/{id}.
+
+* `bitbucket_server_config` -
+  (Optional)
+  The full resource name of the bitbucket server config.
+  Format: projects/{project}/locations/{location}/bitbucketServerConfigs/{id}.
 
 <a name="nested_trigger_template"></a>The `trigger_template` block supports:
 
@@ -809,7 +1060,7 @@ The following arguments are supported:
 * `comment_control` -
   (Optional)
   Whether to block builds on a "/gcbrun" comment from a repository owner or collaborator.
-  Possible values are `COMMENTS_DISABLED`, `COMMENTS_ENABLED`, and `COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY`.
+  Possible values are: `COMMENTS_DISABLED`, `COMMENTS_ENABLED`, `COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY`.
 
 * `invert_regex` -
   (Optional)
@@ -865,7 +1116,7 @@ The following arguments are supported:
 * `comment_control` -
   (Optional)
   Configure builds to run whether a repository owner or collaborator need to comment /gcbrun.
-  Possible values are `COMMENTS_DISABLED`, `COMMENTS_ENABLED`, and `COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY`.
+  Possible values are: `COMMENTS_DISABLED`, `COMMENTS_ENABLED`, `COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY`.
 
 * `invert_regex` -
   (Optional)
@@ -919,7 +1170,7 @@ The following arguments are supported:
 
 * `approval_required` -
   (Optional)
-  Whether or not approval is needed. If this is set on a build, it will become pending when run, 
+  Whether or not approval is needed. If this is set on a build, it will become pending when run,
   and will need to be explicitly approved to start.
 
 <a name="nested_build"></a>The `build` block supports:
@@ -947,14 +1198,14 @@ The following arguments are supported:
 
 * `queue_ttl` -
   (Optional)
-  TTL in queue for this build. If provided and the build is enqueued longer than this value, 
+  TTL in queue for this build. If provided and the build is enqueued longer than this value,
   the build will expire and the build status will be EXPIRED.
   The TTL starts ticking from createTime.
   A duration in seconds with up to nine fractional digits, terminated by 's'. Example: "3.5s".
 
 * `logs_bucket` -
   (Optional)
-  Google Cloud Storage bucket where logs should be written. 
+  Google Cloud Storage bucket where logs should be written.
   Logs file names will be of the format ${logsBucket}/log-${build_id}.txt.
 
 * `timeout` -
@@ -1017,14 +1268,14 @@ The following arguments are supported:
 
 * `generation` -
   (Optional)
-  Google Cloud Storage generation for the object. 
+  Google Cloud Storage generation for the object.
   If the generation is omitted, the latest generation will be used
 
 <a name="nested_repo_source"></a>The `repo_source` block supports:
 
 * `project_id` -
   (Optional)
-  ID of the project that owns the Cloud Source Repository. 
+  ID of the project that owns the Cloud Source Repository.
   If omitted, the project ID requesting the build is assumed.
 
 * `repo_name` -
@@ -1034,7 +1285,7 @@ The following arguments are supported:
 * `dir` -
   (Optional)
   Directory, relative to the source root, in which to run the build.
-  This must be a relative path. If a step's dir is specified and is an absolute path, 
+  This must be a relative path. If a step's dir is specified and is an absolute path,
   this value is ignored for that step's execution.
 
 * `invert_regex` -
@@ -1048,13 +1299,13 @@ The following arguments are supported:
 * `branch_name` -
   (Optional)
   Regex matching branches to build. Exactly one a of branch name, tag, or commit SHA must be provided.
-  The syntax of the regular expressions accepted is the syntax accepted by RE2 and 
+  The syntax of the regular expressions accepted is the syntax accepted by RE2 and
   described at https://github.com/google/re2/wiki/Syntax
 
 * `tag_name` -
   (Optional)
   Regex matching tags to build. Exactly one a of branch name, tag, or commit SHA must be provided.
-  The syntax of the regular expressions accepted is the syntax accepted by RE2 and 
+  The syntax of the regular expressions accepted is the syntax accepted by RE2 and
   described at https://github.com/google/re2/wiki/Syntax
 
 * `commit_sha` -
@@ -1070,8 +1321,8 @@ The following arguments are supported:
 * `secret_env` -
   (Optional)
   Map of environment variable name to its encrypted value.
-  Secret environment variables must be unique across all of a build's secrets, 
-  and must be used by at least one build step. Values can be at most 64 KB in size. 
+  Secret environment variables must be unique across all of a build's secrets,
+  and must be used by at least one build step. Values can be at most 64 KB in size.
   There can be at most 100 secret values across all of a build's secrets.
 
 <a name="nested_available_secrets"></a>The `available_secrets` block supports:
@@ -1103,7 +1354,7 @@ The following arguments are supported:
   run directly. If not, the host will attempt to pull the image first, using
   the builder service account's credentials if necessary.
   The Docker daemon's cache will already have the latest versions of all of
-  the officially supported build steps (see https://github.com/GoogleCloudPlatform/cloud-builders 
+  the officially supported build steps (see https://github.com/GoogleCloudPlatform/cloud-builders
   for images and examples).
   The Docker daemon will also have cached many of the layers for some popular
   images, like "ubuntu", "debian", but they will be refreshed at the time
@@ -1189,8 +1440,22 @@ The following arguments are supported:
 
 * `script` -
   (Optional)
-  A shell script to be executed in the step. 
+  A shell script to be executed in the step.
   When script is provided, the user cannot specify the entrypoint or args.
+
+* `allow_failure` -
+  (Optional)
+  Allow this build step to fail without failing the entire build.
+  If false, the entire build will fail if this step fails. Otherwise, the
+  build will succeed, but this step will still have a failure status.
+  Error information will be reported in the `failureDetail` field.
+  `allowExitCodes` takes precedence over this field.
+
+* `allow_exit_codes` -
+  (Optional)
+  Allow this build step to fail without failing the entire build if and
+  only if the exit code is one of the specified codes.
+  If `allowFailure` is also specified, this field will take precedence.
 
 
 <a name="nested_volumes"></a>The `volumes` block supports:
@@ -1263,17 +1528,16 @@ The following arguments are supported:
 * `source_provenance_hash` -
   (Optional)
   Requested hash for SourceProvenance.
-  Each value may be one of `NONE`, `SHA256`, and `MD5`.
+  Each value may be one of: `NONE`, `SHA256`, `MD5`.
 
 * `requested_verify_option` -
   (Optional)
   Requested verifiability options.
-  Possible values are `NOT_VERIFIED` and `VERIFIED`.
+  Possible values are: `NOT_VERIFIED`, `VERIFIED`.
 
 * `machine_type` -
   (Optional)
   Compute Engine machine type on which to run the build.
-  Possible values are `UNSPECIFIED`, `N1_HIGHCPU_8`, `N1_HIGHCPU_32`, `E2_HIGHCPU_8`, and `E2_HIGHCPU_32`.
 
 * `disk_size_gb` -
   (Optional)
@@ -1288,7 +1552,7 @@ The following arguments are supported:
   Option to specify behavior when there is an error in the substitution checks.
   NOTE this is always set to ALLOW_LOOSE for triggered builds and cannot be overridden
   in the build configuration file.
-  Possible values are `MUST_MATCH` and `ALLOW_LOOSE`.
+  Possible values are: `MUST_MATCH`, `ALLOW_LOOSE`.
 
 * `dynamic_substitutions` -
   (Optional)
@@ -1298,7 +1562,7 @@ The following arguments are supported:
 * `log_streaming_option` -
   (Optional)
   Option to define build log streaming behavior to Google Cloud Storage.
-  Possible values are `STREAM_DEFAULT`, `STREAM_ON`, and `STREAM_OFF`.
+  Possible values are: `STREAM_DEFAULT`, `STREAM_ON`, `STREAM_OFF`.
 
 * `worker_pool` -
   (Optional)
@@ -1308,7 +1572,7 @@ The following arguments are supported:
 * `logging` -
   (Optional)
   Option to specify the logging mode, which determines if and where build logs are stored.
-  Possible values are `LOGGING_UNSPECIFIED`, `LEGACY`, `GCS_ONLY`, `STACKDRIVER_ONLY`, `CLOUD_LOGGING_ONLY`, and `NONE`.
+  Possible values are: `LOGGING_UNSPECIFIED`, `LEGACY`, `GCS_ONLY`, `STACKDRIVER_ONLY`, `CLOUD_LOGGING_ONLY`, `NONE`.
 
 * `env` -
   (Optional)

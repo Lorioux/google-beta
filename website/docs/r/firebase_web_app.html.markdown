@@ -37,8 +37,8 @@ To get more information about WebApp, see:
 resource "google_project" "default" {
 	provider = google-beta
 
-	project_id = "tf-test%{random_suffix}"
-	name       = "tf-test%{random_suffix}"
+	project_id = "my-project"
+	name       = "my-project"
 	org_id     = "123456789"
 
 	labels = {
@@ -87,6 +87,31 @@ resource "google_storage_bucket_object" "default" {
     })
 }
 ```
+## Example Usage - Firebase Web App Custom Api Key
+
+
+```hcl
+resource "google_firebase_web_app" "default" {
+	provider = google-beta
+	project = "my-project-name"
+	display_name = "Display Name"
+	api_key_id = google_apikeys_key.web.uid
+	deletion_policy = "DELETE"
+}
+
+resource "google_apikeys_key" "web" {
+	provider = google-beta
+	project  = "my-project-name"
+	name         = "api-key"
+	display_name = "Display Name"
+
+	restrictions {
+	    browser_key_restrictions {
+	        allowed_referrers = ["*"]
+	    }
+	}
+}
+```
 
 ## Argument Reference
 
@@ -101,6 +126,12 @@ The following arguments are supported:
 - - -
 
 
+* `api_key_id` -
+  (Optional)
+  The globally unique, Google-assigned identifier (UID) for the Firebase API key associated with the WebApp.
+  If apiKeyId is not set during creation, then Firebase automatically associates an apiKeyId with the WebApp.
+  This auto-associated key may be an existing valid key or, if no valid key exists, a new one will be provisioned.
+
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
 
@@ -113,7 +144,7 @@ serving traffic. Set to `DELETE` to delete the WebApp. Default to `ABANDON`
 
 In addition to the arguments listed above, the following computed attributes are exported:
 
-* `id` - an identifier for the resource with format `{{name}}`
+* `id` - an identifier for the resource with format `projects/{{project}}/webApps/{{app_id}}`
 
 * `name` -
   The fully qualified resource name of the App, for example:
@@ -142,9 +173,11 @@ This resource provides the following
 WebApp can be imported using any of these accepted formats:
 
 ```
-$ terraform import google_firebase_web_app.default {{project}}/{{name}}
-$ terraform import google_firebase_web_app.default {{project}} {{name}}
-$ terraform import google_firebase_web_app.default {{name}}
+$ terraform import google_firebase_web_app.default {{project}} projects/{{project}}/webApps/{{app_id}}
+$ terraform import google_firebase_web_app.default projects/{{project}}/webApps/{{app_id}}
+$ terraform import google_firebase_web_app.default {{project}}/{{project}}/{{app_id}}
+$ terraform import google_firebase_web_app.default webApps/{{app_id}}
+$ terraform import google_firebase_web_app.default {{app_id}}
 ```
 
 ## User Project Overrides

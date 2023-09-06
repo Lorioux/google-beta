@@ -29,7 +29,7 @@ To get more information about Service, see:
     * [Official Documentation](https://cloud.google.com/run/docs/)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -50,7 +50,7 @@ resource "google_cloud_run_v2_service" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_sql&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_sql&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -139,7 +139,7 @@ resource "google_sql_database_instance" "instance" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_vpcaccess&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_vpcaccess&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -184,7 +184,7 @@ resource "google_compute_network" "custom_test" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_probes&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_probes&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -218,7 +218,7 @@ resource "google_cloud_run_v2_service" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_secret&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_secret&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -240,7 +240,6 @@ resource "google_cloud_run_v2_service" "default" {
         items {
           version = "1"
           path = "my-secret"
-          mode = 256 # 0400
         }
       }
     }
@@ -277,6 +276,54 @@ resource "google_secret_manager_secret_iam_member" "secret-access" {
   depends_on = [google_secret_manager_secret.secret]
 }
 ```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudrunv2_service_multicontainer&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Cloudrunv2 Service Multicontainer
+
+
+```hcl
+resource "google_cloud_run_v2_service" "default" {
+  provider = google-beta
+  name     = "cloudrun-service"
+  location = "us-central1"
+  launch_stage = "BETA"
+  ingress = "INGRESS_TRAFFIC_ALL"
+  template {
+    containers {
+      name = "hello-1"
+      ports {
+        container_port = 8080
+      }
+      image = "us-docker.pkg.dev/cloudrun/container/hello"
+      depends_on = ["hello-2"]
+      volume_mounts {
+        name = "empty-dir-volume"
+	mount_path = "/mnt"
+      }
+    }
+    containers {
+      name = "hello-2"
+      image = "us-docker.pkg.dev/cloudrun/container/hello"
+    }
+    volumes {
+      name = "empty-dir-volume"
+      empty_dir {
+        medium = "MEMORY"
+        size_limit = "256Mi"
+      }
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      launch_stage,
+    ]
+  }
+}
+```
 
 ## Argument Reference
 
@@ -301,11 +348,17 @@ The following arguments are supported:
 
 * `labels` -
   (Optional)
-  KRM-style labels for the resource.
+  Unstructured key value map that can be used to organize and categorize objects. User-provided labels are shared with Google's billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc.
+  For more information, visit https://cloud.google.com/resource-manager/docs/creating-managing-labels or https://cloud.google.com/run/docs/configuring/labels.
+  Cloud Run API v2 does not support labels with `run.googleapis.com`, `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev` namespaces, and they will be rejected.
+  All system labels in v1 now have a corresponding field in v2 RevisionTemplate.
 
 * `annotations` -
   (Optional)
-  KRM-style annotations for the resource.
+  Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects.
+  Cloud Run API v2 does not support annotations with `run.googleapis.com`, `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev` namespaces, and they will be rejected.
+  All system annotations in v1 now have a corresponding field in v2 RevisionTemplate.
+  This field follows Kubernetes annotations' namespacing, limits, and rules.
 
 * `scaling` -
   (Optional)
@@ -328,7 +381,7 @@ The following arguments are supported:
 
 * `containers` -
   (Optional)
-  Holds the single container that defines the unit of execution for this task.
+  Holds the containers that define the unit of execution for this Service.
   Structure is [documented below](#nested_containers).
 
 * `volumes` -
@@ -339,7 +392,7 @@ The following arguments are supported:
 * `execution_environment` -
   (Optional)
   The sandbox environment to host this Revision.
-  Possible values are `EXECUTION_ENVIRONMENT_GEN1` and `EXECUTION_ENVIRONMENT_GEN2`.
+  Possible values are: `EXECUTION_ENVIRONMENT_GEN1`, `EXECUTION_ENVIRONMENT_GEN2`.
 
 * `encryption_key` -
   (Optional)
@@ -348,6 +401,10 @@ The following arguments are supported:
 * `max_instance_request_concurrency` -
   (Optional)
   Sets the maximum number of requests that each serving instance can receive.
+
+* `session_affinity` -
+  (Optional)
+  Enables session affinity. For more information, go to https://cloud.google.com/run/docs/configuring/session-affinity
 
 
 <a name="nested_scaling"></a>The `scaling` block supports:
@@ -369,7 +426,7 @@ The following arguments are supported:
 * `egress` -
   (Optional)
   Traffic VPC egress settings.
-  Possible values are `ALL_TRAFFIC` and `PRIVATE_RANGES_ONLY`.
+  Possible values are: `ALL_TRAFFIC`, `PRIVATE_RANGES_ONLY`.
 
 <a name="nested_containers"></a>The `containers` block supports:
 
@@ -424,6 +481,10 @@ The following arguments are supported:
   Startup probe of application within the container. All other probes are disabled if a startup probe is provided, until it succeeds. Container will not be added to service endpoints if the probe fails. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
   Structure is [documented below](#nested_startup_probe).
 
+* `depends_on` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Containers which should be started before this container. If specified the container will wait to start until all containers with the listed names are healthy.
+
 
 <a name="nested_env"></a>The `env` block supports:
 
@@ -468,6 +529,10 @@ The following arguments are supported:
 * `cpu_idle` -
   (Optional)
   Determines whether CPU should be throttled or not outside of requests.
+
+* `startup_cpu_boost` -
+  (Optional)
+  Determines whether CPU should be boosted on startup of a new container instance above the requested CPU threshold, this can help reduce cold-start latency.
 
 <a name="nested_ports"></a>The `ports` block supports:
 
@@ -517,6 +582,8 @@ The following arguments are supported:
   TCPSocket specifies an action involving a TCP port. This field is not supported in liveness probe currently.
   Structure is [documented below](#nested_tcp_socket).
 
+  ~> **Warning:** `tcp_socket` is deprecated and will be removed in a future major release. This field is not supported by the Cloud Run API.
+
 * `grpc` -
   (Optional)
   GRPC specifies an action involving a GRPC port.
@@ -528,6 +595,11 @@ The following arguments are supported:
 * `path` -
   (Optional)
   Path to access on the HTTP server. Defaults to '/'.
+
+* `port` -
+  (Optional)
+  Port number to access on the container. Number must be in the range 1 to 65535.
+  If not specified, defaults to the same value as container.ports[0].containerPort.
 
 * `http_headers` -
   (Optional)
@@ -555,7 +627,8 @@ The following arguments are supported:
 
 * `port` -
   (Optional)
-  Port number to access on the container. Number must be in the range 1 to 65535. If not specified, defaults to the same value as container.ports[0].containerPort.
+  Port number to access on the container. Number must be in the range 1 to 65535.
+  If not specified, defaults to the same value as container.ports[0].containerPort.
 
 * `service` -
   (Optional)
@@ -603,6 +676,11 @@ The following arguments are supported:
   (Optional)
   Path to access on the HTTP server. Defaults to '/'.
 
+* `port` -
+  (Optional)
+  Port number to access on the container. Must be in the range 1 to 65535.
+  If not specified, defaults to the same value as container.ports[0].containerPort.
+
 * `http_headers` -
   (Optional)
   Custom headers to set in the request. HTTP allows repeated headers.
@@ -623,13 +701,15 @@ The following arguments are supported:
 
 * `port` -
   (Optional)
-  Port number to access on the container. Must be in the range 1 to 65535. If not specified, defaults to 8080.
+  Port number to access on the container. Must be in the range 1 to 65535.
+  If not specified, defaults to the same value as container.ports[0].containerPort.
 
 <a name="nested_grpc"></a>The `grpc` block supports:
 
 * `port` -
   (Optional)
-  Port number to access on the container. Number must be in the range 1 to 65535. If not specified, defaults to the same value as container.ports[0].containerPort.
+  Port number to access on the container. Number must be in the range 1 to 65535.
+  If not specified, defaults to the same value as container.ports[0].containerPort.
 
 * `service` -
   (Optional)
@@ -652,6 +732,11 @@ The following arguments are supported:
   (Optional)
   For Cloud SQL volumes, contains the specific instances that should be mounted. Visit https://cloud.google.com/sql/docs/mysql/connect-run for more information on how to connect Cloud SQL and Cloud Run.
   Structure is [documented below](#nested_cloud_sql_instance).
+
+* `empty_dir` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  Ephemeral storage used as a shared volume.
+  Structure is [documented below](#nested_empty_dir).
 
 
 <a name="nested_secret"></a>The `secret` block supports:
@@ -681,7 +766,7 @@ The following arguments are supported:
   The Cloud Secret Manager secret version. Can be 'latest' for the latest value or an integer for a specific version
 
 * `mode` -
-  (Required)
+  (Optional)
   Integer octal mode bits to use on this file, must be a value between 01 and 0777 (octal). If 0 or not set, the Volume's default mode will be used.
 
 <a name="nested_cloud_sql_instance"></a>The `cloud_sql_instance` block supports:
@@ -689,6 +774,18 @@ The following arguments are supported:
 * `instances` -
   (Optional)
   The Cloud SQL instance connection names, as can be found in https://console.cloud.google.com/sql/instances. Visit https://cloud.google.com/sql/docs/mysql/connect-run for more information on how to connect Cloud SQL and Cloud Run. Format: {project}:{location}:{instance}
+
+<a name="nested_empty_dir"></a>The `empty_dir` block supports:
+
+* `medium` -
+  (Optional)
+  The different types of medium supported for EmptyDir.
+  Default value is `MEMORY`.
+  Possible values are: `MEMORY`.
+
+* `size_limit` -
+  (Optional)
+  Limit on the storage usable by this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. This field's values are of the 'Quantity' k8s type: https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/. The default is nil which means that the limit is undefined. More info: https://kubernetes.io/docs/concepts/storage/volumes/#emptydir.
 
 - - -
 
@@ -699,11 +796,17 @@ The following arguments are supported:
 
 * `labels` -
   (Optional)
-  Map of string keys and values that can be used to organize and categorize objects. User-provided labels are shared with Google's billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https://cloud.google.com/resource-manager/docs/creating-managing-labels or https://cloud.google.com/run/docs/configuring/labels Cloud Run will populate some labels with 'run.googleapis.com' or 'serving.knative.dev' namespaces. Those labels are read-only, and user changes will not be preserved.
+  Unstructured key value map that can be used to organize and categorize objects. User-provided labels are shared with Google's billing system, so they can be used to filter, or break down billing charges by team, component,
+  environment, state, etc. For more information, visit https://cloud.google.com/resource-manager/docs/creating-managing-labels or https://cloud.google.com/run/docs/configuring/labels.
+  Cloud Run API v2 does not support labels with  `run.googleapis.com`, `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev` namespaces, and they will be rejected.
+  All system labels in v1 now have a corresponding field in v2 Service.
 
 * `annotations` -
   (Optional)
-  Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run will populate some annotations using 'run.googleapis.com' or 'serving.knative.dev' namespaces. This field follows Kubernetes annotations' namespacing, limits, and rules. More info: https://kubernetes.io/docs/user-guide/annotations
+  Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects.
+  Cloud Run API v2 does not support annotations with `run.googleapis.com`, `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev` namespaces, and they will be rejected in new resources.
+  All system annotations in v1 now have a corresponding field in v2 Service.
+  This field follows Kubernetes annotations' namespacing, limits, and rules.
 
 * `client` -
   (Optional)
@@ -716,17 +819,24 @@ The following arguments are supported:
 * `ingress` -
   (Optional)
   Provides the ingress settings for this Service. On output, returns the currently observed ingress settings, or INGRESS_TRAFFIC_UNSPECIFIED if no revision is active.
-  Possible values are `INGRESS_TRAFFIC_ALL`, `INGRESS_TRAFFIC_INTERNAL_ONLY`, and `INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER`.
+  Possible values are: `INGRESS_TRAFFIC_ALL`, `INGRESS_TRAFFIC_INTERNAL_ONLY`, `INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER`.
 
 * `launch_stage` -
   (Optional)
-  The launch stage as defined by Google Cloud Platform Launch Stages. Cloud Run supports ALPHA, BETA, and GA. If no value is specified, GA is assumed.
-  Possible values are `UNIMPLEMENTED`, `PRELAUNCH`, `EARLY_ACCESS`, `ALPHA`, `BETA`, `GA`, and `DEPRECATED`.
+  The launch stage as defined by [Google Cloud Platform Launch Stages](https://cloud.google.com/products#product-launch-stages). Cloud Run supports ALPHA, BETA, and GA.
+  If no value is specified, GA is assumed. Set the launch stage to a preview stage on input to allow use of preview features in that stage. On read (or output), describes whether the resource uses preview features.
+  For example, if ALPHA is provided as input, but only BETA and GA-level features are used, this field will be BETA on output.
+  Possible values are: `UNIMPLEMENTED`, `PRELAUNCH`, `EARLY_ACCESS`, `ALPHA`, `BETA`, `GA`, `DEPRECATED`.
 
 * `binary_authorization` -
   (Optional)
   Settings for the Binary Authorization feature.
   Structure is [documented below](#nested_binary_authorization).
+
+* `custom_audiences` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  One or more custom audiences that you want this service to support. Specify each custom audience as the full URL in a string. The custom audiences are encoded in the token and used to authenticate requests.
+  For more information, see https://cloud.google.com/run/docs/configuring/custom-audiences.
 
 * `traffic` -
   (Optional)
@@ -756,7 +866,7 @@ The following arguments are supported:
 * `type` -
   (Optional)
   The allocation type for this traffic target.
-  Possible values are `TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST` and `TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION`.
+  Possible values are: `TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST`, `TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION`.
 
 * `revision` -
   (Optional)
@@ -781,6 +891,24 @@ In addition to the arguments listed above, the following computed attributes are
 
 * `generation` -
   A number that monotonically increases every time the user modifies the desired state. Please note that unlike v1, this is an int64 value. As with most Google APIs, its JSON representation will be a string instead of an integer.
+
+* `create_time` -
+  The creation time.
+
+* `update_time` -
+  The last-modified time.
+
+* `delete_time` -
+  The deletion time.
+
+* `expire_time` -
+  For a deleted resource, the time after which it will be permamently deleted.
+
+* `creator` -
+  Email address of the authenticated creator.
+
+* `last_modifier` -
+  Email address of the last authenticated modifier.
 
 * `observed_generation` -
   The generation of this Service currently serving traffic. See comments in reconciling for additional information on reconciliation process in Cloud Run. Please note that unlike v1, this is an int64 value. As with most Google APIs, its JSON representation will be a string instead of an integer.

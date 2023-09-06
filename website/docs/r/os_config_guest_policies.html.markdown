@@ -33,7 +33,7 @@ To get more information about GuestPolicies, see:
     * [Official Documentation](https://cloud.google.com/compute/docs/os-config-management)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_guest_policies_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_guest_policies_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -85,7 +85,7 @@ resource "google_os_config_guest_policies" "guest_policies" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_guest_policies_packages&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_guest_policies_packages&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -149,7 +149,7 @@ resource "google_os_config_guest_policies" "guest_policies" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_guest_policies_recipes&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=os_config_guest_policies_recipes&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -311,7 +311,7 @@ The following arguments are supported:
 * `desired_state` -
   (Optional)
   The desiredState the agent should maintain for this package. The default is to ensure the package is installed.
-  Possible values are `INSTALLED`, `UPDATED`, and `REMOVED`.
+  Possible values are: `INSTALLED`, `UPDATED`, `REMOVED`.
 
 * `manager` -
   (Optional)
@@ -321,7 +321,7 @@ The following arguments are supported:
   This is useful when creating a policy that applies to different types of systems.
   The default behavior is ANY.
   Default value is `ANY`.
-  Possible values are `ANY`, `APT`, `YUM`, `ZYPPER`, and `GOO`.
+  Possible values are: `ANY`, `APT`, `YUM`, `ZYPPER`, `GOO`.
 
 <a name="nested_package_repositories"></a>The `package_repositories` block supports:
 
@@ -352,7 +352,7 @@ The following arguments are supported:
   (Optional)
   Type of archive files in this repository. The default behavior is DEB.
   Default value is `DEB`.
-  Possible values are `DEB` and `DEB_SRC`.
+  Possible values are: `DEB`, `DEB_SRC`.
 
 * `uri` -
   (Required)
@@ -457,7 +457,7 @@ The following arguments are supported:
   if a higher version of the recipe is assigned to this instance.
   REMOVE: Remove is unsupported for software recipes and attempts to create or update a recipe to the REMOVE state is rejected.
   Default value is `INSTALLED`.
-  Possible values are `INSTALLED`, `UPDATED`, and `REMOVED`.
+  Possible values are: `INSTALLED`, `UPDATED`, `REMOVED`.
 
 
 <a name="nested_artifacts"></a>The `artifacts` block supports:
@@ -588,7 +588,7 @@ The following arguments are supported:
 * `type` -
   (Required)
   The type of the archive to extract.
-  Possible values are `TAR`, `TAR_GZIP`, `TAR_BZIP`, `TAR_LZMA`, `TAR_XZ`, and `ZIP`.
+  Possible values are: `TAR`, `TAR_GZIP`, `TAR_BZIP`, `TAR_LZMA`, `TAR_XZ`, `ZIP`.
 
 <a name="nested_msi_installation"></a>The `msi_installation` block supports:
 
@@ -648,7 +648,7 @@ The following arguments are supported:
   (Optional)
   The script interpreter to use to run the script. If no interpreter is specified the script is executed directly,
   which likely only succeed for scripts with shebang lines.
-  Possible values are `SHELL` and `POWERSHELL`.
+  Possible values are: `SHELL`, `POWERSHELL`.
 
 <a name="nested_update_steps"></a>The `update_steps` block supports:
 
@@ -725,7 +725,7 @@ The following arguments are supported:
 * `type` -
   (Required)
   The type of the archive to extract.
-  Possible values are `TAR`, `TAR_GZIP`, `TAR_BZIP`, `TAR_LZMA`, `TAR_XZ`, and `ZIP`.
+  Possible values are: `TAR`, `TAR_GZIP`, `TAR_BZIP`, `TAR_LZMA`, `TAR_XZ`, `ZIP`.
 
 <a name="nested_msi_installation"></a>The `msi_installation` block supports:
 
@@ -785,7 +785,7 @@ The following arguments are supported:
   (Optional)
   The script interpreter to use to run the script. If no interpreter is specified the script is executed directly,
   which likely only succeed for scripts with shebang lines.
-  Possible values are `SHELL` and `POWERSHELL`.
+  Possible values are: `SHELL`, `POWERSHELL`.
 
 ## Attributes Reference
 

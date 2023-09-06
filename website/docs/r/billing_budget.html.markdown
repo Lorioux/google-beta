@@ -107,6 +107,7 @@ resource "google_billing_budget" "budget" {
     credit_types_treatment = "INCLUDE_SPECIFIED_CREDITS"
     services               = ["services/24E6-581D-38E5"] # Bigquery
     credit_types           = ["PROMOTION", "FREE_TIER"]
+    resource_ancestors     = ["organizations/123456789"]
   }
 
   amount {
@@ -317,12 +318,19 @@ The following arguments are supported:
   all usage for the billing account, regardless of which project
   the usage occurred on.
 
+* `resource_ancestors` -
+  (Optional)
+  A set of folder and organization names of the form folders/{folderId} or organizations/{organizationId},
+  specifying that usage from only this set of folders and organizations should be included in the budget.
+  If omitted, the budget includes all usage that the billing account pays for. If the folder or organization
+  contains projects that are paid for by a different Cloud Billing account, the budget doesn't apply to those projects.
+
 * `credit_types_treatment` -
   (Optional)
   Specifies how credits should be treated when determining spend
   for threshold calculations.
   Default value is `INCLUDE_ALL_CREDITS`.
-  Possible values are `INCLUDE_ALL_CREDITS`, `EXCLUDE_ALL_CREDITS`, and `INCLUDE_SPECIFIED_CREDITS`.
+  Possible values are: `INCLUDE_ALL_CREDITS`, `EXCLUDE_ALL_CREDITS`, `INCLUDE_SPECIFIED_CREDITS`.
 
 * `services` -
   (Optional)
@@ -361,7 +369,7 @@ The following arguments are supported:
   canonical start. Grammatically, "the start of the current CalendarPeriod".
   All calendar times begin at 12 AM US and Canadian Pacific Time (UTC-8).
   Exactly one of `calendar_period`, `custom_period` must be provided.
-  Possible values are `MONTH`, `QUARTER`, `YEAR`, and `CALENDAR_PERIOD_UNSPECIFIED`.
+  Possible values are: `MONTH`, `QUARTER`, `YEAR`, `CALENDAR_PERIOD_UNSPECIFIED`.
 
 * `custom_period` -
   (Optional)
@@ -380,7 +388,7 @@ The following arguments are supported:
 
 * `end_date` -
   (Optional)
-  Optional. The end date of the time period. Budgets with elapsed end date won't be processed. 
+  Optional. The end date of the time period. Budgets with elapsed end date won't be processed.
   If unset, specifies to track all usage incurred since the startDate.
   Structure is [documented below](#nested_end_date).
 
@@ -425,7 +433,7 @@ The following arguments are supported:
   The type of basis used to determine if spend has passed
   the threshold.
   Default value is `CURRENT_SPEND`.
-  Possible values are `CURRENT_SPEND` and `FORECASTED_SPEND`.
+  Possible values are: `CURRENT_SPEND`, `FORECASTED_SPEND`.
 
 <a name="nested_all_updates_rule"></a>The `all_updates_rule` block supports:
 

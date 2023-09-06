@@ -29,7 +29,7 @@ To get more information about Instance, see:
     * [AlloyDB](https://cloud.google.com/alloydb/docs/)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=alloydb_instance_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=alloydb_instance_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -52,7 +52,7 @@ resource "google_alloydb_instance" "default" {
 resource "google_alloydb_cluster" "default" {
   cluster_id = "alloydb-cluster"
   location   = "us-central1"
-  network    = "projects/${data.google_project.project.number}/global/networks/${google_compute_network.default.name}"
+  network    = data.google_compute_network.default.id
 
   initial_user {
     password = "alloydb-cluster"
@@ -61,8 +61,8 @@ resource "google_alloydb_cluster" "default" {
 
 data "google_project" "project" {}
 
-resource "google_compute_network" "default" {
-  name = "alloydb-cluster"
+data "google_compute_network" "default" {
+  name = "alloydb-network"
 }
 
 resource "google_compute_global_address" "private_ip_alloc" {
@@ -70,11 +70,11 @@ resource "google_compute_global_address" "private_ip_alloc" {
   address_type  = "INTERNAL"
   purpose       = "VPC_PEERING"
   prefix_length = 16
-  network       = google_compute_network.default.id
+  network       = data.google_compute_network.default.id
 }
 
 resource "google_service_networking_connection" "vpc_connection" {
-  network                 = google_compute_network.default.id
+  network                 = data.google_compute_network.default.id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.private_ip_alloc.name]
 }
@@ -87,8 +87,8 @@ The following arguments are supported:
 
 * `instance_type` -
   (Required)
-  The type of the instance.
-  Possible values are `PRIMARY` and `READ_POOL`.
+  The type of the instance. If the instance type is READ_POOL, provide the associated PRIMARY instance in the `depends_on` meta-data attribute.
+  Possible values are: `PRIMARY`, `READ_POOL`.
 
 * `cluster` -
   (Required)
@@ -125,12 +125,17 @@ The following arguments are supported:
 
 * `availability_type` -
   (Optional)
-  Availability type of an Instance. Defaults to REGIONAL for both primary and read instances. Note that primary and read instances can have different availability types.
-  Possible values are `AVAILABILITY_TYPE_UNSPECIFIED`, `ZONAL`, and `REGIONAL`.
+  'Availability type of an Instance. Defaults to REGIONAL for both primary and read instances.
+  Note that primary and read instances can have different availability types.
+  Only READ_POOL instance supports ZONAL type. Users can't specify the zone for READ_POOL instance.
+  Zone is automatically chosen from the list of zones in the region specified.
+  Read pool of size 1 can only have zonal availability. Read pools with node count of 2 or more
+  can have regional availability (nodes are present in 2 or more zones in a region).'
+  Possible values are: `AVAILABILITY_TYPE_UNSPECIFIED`, `ZONAL`, `REGIONAL`.
 
 * `read_pool_config` -
   (Optional)
-  Read pool specific config.
+  Read pool specific config. If the instance type is READ_POOL, this configuration must be provided.
   Structure is [documented below](#nested_read_pool_config).
 
 * `machine_config` -
@@ -184,9 +189,9 @@ In addition to the arguments listed above, the following computed attributes are
 This resource provides the following
 [Timeouts](https://developer.hashicorp.com/terraform/plugin/sdkv2/resources/retries-and-customizable-timeouts) configuration options:
 
-- `create` - Default is 20 minutes.
-- `update` - Default is 20 minutes.
-- `delete` - Default is 20 minutes.
+- `create` - Default is 40 minutes.
+- `update` - Default is 40 minutes.
+- `delete` - Default is 40 minutes.
 
 ## Import
 
@@ -194,6 +199,7 @@ This resource provides the following
 Instance can be imported using any of these accepted formats:
 
 ```
-$ terraform import google_alloydb_instance.default {{cluster}}/instances/{{instance_id}}
-$ terraform import google_alloydb_instance.default {{cluster}}/{{instance_id}}
+$ terraform import google_alloydb_instance.default projects/{{project}}/locations/{{location}}/clusters/{{cluster}}/instances/{{instance_id}}
+$ terraform import google_alloydb_instance.default {{project}}/{{location}}/{{cluster}}/{{instance_id}}
+$ terraform import google_alloydb_instance.default {{location}}/{{cluster}}/{{instance_id}}
 ```

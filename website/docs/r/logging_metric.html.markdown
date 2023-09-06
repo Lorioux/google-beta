@@ -32,7 +32,7 @@ To get more information about Metric, see:
     * [Official Documentation](https://cloud.google.com/logging/docs/apis)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=logging_metric_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=logging_metric_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -74,7 +74,7 @@ resource "google_logging_metric" "logging_metric" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=logging_metric_counter_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=logging_metric_counter_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -92,7 +92,7 @@ resource "google_logging_metric" "logging_metric" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=logging_metric_counter_labels&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=logging_metric_counter_labels&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -133,6 +133,25 @@ resource "google_logging_metric" "logging_metric" {
   bucket_name = google_logging_project_bucket_config.logging_metric.id
 }
 ```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=logging_metric_disabled&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Logging Metric Disabled
+
+
+```hcl
+resource "google_logging_metric" "logging_metric" {
+  name   = "my-(custom)/metric"
+  filter = "resource.type=gae_app AND severity>=ERROR"
+  metric_descriptor {
+    metric_kind = "DELTA"
+    value_type  = "INT64"
+  }
+  disabled = true
+}
+```
 
 ## Argument Reference
 
@@ -165,6 +184,10 @@ The following arguments are supported:
   (Optional)
   The resource name of the Log Bucket that owns the Log Metric. Only Log Buckets in projects
   are supported. The bucket has to be in the same project as the metric.
+
+* `disabled` -
+  (Optional)
+  If set to True, then this metric is disabled and it does not generate any points.
 
 * `metric_descriptor` -
   (Optional)
@@ -214,14 +237,14 @@ The following arguments are supported:
   Whether the measurement is an integer, a floating-point number, etc.
   Some combinations of metricKind and valueType might not be supported.
   For counter metrics, set this to INT64.
-  Possible values are `BOOL`, `INT64`, `DOUBLE`, `STRING`, `DISTRIBUTION`, and `MONEY`.
+  Possible values are: `BOOL`, `INT64`, `DOUBLE`, `STRING`, `DISTRIBUTION`, `MONEY`.
 
 * `metric_kind` -
   (Required)
   Whether the metric records instantaneous values, changes to a value, etc.
   Some combinations of metricKind and valueType might not be supported.
   For counter metrics, set this to DELTA.
-  Possible values are `DELTA`, `GAUGE`, and `CUMULATIVE`.
+  Possible values are: `DELTA`, `GAUGE`, `CUMULATIVE`.
 
 * `labels` -
   (Optional)
@@ -233,8 +256,8 @@ The following arguments are supported:
 
 * `display_name` -
   (Optional)
-  A concise name for the metric, which can be displayed in user interfaces. Use sentence case 
-  without an ending period, for example "Request count". This field is optional but it is 
+  A concise name for the metric, which can be displayed in user interfaces. Use sentence case
+  without an ending period, for example "Request count". This field is optional but it is
   recommended to be set for any metrics associated with user-visible concepts, such as Quota.
 
 
@@ -252,7 +275,7 @@ The following arguments are supported:
   (Optional)
   The type of data that can be assigned to the label.
   Default value is `STRING`.
-  Possible values are `BOOL`, `INT64`, and `STRING`.
+  Possible values are: `BOOL`, `INT64`, `STRING`.
 
 <a name="nested_bucket_options"></a>The `bucket_options` block supports:
 

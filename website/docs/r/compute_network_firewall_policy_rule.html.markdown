@@ -24,6 +24,16 @@ The Compute NetworkFirewallPolicyRule resource
 
 ## Example Usage - global
 ```hcl
+resource "google_network_security_address_group" "basic_global_networksecurity_address_group" {
+  name        = "policy"
+  parent      = "projects/my-project-name"
+  description = "Sample global networksecurity_address_group"
+  location    = "global"
+  items       = ["208.80.154.224/32"]
+  type        = "IPV4"
+  capacity    = 100
+}
+
 resource "google_compute_network_firewall_policy" "basic_network_firewall_policy" {
   name        = "policy"
   description = "Sample global network firewall policy"
@@ -43,6 +53,9 @@ resource "google_compute_network_firewall_policy_rule" "primary" {
 
   match {
     src_ip_ranges = ["10.100.0.1/32"]
+    src_fqdns = ["google.com"]
+    src_region_codes = ["US"]
+    src_threat_intelligences = ["iplist-known-malicious-ips"]
 
     src_secure_tags {
       name = "tagValues/${google_tags_tag_value.basic_value.name}"
@@ -51,6 +64,8 @@ resource "google_compute_network_firewall_policy_rule" "primary" {
     layer4_configs {
       ip_protocol = "all"
     }
+    
+    src_address_groups = [google_network_security_address_group.basic_global_networksecurity_address_group.id]
   }
 }
 
@@ -82,7 +97,7 @@ The following arguments are supported:
 
 * `action` -
   (Required)
-  The Action to perform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.
+  The Action to perform when the client connection triggers the rule. Valid actions are "allow", "deny" and "goto_next".
   
 * `direction` -
   (Required)
@@ -104,21 +119,53 @@ The following arguments are supported:
 
 The `match` block supports:
     
+* `dest_address_groups` -
+  (Optional)
+  Address groups which should be matched against the traffic destination. Maximum number of destination address groups is 10. Destination address groups is only supported in Egress rules.
+    
+* `dest_fqdns` -
+  (Optional)
+  Domain names that will be used to match against the resolved domain name of destination of traffic. Can only be specified if DIRECTION is egress.
+    
 * `dest_ip_ranges` -
   (Optional)
   CIDR IP address range. Maximum number of destination CIDR IP ranges allowed is 5000.
+    
+* `dest_region_codes` -
+  (Optional)
+  The Unicode country codes whose IP addresses will be used to match against the source of traffic. Can only be specified if DIRECTION is egress.
+    
+* `dest_threat_intelligences` -
+  (Optional)
+  Name of the Google Cloud Threat Intelligence list.
     
 * `layer4_configs` -
   (Required)
   Pairs of IP protocols and ports that the rule should match.
     
+* `src_address_groups` -
+  (Optional)
+  Address groups which should be matched against the traffic source. Maximum number of source address groups is 10. Source address groups is only supported in Ingress rules.
+    
+* `src_fqdns` -
+  (Optional)
+  Domain names that will be used to match against the resolved domain name of source of traffic. Can only be specified if DIRECTION is ingress.
+    
 * `src_ip_ranges` -
   (Optional)
   CIDR IP address range. Maximum number of source CIDR IP ranges allowed is 5000.
     
+* `src_region_codes` -
+  (Optional)
+  The Unicode country codes whose IP addresses will be used to match against the source of traffic. Can only be specified if DIRECTION is ingress.
+    
 * `src_secure_tags` -
   (Optional)
   List of secure tag values, which should be matched at the source of the traffic. For INGRESS rule, if all the <code>srcSecureTag</code> are INEFFECTIVE, and there is no <code>srcIpRange</code>, this rule will be ignored. Maximum number of source tag values allowed is 256.
+    
+* `src_threat_intelligences` -
+  (Optional)
+  Name of the Google Cloud Threat Intelligence list.
     
 The `layer4_configs` block supports:
     

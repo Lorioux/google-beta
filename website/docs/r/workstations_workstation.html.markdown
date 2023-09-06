@@ -12,7 +12,7 @@
 #     .github/CONTRIBUTING.md.
 #
 # ----------------------------------------------------------------------------
-subcategory: "Workstations"
+subcategory: "Cloud Workstations"
 description: |-
   A single instance of a developer workstation with its own persistent storage.
 ---
@@ -31,7 +31,7 @@ To get more information about Workstation, see:
     * [Workstations](https://cloud.google.com/workstations/docs/)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=workstation_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=workstation_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -86,7 +86,7 @@ resource "google_workstations_workstation_config" "default" {
 
 resource "google_workstations_workstation" "default" {
   provider               = google-beta
-  workstation_id         = "workstation"
+  workstation_id         = "work-station"
   workstation_config_id  = google_workstations_workstation_config.default.workstation_config_id
   workstation_cluster_id = google_workstations_workstation_cluster.default.workstation_cluster_id
   location   		         = "us-central1"
@@ -112,15 +112,15 @@ The following arguments are supported:
 
 * `workstation_config_id` -
   (Required)
-  The ID of the workstation cluster config.
+  The ID of the parent workstation cluster config.
 
 * `workstation_cluster_id` -
   (Required)
-  The name of the workstation cluster.
+  The ID of the parent workstation cluster.
 
 * `location` -
   (Required)
-  The location where the workstation cluster config should reside.
+  The location where the workstation parent resources reside.
 
 
 - - -
@@ -149,17 +149,17 @@ In addition to the arguments listed above, the following computed attributes are
 * `id` - an identifier for the resource with format `projects/{{project}}/locations/{{location}}/workstationClusters/{{workstation_cluster_id}}/workstationConfigs/{{workstation_config_id}}/workstations/{{workstation_id}}`
 
 * `name` -
-  The name of the cluster resource.
+  Full name of this resource.
 
 * `uid` -
-  The system-generated UID of the resource.
+  A system-assigned unique identified for this resource.
 
 * `create_time` -
-  Time the Instance was created in UTC.
+  Time when this resource was created.
 
 * `host` -
-  Host to which clients can send HTTPS traffic that will be received by the workstation. 
-  Authorized traffic will be received to the workstation as HTTP on port 80. 
+  Host to which clients can send HTTPS traffic that will be received by the workstation.
+  Authorized traffic will be received to the workstation as HTTP on port 80.
   To send traffic to a different port, clients may prefix the host with the destination port in the format "{port}-{host}".
 
 * `state` -

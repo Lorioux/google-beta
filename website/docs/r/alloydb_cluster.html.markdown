@@ -28,11 +28,12 @@ To get more information about Cluster, see:
 * How-to Guides
     * [AlloyDB](https://cloud.google.com/alloydb/docs/)
 
-~> **Warning:** All arguments including `initial_user.password` will be stored in the raw
-state as plain-text. [Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
+~> **Warning:** All arguments including the following potentially sensitive
+values will be stored in the raw state as plain text: `initial_user.password`.
+[Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=alloydb_cluster_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=alloydb_cluster_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -43,7 +44,7 @@ state as plain-text. [Read more about sensitive data in state](https://www.terra
 resource "google_alloydb_cluster" "default" {
   cluster_id = "alloydb-cluster"
   location   = "us-central1"
-  network    = "projects/${data.google_project.project.number}/global/networks/${google_compute_network.default.name}"
+  network    = google_compute_network.default.id
 }
 
 data "google_project" "project" {}
@@ -53,7 +54,7 @@ resource "google_compute_network" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=alloydb_cluster_full&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=alloydb_cluster_full&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -64,11 +65,16 @@ resource "google_compute_network" "default" {
 resource "google_alloydb_cluster" "full" {
   cluster_id   = "alloydb-cluster-full"
   location     = "us-central1"
-  network      = "projects/${data.google_project.project.number}/global/networks/${google_compute_network.default.name}"
+  network      = google_compute_network.default.id
 
   initial_user {
     user     = "alloydb-cluster-full"
     password = "alloydb-cluster-full"
+  }
+
+  continuous_backup_config {
+    enabled              = true
+    recovery_window_days = 14
   }
 
   automated_backup_policy {
@@ -107,6 +113,80 @@ resource "google_compute_network" "default" {
   name = "alloydb-cluster-full"
 }
 ```
+## Example Usage - Alloydb Cluster Restore
+
+
+```hcl
+resource "google_alloydb_cluster" "source" {
+  cluster_id = "alloydb-source-cluster"
+  location   = "us-central1"
+  network    = data.google_compute_network.default.id
+
+  initial_user {
+    password = "alloydb-source-cluster"
+  }
+}
+
+resource "google_alloydb_instance" "source" {
+  cluster       = google_alloydb_cluster.source.name
+  instance_id   = "alloydb-instance"
+  instance_type = "PRIMARY"
+
+  machine_config {
+    cpu_count = 2
+  }
+
+  depends_on = [google_service_networking_connection.vpc_connection]
+}
+
+resource "google_alloydb_backup" "source" {
+  backup_id    = "alloydb-backup"
+  location     = "us-central1"
+  cluster_name = google_alloydb_cluster.source.name
+
+  depends_on = [google_alloydb_instance.source]
+}
+
+resource "google_alloydb_cluster" "restored_from_backup" {
+  cluster_id            = "alloydb-backup-restored"
+  location              = "us-central1"
+  network               = data.google_compute_network.default.id
+  restore_backup_source {
+    backup_name = google_alloydb_backup.source.name
+  }
+}
+
+resource "google_alloydb_cluster" "restored_via_pitr" {
+  cluster_id             = "alloydb-pitr-restored"
+  location               = "us-central1"
+  network                = data.google_compute_network.default.id
+
+  restore_continuous_backup_source {
+    cluster = google_alloydb_cluster.source.name
+    point_in_time = "2023-08-03T19:19:00.094Z"
+  }
+}
+
+data "google_project" "project" {}
+
+data "google_compute_network" "default" {
+  name = "alloydb-network"
+}
+
+resource "google_compute_global_address" "private_ip_alloc" {
+  name          =  "alloydb-source-cluster"
+  address_type  = "INTERNAL"
+  purpose       = "VPC_PEERING"
+  prefix_length = 16
+  network       = data.google_compute_network.default.id
+}
+
+resource "google_service_networking_connection" "vpc_connection" {
+  network                 = data.google_compute_network.default.id
+  service                 = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [google_compute_global_address.private_ip_alloc.name]
+}
+```
 
 ## Argument Reference
 
@@ -122,6 +202,10 @@ The following arguments are supported:
   (Required)
   The ID of the alloydb cluster.
 
+* `location` -
+  (Required)
+  The location where the alloydb cluster should reside.
+
 
 - - -
 
@@ -129,6 +213,11 @@ The following arguments are supported:
 * `labels` -
   (Optional)
   User-defined labels for the alloydb cluster.
+
+* `encryption_config` -
+  (Optional)
+  EncryptionConfig describes the encryption config of a cluster or a backup that is encrypted with a CMEK (customer-managed encryption key).
+  Structure is [documented below](#nested_encryption_config).
 
 * `display_name` -
   (Optional)
@@ -139,19 +228,36 @@ The following arguments are supported:
   Initial user to setup during cluster creation.
   Structure is [documented below](#nested_initial_user).
 
+* `restore_backup_source` -
+  (Optional)
+  The source when restoring from a backup. Conflicts with 'restore_continuous_backup_source', both can't be set together.
+  Structure is [documented below](#nested_restore_backup_source).
+
+* `restore_continuous_backup_source` -
+  (Optional)
+  The source when restoring via point in time recovery (PITR). Conflicts with 'restore_backup_source', both can't be set together.
+  Structure is [documented below](#nested_restore_continuous_backup_source).
+
+* `continuous_backup_config` -
+  (Optional)
+  The continuous backup config for this cluster.
+  If no policy is provided then the default policy will be used. The default policy takes one backup a day and retains backups for 14 days.
+  Structure is [documented below](#nested_continuous_backup_config).
+
 * `automated_backup_policy` -
   (Optional)
-  The automated backup policy for this cluster.
-  If no policy is provided then the default policy will be used. The default policy takes one backup a day, has a backup window of 1 hour, and retains backups for 14 days.
+  The automated backup policy for this cluster. AutomatedBackupPolicy is disabled by default.
   Structure is [documented below](#nested_automated_backup_policy).
-
-* `location` -
-  (Optional)
-  The location where the alloydb cluster should reside.
 
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
 
+
+<a name="nested_encryption_config"></a>The `encryption_config` block supports:
+
+* `kms_key_name` -
+  (Optional)
+  The fully-qualified resource name of the KMS key. Each Cloud KMS key is regionalized and has the following format: projects/[PROJECT]/locations/[REGION]/keyRings/[RING]/cryptoKeys/[KEY_NAME].
 
 <a name="nested_initial_user"></a>The `initial_user` block supports:
 
@@ -163,6 +269,45 @@ The following arguments are supported:
   (Required)
   The initial password for the user.
   **Note**: This property is sensitive and will not be displayed in the plan.
+
+<a name="nested_restore_backup_source"></a>The `restore_backup_source` block supports:
+
+* `backup_name` -
+  (Required)
+  The name of the backup that this cluster is restored from.
+
+<a name="nested_restore_continuous_backup_source"></a>The `restore_continuous_backup_source` block supports:
+
+* `cluster` -
+  (Required)
+  The name of the source cluster that this cluster is restored from.
+
+* `point_in_time` -
+  (Required)
+  The point in time that this cluster is restored to, in RFC 3339 format.
+
+<a name="nested_continuous_backup_config"></a>The `continuous_backup_config` block supports:
+
+* `enabled` -
+  (Optional)
+  Whether continuous backup recovery is enabled. If not set, defaults to true.
+
+* `recovery_window_days` -
+  (Optional)
+  The numbers of days that are eligible to restore from using PITR. To support the entire recovery window, backups and logs are retained for one day more than the recovery window.
+  If not set, defaults to 14 days.
+
+* `encryption_config` -
+  (Optional)
+  EncryptionConfig describes the encryption config of a cluster or a backup that is encrypted with a CMEK (customer-managed encryption key).
+  Structure is [documented below](#nested_encryption_config).
+
+
+<a name="nested_encryption_config"></a>The `encryption_config` block supports:
+
+* `kms_key_name` -
+  (Optional)
+  The fully-qualified resource name of the KMS key. Each Cloud KMS key is regionalized and has the following format: projects/[PROJECT]/locations/[REGION]/keyRings/[RING]/cryptoKeys/[KEY_NAME].
 
 <a name="nested_automated_backup_policy"></a>The `automated_backup_policy` block supports:
 
@@ -180,19 +325,24 @@ The following arguments are supported:
   (Optional)
   Labels to apply to backups created using this configuration.
 
+* `encryption_config` -
+  (Optional)
+  EncryptionConfig describes the encryption config of a cluster or a backup that is encrypted with a CMEK (customer-managed encryption key).
+  Structure is [documented below](#nested_encryption_config).
+
 * `weekly_schedule` -
-  (Required)
+  (Optional)
   Weekly schedule for the Backup.
   Structure is [documented below](#nested_weekly_schedule).
 
 * `time_based_retention` -
   (Optional)
-  Time-based Backup retention policy.
+  Time-based Backup retention policy. Conflicts with 'quantity_based_retention', both can't be set together.
   Structure is [documented below](#nested_time_based_retention).
 
 * `quantity_based_retention` -
   (Optional)
-  Quantity-based Backup retention policy to retain recent backups.
+  Quantity-based Backup retention policy to retain recent backups. Conflicts with 'time_based_retention', both can't be set together.
   Structure is [documented below](#nested_quantity_based_retention).
 
 * `enabled` -
@@ -200,12 +350,18 @@ The following arguments are supported:
   Whether automated backups are enabled.
 
 
+<a name="nested_encryption_config"></a>The `encryption_config` block supports:
+
+* `kms_key_name` -
+  (Optional)
+  The fully-qualified resource name of the KMS key. Each Cloud KMS key is regionalized and has the following format: projects/[PROJECT]/locations/[REGION]/keyRings/[RING]/cryptoKeys/[KEY_NAME].
+
 <a name="nested_weekly_schedule"></a>The `weekly_schedule` block supports:
 
 * `days_of_week` -
   (Optional)
   The days of the week to perform a backup. At least one day of the week must be provided.
-  Each value may be one of `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, and `SUNDAY`.
+  Each value may be one of: `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
 
 * `start_times` -
   (Required)
@@ -221,15 +377,15 @@ The following arguments are supported:
 
 * `minutes` -
   (Optional)
-  Minutes of hour of day. Must be from 0 to 59.
+  Minutes of hour of day. Currently, only the value 0 is supported.
 
 * `seconds` -
   (Optional)
-  Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.
+  Seconds of minutes of the time. Currently, only the value 0 is supported.
 
 * `nanos` -
   (Optional)
-  Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+  Fractions of seconds in nanoseconds. Currently, only the value 0 is supported.
 
 <a name="nested_time_based_retention"></a>The `time_based_retention` block supports:
 
@@ -256,6 +412,14 @@ In addition to the arguments listed above, the following computed attributes are
 * `uid` -
   The system-generated UID of the resource.
 
+* `encryption_info` -
+  EncryptionInfo describes the encryption information of a cluster or a backup.
+  Structure is [documented below](#nested_encryption_info).
+
+* `continuous_backup_info` -
+  ContinuousBackupInfo describes the continuous backup properties of a cluster.
+  Structure is [documented below](#nested_continuous_backup_info).
+
 * `database_version` -
   The database engine major version. This is an output-only field and it's populated at the Cluster creation time. This field cannot be changed after cluster creation.
 
@@ -267,6 +431,46 @@ In addition to the arguments listed above, the following computed attributes are
   Cluster created via DMS migration.
   Structure is [documented below](#nested_migration_source).
 
+
+<a name="nested_encryption_info"></a>The `encryption_info` block contains:
+
+* `encryption_type` -
+  (Output)
+  Output only. Type of encryption.
+
+* `kms_key_versions` -
+  (Output)
+  Output only. Cloud KMS key versions that are being used to protect the database or the backup.
+
+<a name="nested_continuous_backup_info"></a>The `continuous_backup_info` block contains:
+
+* `enabled_time` -
+  (Output)
+  When ContinuousBackup was most recently enabled. Set to null if ContinuousBackup is not enabled.
+
+* `schedule` -
+  (Output)
+  Days of the week on which a continuous backup is taken. Output only field. Ignored if passed into the request.
+
+* `earliest_restorable_time` -
+  (Output)
+  The earliest restorable time that can be restored to. Output only field.
+
+* `encryption_info` -
+  (Output)
+  Output only. The encryption information for the WALs and backups required for ContinuousBackup.
+  Structure is [documented below](#nested_encryption_info).
+
+
+<a name="nested_encryption_info"></a>The `encryption_info` block contains:
+
+* `encryption_type` -
+  (Output)
+  Output only. Type of encryption.
+
+* `kms_key_versions` -
+  (Output)
+  Output only. Cloud KMS key versions that are being used to protect the database or the backup.
 
 <a name="nested_backup_source"></a>The `backup_source` block contains:
 

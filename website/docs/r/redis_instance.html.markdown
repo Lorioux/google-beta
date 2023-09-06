@@ -29,7 +29,7 @@ To get more information about Instance, see:
     * [Official Documentation](https://cloud.google.com/memorystore/docs/redis/)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=redis_instance_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=redis_instance_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -43,7 +43,7 @@ resource "google_redis_instance" "cache" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=redis_instance_full&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=redis_instance_full&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -96,7 +96,7 @@ data "google_compute_network" "redis-network" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=redis_instance_full_with_persistence_config&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=redis_instance_full_with_persistence_config&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -118,7 +118,7 @@ resource "google_redis_instance" "cache-persis" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=redis_instance_private_service&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=redis_instance_private_service&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -171,7 +171,7 @@ resource "google_redis_instance" "cache" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=redis_instance_mrr&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=redis_instance_mrr&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -301,7 +301,7 @@ The following arguments are supported:
   (Optional)
   The connection mode of the Redis instance.
   Default value is `DIRECT_PEERING`.
-  Possible values are `DIRECT_PEERING` and `PRIVATE_SERVICE_ACCESS`.
+  Possible values are: `DIRECT_PEERING`, `PRIVATE_SERVICE_ACCESS`.
 
 * `display_name` -
   (Optional)
@@ -335,11 +335,6 @@ The following arguments are supported:
   Maintenance policy for an instance.
   Structure is [documented below](#nested_maintenance_policy).
 
-* `maintenance_schedule` -
-  (Optional)
-  Upcoming maintenance schedule.
-  Structure is [documented below](#nested_maintenance_schedule).
-
 * `redis_version` -
   (Optional)
   The version of Redis software. If not provided, latest supported
@@ -360,14 +355,14 @@ The following arguments are supported:
   - BASIC: standalone instance
   - STANDARD_HA: highly available primary/replica instances
   Default value is `BASIC`.
-  Possible values are `BASIC` and `STANDARD_HA`.
+  Possible values are: `BASIC`, `STANDARD_HA`.
 
 * `transit_encryption_mode` -
   (Optional)
   The TLS mode of the Redis instance, If not provided, TLS is disabled for the instance.
   - SERVER_AUTHENTICATION: Client to Server traffic encryption enabled with server authentication
   Default value is `DISABLED`.
-  Possible values are `SERVER_AUTHENTICATION` and `DISABLED`.
+  Possible values are: `SERVER_AUTHENTICATION`, `DISABLED`.
 
 * `replica_count` -
   (Optional)
@@ -384,7 +379,7 @@ The following arguments are supported:
   instance cannot scale up or down the number of replicas.
   - READ_REPLICAS_ENABLED: If enabled, read endpoint will be provided and the instance
   can scale up and down the number of replicas.
-  Possible values are `READ_REPLICAS_DISABLED` and `READ_REPLICAS_ENABLED`.
+  Possible values are: `READ_REPLICAS_DISABLED`, `READ_REPLICAS_ENABLED`.
 
 * `secondary_ip_range` -
   (Optional)
@@ -413,7 +408,7 @@ The following arguments are supported:
   Optional. Controls whether Persistence features are enabled. If not provided, the existing value will be used.
   - DISABLED: 	Persistence is disabled for the instance, and any existing snapshots are deleted.
   - RDB: RDB based Persistence is enabled.
-  Possible values are `DISABLED` and `RDB`.
+  Possible values are: `DISABLED`, `RDB`.
 
 * `rdb_snapshot_period` -
   (Optional)
@@ -422,7 +417,7 @@ The following arguments are supported:
   - SIX_HOURS:	Snapshot every 6 hours.
   - TWELVE_HOURS:	Snapshot every 12 hours.
   - TWENTY_FOUR_HOURS:	Snapshot every 24 hours.
-  Possible values are `ONE_HOUR`, `SIX_HOURS`, `TWELVE_HOURS`, and `TWENTY_FOUR_HOURS`.
+  Possible values are: `ONE_HOUR`, `SIX_HOURS`, `TWELVE_HOURS`, `TWENTY_FOUR_HOURS`.
 
 * `rdb_next_snapshot_time` -
   (Output)
@@ -481,7 +476,7 @@ The following arguments are supported:
   - FRIDAY: Friday
   - SATURDAY: Saturday
   - SUNDAY: Sunday
-  Possible values are `DAY_OF_WEEK_UNSPECIFIED`, `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, and `SUNDAY`.
+  Possible values are: `DAY_OF_WEEK_UNSPECIFIED`, `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
 
 * `duration` -
   (Output)
@@ -516,27 +511,6 @@ The following arguments are supported:
   (Optional)
   Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
 
-<a name="nested_maintenance_schedule"></a>The `maintenance_schedule` block supports:
-
-* `start_time` -
-  (Output)
-  Output only. The start time of any upcoming scheduled maintenance for this instance.
-  A timestamp in RFC3339 UTC "Zulu" format, with nanosecond
-  resolution and up to nine fractional digits.
-
-* `end_time` -
-  (Output)
-  Output only. The end time of any upcoming scheduled maintenance for this instance.
-  A timestamp in RFC3339 UTC "Zulu" format, with nanosecond
-  resolution and up to nine fractional digits.
-
-* `schedule_deadline_time` -
-  (Output)
-  Output only. The deadline that the maintenance schedule start time
-  can not go beyond, including reschedule.
-  A timestamp in RFC3339 UTC "Zulu" format, with nanosecond
-  resolution and up to nine fractional digits.
-
 ## Attributes Reference
 
 In addition to the arguments listed above, the following computed attributes are exported:
@@ -557,6 +531,10 @@ In addition to the arguments listed above, the following computed attributes are
 * `host` -
   Hostname or IP address of the exposed Redis endpoint used by clients
   to connect to the service.
+
+* `maintenance_schedule` -
+  Upcoming maintenance schedule.
+  Structure is [documented below](#nested_maintenance_schedule).
 
 * `port` -
   The port number of the exposed Redis endpoint.
@@ -584,6 +562,27 @@ In addition to the arguments listed above, the following computed attributes are
   Output only. The port number of the exposed readonly redis endpoint. Standard tier only.
   Write requests should target 'port'.
 
+
+<a name="nested_maintenance_schedule"></a>The `maintenance_schedule` block contains:
+
+* `start_time` -
+  (Output)
+  Output only. The start time of any upcoming scheduled maintenance for this instance.
+  A timestamp in RFC3339 UTC "Zulu" format, with nanosecond
+  resolution and up to nine fractional digits.
+
+* `end_time` -
+  (Output)
+  Output only. The end time of any upcoming scheduled maintenance for this instance.
+  A timestamp in RFC3339 UTC "Zulu" format, with nanosecond
+  resolution and up to nine fractional digits.
+
+* `schedule_deadline_time` -
+  (Output)
+  Output only. The deadline that the maintenance schedule start time
+  can not go beyond, including reschedule.
+  A timestamp in RFC3339 UTC "Zulu" format, with nanosecond
+  resolution and up to nine fractional digits.
 
 <a name="nested_server_ca_certs"></a>The `server_ca_certs` block contains:
 

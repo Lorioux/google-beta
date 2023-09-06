@@ -26,7 +26,7 @@ trust anchor.
 
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=privateca_capool_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=privateca_capool_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -48,7 +48,7 @@ resource "google_privateca_ca_pool" "default" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=privateca_capool_all_fields&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=privateca_capool_all_fields&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -63,6 +63,7 @@ resource "google_privateca_ca_pool" "default" {
   publishing_options {
     publish_ca_cert = false
     publish_crl = true
+    encoding_format = "PEM"
   }
   labels = {
     foo = "bar"
@@ -158,7 +159,7 @@ The following arguments are supported:
 * `tier` -
   (Required)
   The Tier of this CaPool.
-  Possible values are `ENTERPRISE` and `DEVOPS`.
+  Possible values are: `ENTERPRISE`, `DEVOPS`.
 
 * `location` -
   (Required)
@@ -252,7 +253,7 @@ The following arguments are supported:
 * `signature_algorithm` -
   (Required)
   The algorithm used.
-  Possible values are `ECDSA_P256`, `ECDSA_P384`, and `EDDSA_25519`.
+  Possible values are: `ECDSA_P256`, `ECDSA_P384`, `EDDSA_25519`.
 
 <a name="nested_allowed_issuance_modes"></a>The `allowed_issuance_modes` block supports:
 
@@ -372,7 +373,7 @@ The following arguments are supported:
 
 * `non_ca` -
   (Optional)
-  When true, the "CA" in Basic Constraints extension will be set to false. 
+  When true, the "CA" in Basic Constraints extension will be set to false.
   If both `is_ca` and `non_ca` are unset, the extension will be omitted from the CA certificate.
 
 * `max_issuer_path_length` -
@@ -550,6 +551,13 @@ The following arguments are supported:
   in all issued Certificates. If this is false, CRLs will not be published and the corresponding X.509 extension will not
   be written in issued certificates. CRLs will expire 7 days from their creation. However, we will rebuild daily. CRLs are
   also rebuilt shortly after a certificate is revoked.
+
+* `encoding_format` -
+  (Optional)
+  Specifies the encoding format of each CertificateAuthority's CA
+  certificate and CRLs. If this is omitted, CA certificates and CRLs
+  will be published in PEM.
+  Possible values are: `PEM`, `DER`.
 
 ## Attributes Reference
 

@@ -69,7 +69,7 @@ The following arguments are supported:
   * KIND_LIST: List entity types contain a set of entries that do not map to reference values. However, list entity
   types can contain references to other entity types (with or without aliases).
   * KIND_REGEXP: Regexp entity types allow to specify regular expressions in entries values.
-  Possible values are `KIND_MAP`, `KIND_LIST`, and `KIND_REGEXP`.
+  Possible values are: `KIND_MAP`, `KIND_LIST`, `KIND_REGEXP`.
 
 
 - - -
@@ -113,7 +113,7 @@ In addition to the arguments listed above, the following computed attributes are
 * `id` - an identifier for the resource with format `{{name}}`
 
 * `name` -
-  The unique identifier of the entity type. 
+  The unique identifier of the entity type.
   Format: projects/<Project ID>/agent/entityTypes/<Entity type ID>.
 
 

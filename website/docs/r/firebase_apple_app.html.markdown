@@ -52,6 +52,21 @@ resource "google_firebase_apple_app" "full" {
   bundle_id = "apple.app.12345"
   app_store_id = "12345"
   team_id = "9987654321"
+  api_key_id = google_apikeys_key.apple.uid
+}
+
+resource "google_apikeys_key" "apple" {
+  provider = google-beta
+
+  name         = "api-key"
+  display_name = "Display Name Full"
+  project = "my-project-name"
+  
+  restrictions {
+    ios_key_restrictions {
+      allowed_bundle_ids = ["apple.app.12345"]
+    }
+  }
 }
 ```
 
@@ -64,13 +79,13 @@ The following arguments are supported:
   (Required)
   The user-assigned display name of the App.
 
+* `bundle_id` -
+  (Required)
+  The canonical bundle ID of the Apple app as it would appear in the Apple AppStore.
+
 
 - - -
 
-
-* `bundle_id` -
-  (Optional)
-  The canonical bundle ID of the Apple app as it would appear in the Apple AppStore.
 
 * `app_store_id` -
   (Optional)
@@ -79,6 +94,12 @@ The following arguments are supported:
 * `team_id` -
   (Optional)
   The Apple Developer Team ID associated with the App in the App Store.
+
+* `api_key_id` -
+  (Optional)
+  The globally unique, Google-assigned identifier (UID) for the Firebase API key associated with the AppleApp.
+  If apiKeyId is not set during creation, then Firebase automatically associates an apiKeyId with the AppleApp.
+  This auto-associated key may be an existing valid key or, if no valid key exists, a new one will be provisioned.
 
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
@@ -92,7 +113,7 @@ serving traffic. Set to `DELETE` to delete the Apple. Defaults to `DELETE`.
 
 In addition to the arguments listed above, the following computed attributes are exported:
 
-* `id` - an identifier for the resource with format `{{name}}`
+* `id` - an identifier for the resource with format `projects/{{project}}/iosApps/{{app_id}}`
 
 * `name` -
   The fully qualified resource name of the App, for example:
@@ -118,10 +139,11 @@ This resource provides the following
 AppleApp can be imported using any of these accepted formats:
 
 ```
-$ terraform import google_firebase_apple_app.default projects/{{project}}/iosApps/{{appId}}
-$ terraform import google_firebase_apple_app.default {{project}}/{{appId}}
-$ terraform import google_firebase_apple_app.default iosApps/{{appId}}
-$ terraform import google_firebase_apple_app.default {{appId}}
+$ terraform import google_firebase_apple_app.default {{project}} projects/{{project}}/iosApps/{{app_id}}
+$ terraform import google_firebase_apple_app.default projects/{{project}}/iosApps/{{app_id}}
+$ terraform import google_firebase_apple_app.default {{project}}/{{project}}/{{app_id}}
+$ terraform import google_firebase_apple_app.default iosApps/{{app_id}}
+$ terraform import google_firebase_apple_app.default {{app_id}}
 ```
 
 ## User Project Overrides

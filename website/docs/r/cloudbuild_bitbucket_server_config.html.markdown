@@ -29,7 +29,7 @@ To get more information about BitbucketServerConfig, see:
     * [Connect to a Bitbucket Server host](https://cloud.google.com/build/docs/automating-builds/bitbucket/connect-host-bitbucket-server)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_bitbucket_server_config&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_bitbucket_server_config&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -38,7 +38,7 @@ To get more information about BitbucketServerConfig, see:
 
 ```hcl
 resource "google_cloudbuild_bitbucket_server_config" "bbs-config" {
-    config_id = "mybbsconfig"
+    config_id = "bbs-config"
     location = "us-central1"
     host_uri = "https://bbs.com"
     secrets {
@@ -55,7 +55,7 @@ resource "google_cloudbuild_bitbucket_server_config" "bbs-config" {
 
 ```hcl
 resource "google_cloudbuild_bitbucket_server_config" "bbs-config-with-repos" {
-    config_id = "mybbsconfig"
+    config_id = "bbs-config"
     location = "us-central1"
     host_uri = "https://bbs.com"
     secrets {
@@ -77,7 +77,7 @@ resource "google_cloudbuild_bitbucket_server_config" "bbs-config-with-repos" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_bitbucket_server_config_peered_network&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=cloudbuild_bitbucket_server_config_peered_network&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -113,7 +113,7 @@ resource "google_service_networking_connection" "default" {
 }
 
 resource "google_cloudbuild_bitbucket_server_config" "bbs-config-with-peered-network" {
-    config_id = "mybbsconfig"
+    config_id = "bbs-config"
     location = "us-central1"
     host_uri = "https://bbs.com"
     secrets {
@@ -187,9 +187,9 @@ The following arguments are supported:
 
 * `peered_network` -
   (Optional)
-  The network to be used when reaching out to the Bitbucket Server instance. The VPC network must be enabled for private service connection. 
-  This should be set if the Bitbucket Server instance is hosted on-premises and not reachable by public internet. If this field is left empty, 
-  no network peering will occur and calls to the Bitbucket Server instance will be made over the public internet. Must be in the format 
+  The network to be used when reaching out to the Bitbucket Server instance. The VPC network must be enabled for private service connection.
+  This should be set if the Bitbucket Server instance is hosted on-premises and not reachable by public internet. If this field is left empty,
+  no network peering will occur and calls to the Bitbucket Server instance will be made over the public internet. Must be in the format
   projects/{project}/global/networks/{network}, where {project} is a project number or id and {network} is the name of a VPC network in the project.
 
 * `ssl_ca` -

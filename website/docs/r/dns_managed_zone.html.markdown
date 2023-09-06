@@ -32,7 +32,7 @@ To get more information about ManagedZone, see:
     * [Managing Zones](https://cloud.google.com/dns/zones/)
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_basic&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_basic&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -54,7 +54,7 @@ resource "random_id" "rnd" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_private&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_private&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -136,7 +136,7 @@ resource "google_compute_network" "network-2" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_private_gke&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_private_gke&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -155,9 +155,6 @@ resource "google_dns_managed_zone" "private-zone-gke" {
   visibility = "private"
 
   private_visibility_config {
-    networks {
-      network_url = google_compute_network.network-1.id
-    }
     gke_clusters {
       gke_cluster_name = google_container_cluster.cluster-1.id
     }
@@ -216,7 +213,7 @@ resource "google_container_cluster" "cluster-1" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_private_peering&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_private_peering&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -255,7 +252,7 @@ resource "google_compute_network" "network-target" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_service_directory&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_service_directory&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -294,7 +291,7 @@ resource "google_compute_network" "network" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_cloud_logging&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=dns_managed_zone_cloud_logging&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -352,12 +349,12 @@ The following arguments are supported:
   The zone's visibility: public zones are exposed to the Internet,
   while private zones are visible only to Virtual Private Cloud resources.
   Default value is `public`.
-  Possible values are `private` and `public`.
+  Possible values are: `private`, `public`.
 
 * `private_visibility_config` -
   (Optional)
   For privately visible zones, the set of Virtual Private Cloud
-  resources that the zone is visible from.
+  resources that the zone is visible from. At least one of `gke_clusters` or `networks` must be specified.
   Structure is [documented below](#nested_private_visibility_config).
 
 * `forwarding_config` -
@@ -404,12 +401,12 @@ The following arguments are supported:
   (Optional)
   Specifies the mechanism used to provide authenticated denial-of-existence responses.
   non_existence can only be updated when the state is `off`.
-  Possible values are `nsec` and `nsec3`.
+  Possible values are: `nsec`, `nsec3`.
 
 * `state` -
   (Optional)
   Specifies whether DNSSEC is enabled, and what mode it is in
-  Possible values are `off`, `on`, and `transfer`.
+  Possible values are: `off`, `on`, `transfer`.
 
 * `default_key_specs` -
   (Optional)
@@ -425,7 +422,7 @@ The following arguments are supported:
 * `algorithm` -
   (Optional)
   String mnemonic specifying the DNSSEC algorithm of this key
-  Possible values are `ecdsap256sha256`, `ecdsap384sha384`, `rsasha1`, `rsasha256`, and `rsasha512`.
+  Possible values are: `ecdsap256sha256`, `ecdsap384sha384`, `rsasha1`, `rsasha256`, `rsasha512`.
 
 * `key_length` -
   (Optional)
@@ -439,7 +436,7 @@ The following arguments are supported:
   resource record sets of type DNSKEY. Zone signing keys do
   not have the Secure Entry Point flag set and will be used
   to sign all other types of resource record sets.
-  Possible values are `keySigning` and `zoneSigning`.
+  Possible values are: `keySigning`, `zoneSigning`.
 
 * `kind` -
   (Optional)
@@ -453,7 +450,7 @@ The following arguments are supported:
   Structure is [documented below](#nested_gke_clusters).
 
 * `networks` -
-  (Required)
+  (Optional)
   The list of VPC networks that can see this zone. Until the provider updates to use the Terraform 0.12 SDK in a future release, you
   may experience issues with this resource while updating. If you've defined a `networks` block and
   add another `networks` block while keeping the old block, Terraform will see an incorrect diff
@@ -466,8 +463,8 @@ The following arguments are supported:
 
 * `gke_cluster_name` -
   (Required)
-  The resource name of the cluster to bind this ManagedZone to.  
-  This should be specified in the format like  
+  The resource name of the cluster to bind this ManagedZone to.
+  This should be specified in the format like
   `projects/*/locations/*/clusters/*`
 
 <a name="nested_networks"></a>The `networks` block supports:
@@ -499,7 +496,7 @@ The following arguments are supported:
   Forwarding path for this TargetNameServer. If unset or `default` Cloud DNS will make forwarding
   decision based on address ranges, i.e. RFC1918 addresses go to the VPC, Non-RFC1918 addresses go
   to the Internet. When set to `private`, Cloud DNS will always send queries through VPC for this target
-  Possible values are `default` and `private`.
+  Possible values are: `default`, `private`.
 
 <a name="nested_peering_config"></a>The `peering_config` block supports:
 

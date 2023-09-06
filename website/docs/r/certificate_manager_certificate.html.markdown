@@ -23,15 +23,16 @@ Certificate represents a HTTP-reachable backend for a Certificate.
 
 
 
-~> **Warning:** All arguments including `self_managed.certificate_pem`, `self_managed.private_key_pem`, and `self_managed.pem_private_key` will be stored in the raw
-state as plain-text. [Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
+~> **Warning:** All arguments including the following potentially sensitive
+values will be stored in the raw state as plain text: `self_managed.certificate_pem`, `self_managed.private_key_pem`, `self_managed.pem_private_key`.
+[Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
 
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=certificate_manager_google_managed_certificate&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=certificate_manager_google_managed_certificate_dns&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
-## Example Usage - Certificate Manager Google Managed Certificate
+## Example Usage - Certificate Manager Google Managed Certificate Dns
 
 
 ```hcl
@@ -65,7 +66,90 @@ resource "google_certificate_manager_dns_authorization" "instance2" {
 }
 ```
 <div class = "oics-button" style="float: right; margin: 0 0 -15px">
-  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=certificate_manager_self_managed_certificate&cloudshell_image=gcr.io%2Fgraphite-cloud-shell-images%2Fterraform%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=certificate_manager_google_managed_certificate_issuance_config&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Certificate Manager Google Managed Certificate Issuance Config
+
+
+```hcl
+resource "google_certificate_manager_certificate" "default" {
+  name        = "issuance-config-cert"
+  description = "The default cert"
+  scope       = "EDGE_CACHE"
+  managed {
+    domains = [
+        "terraform.subdomain1.com"
+      ]
+    issuance_config = google_certificate_manager_certificate_issuance_config.issuanceconfig.id
+  }
+}
+
+
+
+# creating certificate_issuance_config to use it in the managed certificate
+resource "google_certificate_manager_certificate_issuance_config" "issuanceconfig" {
+  name    = "issuance-config"
+  description = "sample description for the certificate issuanceConfigs"
+  certificate_authority_config {
+    certificate_authority_service_config {
+        ca_pool = google_privateca_ca_pool.pool.id
+    }
+  }
+  lifetime = "1814400s"
+  rotation_window_percentage = 34
+  key_algorithm = "ECDSA_P256"
+  depends_on=[google_privateca_certificate_authority.ca_authority]
+}
+  
+resource "google_privateca_ca_pool" "pool" {
+  name     = "ca-pool"
+  location = "us-central1"
+  tier     = "ENTERPRISE"
+}
+
+resource "google_privateca_certificate_authority" "ca_authority" {
+  location = "us-central1"
+  pool = google_privateca_ca_pool.pool.name
+  certificate_authority_id = "ca-authority"
+  config {
+    subject_config {
+      subject {
+        organization = "HashiCorp"
+        common_name = "my-certificate-authority"
+      }
+      subject_alt_name {
+        dns_names = ["hashicorp.com"]
+      }
+    }
+    x509_config {
+      ca_options {
+        is_ca = true
+      }
+      key_usage {
+        base_key_usage {
+          cert_sign = true
+          crl_sign = true
+        }
+        extended_key_usage {
+          server_auth = true
+        }
+      }
+    }
+  }
+  key_spec {
+    algorithm = "RSA_PKCS1_4096_SHA256"
+  }
+
+  // Disable CA deletion related safe checks for easier cleanup.
+  deletion_protection                    = false
+  skip_grace_period                      = true
+  ignore_active_certificates_on_deletion = true
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=certificate_manager_self_managed_certificate&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
     <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
   </a>
 </div>
@@ -75,11 +159,30 @@ resource "google_certificate_manager_dns_authorization" "instance2" {
 ```hcl
 resource "google_certificate_manager_certificate" "default" {
   name        = "self-managed-cert"
-  description = "The default cert"
-  scope       = "EDGE_CACHE"
+  description = "Global cert"
+  scope       = "ALL_REGIONS"
   self_managed {
-    pem_certificate = file("test-fixtures/certificatemanager/cert.pem")
-    pem_private_key = file("test-fixtures/certificatemanager/private-key.pem")
+    pem_certificate = file("test-fixtures/cert.pem")
+    pem_private_key = file("test-fixtures/private-key.pem")
+  }
+}
+```
+<div class = "oics-button" style="float: right; margin: 0 0 -15px">
+  <a href="https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fterraform-google-modules%2Fdocs-examples.git&cloudshell_working_dir=certificate_manager_self_managed_certificate_regional&cloudshell_image=gcr.io%2Fcloudshell-images%2Fcloudshell%3Alatest&open_in_editor=main.tf&cloudshell_print=.%2Fmotd&cloudshell_tutorial=.%2Ftutorial.md" target="_blank">
+    <img alt="Open in Cloud Shell" src="//gstatic.com/cloudssh/images/open-btn.svg" style="max-height: 44px; margin: 32px auto; max-width: 100%;">
+  </a>
+</div>
+## Example Usage - Certificate Manager Self Managed Certificate Regional
+
+
+```hcl
+resource "google_certificate_manager_certificate" "default" {
+  name        = "self-managed-cert"
+  description = "Regional cert"
+  location    = "us-central1"
+  self_managed {
+    pem_certificate = file("test-fixtures/cert.pem")
+    pem_private_key = file("test-fixtures/private-key.pem")
   }
 }
 ```
@@ -114,7 +217,8 @@ The following arguments are supported:
   If unsure, choose this option.
   EDGE_CACHE: Certificates with scope EDGE_CACHE are special-purposed certificates,
   served from non-core Google data centers.
-  Currently allowed only for managed certificates.
+  ALL_REGIONS: Certificates with ALL_REGIONS scope are served from all GCP regions (You can only use ALL_REGIONS with global certs).
+  see https://cloud.google.com/compute/docs/regions-zones
 
 * `self_managed` -
   (Optional)
@@ -130,6 +234,10 @@ The following arguments are supported:
   automatically, for as long as it's authorized to do so.
   Structure is [documented below](#nested_managed).
 
+* `location` -
+  (Optional)
+  The Certificate Manager location. If not specified, "global" is used.
+
 * `project` - (Optional) The ID of the project in which the resource belongs.
     If it is not provided, the provider project is used.
 
@@ -138,14 +246,18 @@ The following arguments are supported:
 
 * `certificate_pem` -
   (Optional, Deprecated)
-  **Deprecated** The certificate chain in PEM-encoded form.
+  The certificate chain in PEM-encoded form.
   Leaf certificate comes first, followed by intermediate ones if any.
   **Note**: This property is sensitive and will not be displayed in the plan.
 
+  ~> **Warning:** `certificate_pem` is deprecated and will be removed in a future major release. Use `pem_certificate` instead.
+
 * `private_key_pem` -
   (Optional, Deprecated)
-  **Deprecated** The private key of the leaf certificate in PEM-encoded form.
+  The private key of the leaf certificate in PEM-encoded form.
   **Note**: This property is sensitive and will not be displayed in the plan.
+
+  ~> **Warning:** `private_key_pem` is deprecated and will be removed in a future major release. Use `pem_private_key` instead.
 
 * `pem_certificate` -
   (Optional)
@@ -166,7 +278,13 @@ The following arguments are supported:
 
 * `dns_authorizations` -
   (Optional)
-  Authorizations that will be used for performing domain authorization
+  Authorizations that will be used for performing domain authorization. Either issuanceConfig or dnsAuthorizations should be specificed, but not both.
+
+* `issuance_config` -
+  (Optional)
+  The resource name for a CertificateIssuanceConfig used to configure private PKI certificates in the format projects/*/locations/*/certificateIssuanceConfigs/*.
+  If this field is not set, the certificates will instead be publicly signed as documented at https://cloud.google.com/load-balancing/docs/ssl-certificates/google-managed-certs#caa.
+  Either issuanceConfig or dnsAuthorizations should be specificed, but not both.
 
 * `state` -
   (Output)
@@ -220,7 +338,7 @@ The following arguments are supported:
 
 In addition to the arguments listed above, the following computed attributes are exported:
 
-* `id` - an identifier for the resource with format `projects/{{project}}/locations/global/certificates/{{name}}`
+* `id` - an identifier for the resource with format `projects/{{project}}/locations/{{location}}/certificates/{{name}}`
 
 
 ## Timeouts
@@ -238,9 +356,9 @@ This resource provides the following
 Certificate can be imported using any of these accepted formats:
 
 ```
-$ terraform import google_certificate_manager_certificate.default projects/{{project}}/locations/global/certificates/{{name}}
-$ terraform import google_certificate_manager_certificate.default {{project}}/{{name}}
-$ terraform import google_certificate_manager_certificate.default {{name}}
+$ terraform import google_certificate_manager_certificate.default projects/{{project}}/locations/{{location}}/certificates/{{name}}
+$ terraform import google_certificate_manager_certificate.default {{project}}/{{location}}/{{name}}
+$ terraform import google_certificate_manager_certificate.default {{location}}/{{name}}
 ```
 
 ## User Project Overrides

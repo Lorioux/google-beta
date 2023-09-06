@@ -31,6 +31,10 @@ To get more information about WorkforcePoolProvider, see:
 ~> **Note:** Ask your Google Cloud account team to request access to workforce identity federation for your
 billing/quota project. The account team notifies you when the project is granted access.
 
+~> **Warning:** All arguments including the following potentially sensitive
+values will be stored in the raw state as plain text: `oidc.client_secret.value.plain_text`.
+[Read more about sensitive data in state](https://www.terraform.io/language/state/sensitive-data).
+
 ## Example Usage - Iam Workforce Pool Provider Saml Basic
 
 
@@ -99,6 +103,15 @@ resource "google_iam_workforce_pool_provider" "example" {
   oidc {
     issuer_uri       = "https://accounts.thirdparty.com"
     client_id        = "client-id"
+    client_secret {
+      value {
+        plain_text = "client-secret"
+      }
+    }
+    web_sso_config {
+      response_type             = "CODE"
+      assertion_claims_behavior = "MERGE_USER_INFO_OVER_ID_TOKEN_CLAIMS"
+    }
   }
 }
 ```
@@ -122,6 +135,16 @@ resource "google_iam_workforce_pool_provider" "example" {
   oidc {
     issuer_uri        = "https://accounts.thirdparty.com"
     client_id         = "client-id"
+    client_secret {
+      value {
+        plain_text = "client-secret"
+      }
+    }
+    web_sso_config {
+      response_type             = "CODE"
+      assertion_claims_behavior = "MERGE_USER_INFO_OVER_ID_TOKEN_CLAIMS"
+      additional_scopes         = ["groups", "roles"]
+    }
   }
   display_name        = "Display name"
   description         = "A sample OIDC workforce pool provider."
@@ -253,9 +276,9 @@ The following arguments are supported:
   The metadata xml document should satisfy the following constraints:
   1) Must contain an Identity Provider Entity ID.
   2) Must contain at least one non-expired signing key certificate.
-  3) For each signing key: 
-    a) Valid from should be no more than 7 days from now. 
-    b) Valid to should be no more than 10 years in the future. 
+  3) For each signing key:
+    a) Valid from should be no more than 7 days from now.
+    b) Valid to should be no more than 10 years in the future.
   4) Up to 3 IdP signing keys are allowed in the metadata xml.
   When updating the provider's metadata xml, at least one non-expired signing key
   must overlap with the existing metadata. This requirement is skipped if there are
@@ -270,6 +293,84 @@ The following arguments are supported:
 * `client_id` -
   (Required)
   The client ID. Must match the audience claim of the JWT issued by the identity provider.
+
+* `client_secret` -
+  (Optional)
+  The optional client secret. Required to enable Authorization Code flow for web sign-in.
+  Structure is [documented below](#nested_client_secret).
+
+* `web_sso_config` -
+  (Optional)
+  Configuration for web single sign-on for the OIDC provider. Here, web sign-in refers to console sign-in and gcloud sign-in through the browser.
+  Structure is [documented below](#nested_web_sso_config).
+
+* `jwks_json` -
+  (Optional, [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html))
+  OIDC JWKs in JSON String format. For details on definition of a
+  JWK, see https:tools.ietf.org/html/rfc7517. If not set, then we
+  use the `jwks_uri` from the discovery document fetched from the
+  .well-known path for the `issuer_uri`. Currently, RSA and EC asymmetric
+  keys are supported. The JWK must use following format and include only
+  the following fields:
+  ```
+  {
+    "keys": [
+      {
+            "kty": "RSA/EC",
+            "alg": "<algorithm>",
+            "use": "sig",
+            "kid": "<key-id>",
+            "n": "",
+            "e": "",
+            "x": "",
+            "y": "",
+            "crv": ""
+      }
+    ]
+  }
+  ```
+
+
+<a name="nested_client_secret"></a>The `client_secret` block supports:
+
+* `value` -
+  (Optional)
+  The value of the client secret.
+  Structure is [documented below](#nested_value).
+
+
+<a name="nested_value"></a>The `value` block supports:
+
+* `plain_text` -
+  (Required)
+  The plain text of the client secret value.
+  **Note**: This property is sensitive and will not be displayed in the plan.
+
+* `thumbprint` -
+  (Output)
+  A thumbprint to represent the current client secret value.
+
+<a name="nested_web_sso_config"></a>The `web_sso_config` block supports:
+
+* `response_type` -
+  (Required)
+  The Response Type to request for in the OIDC Authorization Request for web sign-in.
+  The `CODE` Response Type is recommended to avoid the Implicit Flow, for security reasons.
+  * CODE: The `response_type=code` selection uses the Authorization Code Flow for web sign-in. Requires a configured client secret.
+  * ID_TOKEN: The `response_type=id_token` selection uses the Implicit Flow for web sign-in.
+  Possible values are: `CODE`, `ID_TOKEN`.
+
+* `assertion_claims_behavior` -
+  (Required)
+  The behavior for how OIDC Claims are included in the `assertion` object used for attribute mapping and attribute condition.
+  * MERGE_USER_INFO_OVER_ID_TOKEN_CLAIMS: Merge the UserInfo Endpoint Claims with ID Token Claims, preferring UserInfo Claim Values for the same Claim Name. This option is available only for the Authorization Code Flow.
+  * ONLY_ID_TOKEN_CLAIMS: Only include ID Token Claims.
+  Possible values are: `MERGE_USER_INFO_OVER_ID_TOKEN_CLAIMS`, `ONLY_ID_TOKEN_CLAIMS`.
+
+* `additional_scopes` -
+  (Optional)
+  Additional scopes to request for in the OIDC authentication request on top of scopes requested by default. By default, the `openid`, `profile` and `email` scopes that are supported by the identity provider are requested.
+  Each additional scope may be at most 256 characters. A maximum of 10 additional scopes may be configured.
 
 ## Attributes Reference
 

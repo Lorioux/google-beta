@@ -1,4 +1,4 @@
-TEST?=$$(go list ./... | grep -v github.com/hashicorp/terraform-provider-google-beta/scripts)
+TEST?=$$(go list ./... | grep -v github.com/lorioux/google-beta/scripts)
 WEBSITE_REPO=github.com/hashicorp/terraform-website
 PKG_NAME=google
 DIR_NAME=google-beta
@@ -12,7 +12,7 @@ test: lint
 	go test $(TESTARGS) -timeout=30s $(TEST)
 
 testacc: lint
-	TF_ACC=1 TF_SCHEMA_PANIC_ON_ERROR=1 go test $(TEST) -v $(TESTARGS) -timeout 240m -ldflags="-X=github.com/hashicorp/terraform-provider-google-beta/version.ProviderVersion=acc"
+	TF_ACC=1 TF_SCHEMA_PANIC_ON_ERROR=1 go test $(TEST) -v $(TESTARGS) -timeout 240m -ldflags="-X=github.com/lorioux/google-beta/version.ProviderVersion=acc"
 
 fmt:
 	@echo "==> Fixing source code with gofmt..."

@@ -164,7 +164,7 @@ available. For more information see [the official documentation on GCP launch st
 
 Because the API for beta features can change before their GA launch, there may
 be breaking changes in the `google-beta` provider in minor release versions.
-These changes will be announced in the [`google-beta` CHANGELOG](https://github.com/hashicorp/terraform-provider-google-beta/blob/main/CHANGELOG.md).
+These changes will be announced in the [`google-beta` CHANGELOG](https://github.com/lorioux/google-beta/blob/main/CHANGELOG.md).
 
 To have resources at different API versions, set up provider blocks for each version:
 

@@ -16,7 +16,7 @@ deprecated in the Terraform `plan`/`apply` output throughout previous provider
 releases, up to and including the final `3.X` series release. These changes,
 such as deprecation notices, can always be found in the CHANGELOG of the
 affected providers. [google](https://github.com/hashicorp/terraform-provider-google/blob/main/CHANGELOG.md)
-[google-beta](https://github.com/hashicorp/terraform-provider-google-beta/blob/main/CHANGELOG.md)
+[google-beta](https://github.com/lorioux/google-beta/blob/main/CHANGELOG.md)
 
 ## I accidentally upgraded to 4.0.0, how do I downgrade to `3.X`?
 

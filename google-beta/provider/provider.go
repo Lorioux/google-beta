@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/lorioux/google-beta/version"
 
-	"github.com/lorioux/google-beta/google-beta/services/accessapproval"
+	// "github.com/lorioux/google-beta/google-beta/services/accessapproval"
 	"github.com/lorioux/google-beta/google-beta/services/accesscontextmanager"
 	"github.com/lorioux/google-beta/google-beta/services/activedirectory"
 	"github.com/lorioux/google-beta/google-beta/services/alloydb"
@@ -127,8 +127,8 @@ import (
 	"github.com/lorioux/google-beta/google-beta/services/composer"
 	"github.com/lorioux/google-beta/google-beta/services/container"
 
-	// "github.com/lorioux/google-beta/google-beta/services/containeraws"
-	// "github.com/lorioux/google-beta/google-beta/services/containerazure"
+	"github.com/lorioux/google-beta/google-beta/services/containeraws"
+	"github.com/lorioux/google-beta/google-beta/services/containerazure"
 	"github.com/lorioux/google-beta/google-beta/services/dataflow"
 	"github.com/lorioux/google-beta/google-beta/services/servicenetworking"
 	"github.com/lorioux/google-beta/google-beta/tpgiamresource"
@@ -841,9 +841,9 @@ func DatasourceMapWithErrors() (map[string]*schema.Resource, error) {
 	return mergeResourceMaps(map[string]*schema.Resource{
 		// ####### START handwritten datasources ###########
 		// ####### START datasources ###########
-		"google_access_approval_folder_service_account":       accessapproval.DataSourceservices.AccessApprovalFolderServiceAccount(),
-		"google_access_approval_organization_service_account": accessapproval.DataSourceservices.AccessApprovalOrganizationServiceAccount(),
-		"google_access_approval_project_service_account":      accessapproval.DataSourceservices.AccessApprovalProjectServiceAccount(),
+		// "google_access_approval_folder_service_account":       accessapproval.DataSourceservices.AccessApprovalFolderServiceAccount(),
+		// "google_access_approval_organization_service_account": accessapproval.DataSourceservices.AccessApprovalOrganizationServiceAccount(),
+		// "google_access_approval_project_service_account":      accessapproval.DataSourceservices.AccessApprovalProjectServiceAccount(),
 		"google_active_folder":                                resourcemanager.DataSourceGoogleActiveFolder(),
 		"google_alloydb_locations":                            alloydb.DataSourceAlloydbLocations(),
 		"google_alloydb_supported_database_flags":             alloydb.DataSourceAlloydbSupportedDatabaseFlags(),
@@ -1071,7 +1071,7 @@ func DatasourceMapWithErrors() (map[string]*schema.Resource, error) {
 			// ####### END generated IAM datasources ###########
 		},
 		map[string]*schema.Resource{
-			####### START non-generated IAM datasources ###########
+			// ####### START non-generated IAM datasources ###########
 			"google_bigtable_instance_iam_policy":       tpgiamresource.DataSourceIamPolicy(bigtable.IamBigtableInstanceSchema, bigtable.NewBigtableInstanceUpdater),
 			"google_bigtable_table_iam_policy":          tpgiamresource.DataSourceIamPolicy(bigtable.IamBigtableTableSchema, bigtable.NewBigtableTableUpdater),
 			"google_bigquery_dataset_iam_policy":        tpgiamresource.DataSourceIamPolicy(bigquery.IamBigqueryDatasetSchema, bigquery.NewBigqueryDatasetIamUpdater),
@@ -1106,9 +1106,9 @@ func ResourceMap() map[string]*schema.Resource {
 func ResourceMapWithErrors() (map[string]*schema.Resource, error) {
 	return mergeResourceMaps(
 		map[string]*schema.Resource{
-			"google_folder_access_approval_settings":       accessapproval.Resourceservices.AccessApprovalFolderSettings(),
-			"google_organization_access_approval_settings": accessapproval.Resourceservices.AccessApprovalOrganizationSettings(),
-			"google_project_access_approval_settings":      accessapproval.Resourceservices.AccessApprovalProjectSettings(),
+			// "google_folder_access_approval_settings":       accessapproval.Resourceservices.AccessApprovalFolderSettings(),
+			// "google_organization_access_approval_settings": accessapproval.Resourceservices.AccessApprovalOrganizationSettings(),
+			// "google_project_access_approval_settings":      accessapproval.Resourceservices.AccessApprovalProjectSettings(),
 
 			"google_firebase_web_app":                                        firebase.ResourceFirebaseWebApp(),
 			"google_firebase_database_instance":                              firebasedatabase.ResourceFirebaseDatabaseInstance(),

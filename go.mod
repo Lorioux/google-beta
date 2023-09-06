@@ -1,4 +1,4 @@
-module github.com/hashicorp/terraform-provider-google-beta
+module github.com/lorioux/google-beta //github.com/hashicorp/terraform-provider-google-beta
 go 1.19
 
 require (

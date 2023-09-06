@@ -4,7 +4,7 @@ package google
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/provider"
+	"github.com/lorioux/google-beta/google-beta/provider" //"github.com/hashicorp/terraform-provider-google-beta/google-beta/provider"
 )
 
 // Provider returns a *schema.Provider.

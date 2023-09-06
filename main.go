@@ -13,7 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-mux/tf5muxserver"
 
 	"github.com/hashicorp/terraform-provider-google-beta/google-beta/fwprovider"
-	"github.com/hashicorp/terraform-provider-google-beta/google-beta/provider"
+	provider "github.com/hashicorp/terraform-provider-google-beta/google-beta"
 	ver "github.com/hashicorp/terraform-provider-google-beta/version"
 )
 
